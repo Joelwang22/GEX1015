@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  @apply bg-slate-950 text-slate-100;
+}
+
+a {
+  @apply text-teal-300 hover:text-teal-200;
+}
+
+button {
+  @apply rounded-md bg-primary px-4 py-2 font-semibold text-white transition hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+}
+
+.slide-body strong {
+  @apply font-semibold text-teal-300;
+}
+.slide-body em {
+  @apply italic text-slate-300;
+}
+.slide-body p + p {
+  @apply mt-3;
+}
