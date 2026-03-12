@@ -15,7 +15,76 @@ import {
 
 const baseSlidePanelClass = 'min-h-full rounded-2xl border border-slate-700 bg-slate-900/60';
 
-// ── Slide renderers ──────────────────────────
+type CheckSlideMode = 'binary' | 'fill_blank' | 'multi_part' | 'case' | 'reflection';
+
+interface CheckSlidePresentation {
+  mode: CheckSlideMode;
+  eyebrow: string;
+  title: string;
+  description: string;
+  accentClass: string;
+  buttonClass: string;
+}
+
+const getCheckSlidePresentation = (question: string): CheckSlidePresentation => {
+  if (/true or false/i.test(question)) {
+    return {
+      mode: 'binary',
+      eyebrow: 'Decision Point',
+      title: 'True or false',
+      description: 'Commit to a verdict before revealing the explanation.',
+      accentClass: 'text-amber-300',
+      buttonClass: 'border-amber-500/60 text-amber-200 hover:bg-amber-500/10',
+    };
+  }
+
+  if (/fill in the blank|\[____\]/i.test(question)) {
+    return {
+      mode: 'fill_blank',
+      eyebrow: 'Recall Prompt',
+      title: 'Fill in the blank',
+      description: 'Try to supply the missing principle or premise before checking the answer.',
+      accentClass: 'text-cyan-300',
+      buttonClass: 'border-cyan-500/60 text-cyan-200 hover:bg-cyan-500/10',
+    };
+  }
+
+  if (/\([a-z]\)/i.test(question)) {
+    return {
+      mode: 'multi_part',
+      eyebrow: 'Break It Down',
+      title: 'Work through the parts',
+      description: 'Handle each sub-question in order, then compare with the model answer.',
+      accentClass: 'text-fuchsia-300',
+      buttonClass: 'border-fuchsia-500/60 text-fuchsia-200 hover:bg-fuchsia-500/10',
+    };
+  }
+
+  if (/suppose|assume|case|scenario|what would .* say/i.test(question)) {
+    return {
+      mode: 'case',
+      eyebrow: 'Case Analysis',
+      title: 'Apply the theory',
+      description: 'Treat this as an exam-style case and decide which distinction controls the answer.',
+      accentClass: 'text-teal-300',
+      buttonClass: 'border-teal-500/60 text-teal-200 hover:bg-teal-500/10',
+    };
+  }
+
+  return {
+    mode: 'reflection',
+    eyebrow: 'Quick Reflection',
+    title: 'Test your understanding',
+    description: 'Pause, answer it in your own words, then open the explanation.',
+    accentClass: 'text-violet-300',
+    buttonClass: 'border-violet-500/60 text-violet-200 hover:bg-violet-500/10',
+  };
+};
+
+const extractPartLabels = (question: string): string[] => {
+  const matches = question.match(/\(([a-z])\)/gi) ?? [];
+  return Array.from(new Set(matches.map((match) => `Part ${match.replace(/[()]/g, '').toUpperCase()}`)));
+};
 
 const SlideIntro = ({ slide }: { slide: IntroSlide }): JSX.Element => (
   <div className={`${baseSlidePanelClass} p-10 text-center sm:p-14`}>
@@ -81,28 +150,114 @@ const SlideTerm = ({ slide }: { slide: TermSlide }): JSX.Element => (
 
 const SlideCheck = ({ slide }: { slide: CheckSlide }): JSX.Element => {
   const [revealed, setRevealed] = useState(false);
+  const [selectedBinaryChoice, setSelectedBinaryChoice] = useState<'True' | 'False' | null>(null);
+  const [scratchpad, setScratchpad] = useState('');
+  const presentation = getCheckSlidePresentation(slide.q);
+  const partLabels = presentation.mode === 'multi_part' ? extractPartLabels(slide.q) : [];
 
   return (
     <div className={`${baseSlidePanelClass} px-7 py-8`}>
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-violet-400">
-        Knowledge Check
-      </p>
-      <p className="mt-4 text-lg leading-relaxed">{slide.q}</p>
-      {!revealed ? (
-        <button
-          type="button"
-          onClick={() => setRevealed(true)}
-          className="mt-5 rounded-lg border border-violet-600 bg-transparent px-5 py-2 text-sm font-semibold text-violet-400 hover:bg-violet-900/30"
-        >
-          Reveal Answer
-        </button>
-      ) : null}
-      <div
-        className={`mt-4 rounded-r-lg border-l-[3px] border-violet-600 bg-violet-900/10 px-4 py-3 text-[0.95rem] leading-relaxed transition-opacity duration-300 ${
-          revealed ? 'opacity-100' : 'pointer-events-none h-0 overflow-hidden opacity-0'
-        }`}
-        dangerouslySetInnerHTML={{ __html: slide.a }}
-      />
+      <div className="max-w-3xl space-y-3">
+        <p className={`text-xs font-bold uppercase tracking-[0.14em] ${presentation.accentClass}`}>
+          {presentation.eyebrow}
+        </p>
+        <h3 className="text-2xl font-semibold text-slate-100">{presentation.title}</h3>
+        <p className="text-sm leading-relaxed text-slate-400">{presentation.description}</p>
+      </div>
+
+      <div className="mt-8 rounded-xl border border-slate-800 bg-slate-950/40 p-5">
+        <p className="text-base leading-relaxed text-slate-100">{slide.q}</p>
+
+        {presentation.mode === 'binary' ? (
+          <div className="mt-5 flex gap-3">
+            {(['True', 'False'] as const).map((choice) => (
+              <button
+                key={choice}
+                type="button"
+                onClick={() => setSelectedBinaryChoice(choice)}
+                className={`rounded-lg border px-4 py-2 text-sm font-semibold transition ${
+                  selectedBinaryChoice === choice
+                    ? 'border-slate-200 bg-slate-100 text-slate-950'
+                    : presentation.buttonClass
+                }`}
+              >
+                {choice}
+              </button>
+            ))}
+          </div>
+        ) : null}
+
+        {presentation.mode === 'fill_blank' ? (
+          <div className="mt-5 space-y-2">
+            <label className="block text-sm font-medium text-slate-300" htmlFor="fill-blank-response">
+              Your answer
+            </label>
+            <input
+              id="fill-blank-response"
+              type="text"
+              value={scratchpad}
+              onChange={(event) => setScratchpad(event.target.value)}
+              placeholder="Type the missing claim or premise"
+              className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
+            />
+          </div>
+        ) : null}
+
+        {presentation.mode === 'multi_part' ? (
+          <div className="mt-5 space-y-3">
+            <div className="flex flex-wrap gap-2">
+              {partLabels.map((label) => (
+                <span
+                  key={label}
+                  className="rounded-full border border-fuchsia-500/40 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold text-fuchsia-200"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+            <textarea
+              value={scratchpad}
+              onChange={(event) => setScratchpad(event.target.value)}
+              rows={5}
+              placeholder="Work through each part in your own words before checking the model answer"
+              className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
+            />
+          </div>
+        ) : null}
+
+        {(presentation.mode === 'case' || presentation.mode === 'reflection') ? (
+          <div className="mt-5 space-y-2">
+            <label className="block text-sm font-medium text-slate-300" htmlFor="reflection-response">
+              Quick note
+            </label>
+            <textarea
+              id="reflection-response"
+              value={scratchpad}
+              onChange={(event) => setScratchpad(event.target.value)}
+              rows={4}
+              placeholder="Write your own answer first, then compare it with the explanation"
+              className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
+            />
+          </div>
+        ) : null}
+
+        <div className="mt-5">
+          <button
+            type="button"
+            onClick={() => setRevealed((current) => !current)}
+            className={`rounded-lg border bg-transparent px-5 py-2 text-sm font-semibold ${presentation.buttonClass}`}
+          >
+            {revealed ? 'Hide explanation' : 'Reveal explanation'}
+          </button>
+        </div>
+
+        {revealed ? (
+          <div
+            className="mt-4 rounded-r-lg border-l-[3px] border-violet-600 bg-violet-900/10 px-4 py-3 text-[0.95rem] leading-relaxed text-slate-200"
+            dangerouslySetInnerHTML={{ __html: slide.a }}
+          />
+        ) : null}
+      </div>
     </div>
   );
 };
@@ -142,8 +297,6 @@ const RenderSlide = ({ slide }: { slide: LessonSlide }): JSX.Element => {
   }
 };
 
-// ── Main component ───────────────────────────
-
 const LessonViewer = (): JSX.Element => {
   const navigate = useNavigate();
   const { lessonIdx } = useParams<{ lessonIdx: string }>();
@@ -165,22 +318,21 @@ const LessonViewer = (): JSX.Element => {
       setFinished(true);
       return;
     }
-    setCurrent((c) => c + 1);
+    setCurrent((value) => value + 1);
   }, [current, lesson, total]);
 
   const goPrev = useCallback(() => {
-    setCurrent((c) => Math.max(0, c - 1));
+    setCurrent((value) => Math.max(0, value - 1));
   }, []);
 
-  // keyboard nav
   useEffect(() => {
     if (finished) return;
-    const handler = (e: KeyboardEvent): void => {
+    const handler = (event: KeyboardEvent): void => {
       const active = document.activeElement as HTMLElement | null;
       if (active && ['INPUT', 'SELECT', 'TEXTAREA'].includes(active.tagName)) return;
-      if (e.key === 'ArrowLeft') goPrev();
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        e.preventDefault();
+      if (event.key === 'ArrowLeft') goPrev();
+      if (event.key === 'ArrowRight' || event.key === ' ') {
+        event.preventDefault();
         goNext();
       }
     };
@@ -190,7 +342,12 @@ const LessonViewer = (): JSX.Element => {
 
   useEffect(() => {
     slideViewportRef.current?.scrollTo({ top: 0, behavior: 'auto' });
-  }, [current]);
+  }, [current, lesson?.id]);
+
+  useEffect(() => {
+    setCurrent(0);
+    setFinished(false);
+  }, [lesson?.id]);
 
   if (!lesson) {
     return (
@@ -207,7 +364,6 @@ const LessonViewer = (): JSX.Element => {
     );
   }
 
-  // ── Completion screen ──
   if (finished) {
     const hasNext = idx < GEX1015_LESSONS.length - 1;
     return (
@@ -245,12 +401,10 @@ const LessonViewer = (): JSX.Element => {
     );
   }
 
-  // ── Active lesson ──
   const slide = lesson.slides[current];
 
   return (
     <section className="mx-auto grid h-full w-full max-w-5xl min-h-0 grid-rows-[auto_auto_minmax(0,7fr)_minmax(5.5rem,1fr)] gap-5 overflow-hidden">
-      {/* Header */}
       <div className="flex items-center gap-3">
         <button
           type="button"
@@ -271,7 +425,6 @@ const LessonViewer = (): JSX.Element => {
         </div>
       </div>
 
-      {/* Progress */}
       <div>
         <div className="flex justify-between text-xs text-slate-500">
           <span>
@@ -287,18 +440,16 @@ const LessonViewer = (): JSX.Element => {
         </div>
       </div>
 
-      {/* Slide */}
       <div
         ref={slideViewportRef}
         data-testid="lesson-slide-viewport"
         className="min-h-0 overflow-y-auto px-2"
       >
-        <div className="mx-auto min-h-full w-full" key={current}>
+        <div className="mx-auto min-h-full w-full" key={`${lesson.id}-${current}`}>
           {slide ? <RenderSlide slide={slide} /> : null}
         </div>
       </div>
 
-      {/* Navigation */}
       <div
         data-testid="lesson-nav"
         className="flex min-h-0 items-end border-t border-slate-800 bg-slate-950/90 pt-4 backdrop-blur"

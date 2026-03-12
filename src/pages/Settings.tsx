@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { db, DEFAULT_MASTERY_THRESHOLD, resetDatabase } from '../db';
+import { db, DEFAULT_MASTERY_THRESHOLD } from '../db';
 import type { AppConfig } from '../models';
 
 const Settings = (): JSX.Element => {
   const [config, setConfig] = useState<AppConfig | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-  const [resetting, setResetting] = useState(false);
 
   useEffect(() => {
     void loadConfig();
@@ -28,21 +27,6 @@ const Settings = (): JSX.Element => {
     await db.config.put(config);
     setStatusMessage('Preferences saved.');
     setTimeout(() => setStatusMessage(null), 3000);
-  };
-
-  const handleReset = async (): Promise<void> => {
-    if (!confirm('This will delete all your quiz history and progress. Are you sure?')) {
-      return;
-    }
-    setResetting(true);
-    try {
-      await resetDatabase();
-      setStatusMessage('Database reset. All data cleared and re-seeded.');
-    } catch (err) {
-      setStatusMessage(err instanceof Error ? err.message : 'Reset failed.');
-    } finally {
-      setResetting(false);
-    }
   };
 
   return (
@@ -103,22 +87,6 @@ const Settings = (): JSX.Element => {
           Save preferences
         </button>
         {statusMessage ? <p className="text-sm text-green-300">{statusMessage}</p> : null}
-      </article>
-
-      <article className="space-y-4 rounded-lg border border-red-500/40 bg-red-500/10 p-4">
-        <h2 className="text-xl font-semibold text-red-200">Reset database</h2>
-        <p className="text-sm text-red-100">
-          Deletes all quiz history, results, and progress. The question bank will be re-seeded from scratch.
-          This cannot be undone.
-        </p>
-        <button
-          type="button"
-          className="rounded-md bg-red-600 px-4 py-2 font-semibold text-white hover:bg-red-500 disabled:opacity-60"
-          onClick={handleReset}
-          disabled={resetting}
-        >
-          {resetting ? 'Resetting…' : 'Reset all data'}
-        </button>
       </article>
     </section>
   );
