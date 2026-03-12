@@ -26,3 +26,23 @@ test('check slides use a more immersive format than a generic knowledge-check ca
   await expect(page.getByRole('button', { name: 'False' })).toBeVisible();
   await expect(page.getByText('Knowledge Check')).toHaveCount(0);
 });
+
+test('inline multiple-choice checks render answer buttons instead of fake multipart placeholders', async ({ page }) => {
+  await page.goto('/#/lessons/4');
+
+  const targetPrompt = page.getByText('According to cultural relativism, which is true?');
+  for (let index = 0; index < 12; index += 1) {
+    if (await targetPrompt.isVisible()) {
+      break;
+    }
+    await page.getByRole('button', { name: /Next/i }).click();
+  }
+
+  await expect(targetPrompt).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Multiple choice' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /A\.\s*Every culture ought to be tolerant\./i })).toBeVisible();
+  await expect(page.getByRole('button', { name: /B\.\s*A person can never do something morally wrong within their own culture\./i })).toBeVisible();
+  await expect(page.getByRole('button', { name: /C\.\s*None of the above\./i })).toBeVisible();
+  await expect(page.getByText('Break It Down')).toHaveCount(0);
+  await expect(page.getByText('Part A')).toHaveCount(0);
+});

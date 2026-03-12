@@ -15,7 +15,7 @@ import {
 
 const baseSlidePanelClass = 'min-h-full rounded-2xl border border-slate-700 bg-slate-900/60';
 
-type CheckSlideMode = 'binary' | 'fill_blank' | 'multi_part' | 'case' | 'reflection';
+type CheckSlideMode = 'binary' | 'fill_blank' | 'multiple_choice' | 'multi_part' | 'case' | 'reflection';
 
 interface CheckSlidePresentation {
   mode: CheckSlideMode;
@@ -26,7 +26,67 @@ interface CheckSlidePresentation {
   buttonClass: string;
 }
 
+interface ChoiceOption {
+  key: string;
+  label: string;
+}
+
+interface FillBlankData {
+  prompt: string;
+  blankCount: number;
+  options: ChoiceOption[];
+  correctKeys: string[];
+}
+
+const extractChoiceOptions = (question: string): ChoiceOption[] => {
+  if (/Options:/i.test(question)) {
+    const optionsSection = question.split(/Options:/i)[1] ?? '';
+    const matches = Array.from(optionsSection.matchAll(/\(([A-Za-z])\)\s*([^()]+?)(?=\s*\([A-Za-z]\)|$)/g));
+    return matches.map((match) => ({
+      key: (match[1] ?? '').toUpperCase(),
+      label: (match[2] ?? '').trim(),
+    }));
+  }
+
+  const inlineMatches = Array.from(question.matchAll(/\(([A-Za-z])\)\s*([^()]+?)(?=\s*\([A-Za-z]\)|$)/g));
+  if (inlineMatches.length >= 2) {
+    return inlineMatches.map((match) => ({
+      key: (match[1] ?? '').toUpperCase(),
+      label: (match[2] ?? '').trim(),
+    }));
+  }
+
+  const sentenceMatches = Array.from(question.matchAll(/([A-Z])\.\s*([^A-Z][^]*?)(?=\s+[A-Z]\.\s|$)/g));
+  if (sentenceMatches.length >= 2) {
+    return sentenceMatches.map((match) => ({
+      key: match[1] ?? '',
+      label: (match[2] ?? '').trim(),
+    }));
+  }
+
+  return [];
+};
+
+const isMultiPartPrompt = (question: string, options: ChoiceOption[]): boolean => {
+  if (/for each|each of the four combinations|work through|sub-question|part \w+/i.test(question)) {
+    return true;
+  }
+
+  if (options.length < 2) {
+    return false;
+  }
+
+  const questionLikeOptions = options.filter((option) =>
+    /[?]$/.test(option.label) ||
+    /^(are|is|what|why|how|which|can|could|does|do|did|suppose|give|identify)\b/i.test(option.label),
+  );
+
+  return questionLikeOptions.length === options.length;
+};
+
 const getCheckSlidePresentation = (question: string): CheckSlidePresentation => {
+  const choiceOptions = extractChoiceOptions(question);
+
   if (/true or false/i.test(question)) {
     return {
       mode: 'binary',
@@ -49,7 +109,18 @@ const getCheckSlidePresentation = (question: string): CheckSlidePresentation => 
     };
   }
 
-  if (/\([a-z]\)/i.test(question)) {
+  if (choiceOptions.length > 0 && !isMultiPartPrompt(question, choiceOptions)) {
+    return {
+      mode: 'multiple_choice',
+      eyebrow: 'Choose One',
+      title: 'Multiple choice',
+      description: 'Pick the best answer before opening the explanation.',
+      accentClass: 'text-sky-300',
+      buttonClass: 'border-sky-500/60 text-sky-200 hover:bg-sky-500/10',
+    };
+  }
+
+  if (isMultiPartPrompt(question, choiceOptions)) {
     return {
       mode: 'multi_part',
       eyebrow: 'Break It Down',
@@ -84,6 +155,68 @@ const getCheckSlidePresentation = (question: string): CheckSlidePresentation => 
 const extractPartLabels = (question: string): string[] => {
   const matches = question.match(/\(([a-z])\)/gi) ?? [];
   return Array.from(new Set(matches.map((match) => `Part ${match.replace(/[()]/g, '').toUpperCase()}`)));
+};
+
+const extractFillBlankData = (question: string, answerHtml: string): FillBlankData | null => {
+  if (!/fill in the blank|\[____\]/i.test(question)) {
+    return null;
+  }
+
+  const prompt = question.split(/Options:/i)[0]?.trim() ?? question.trim();
+  const blankCount = Math.max((prompt.match(/\[____\]/g) ?? []).length, 1);
+  const options = extractChoiceOptions(question);
+  const correctMatches = Array.from(answerHtml.matchAll(/\(([A-Z])\)/g)).map((match) => match[1] ?? '');
+  const correctKeys = correctMatches.slice(0, blankCount);
+
+  return {
+    prompt,
+    blankCount,
+    options,
+    correctKeys,
+  };
+};
+
+const renderFillBlankPrompt = (
+  prompt: string,
+  assignedKeys: Array<string | null>,
+  optionsByKey: Map<string, ChoiceOption>,
+  onDropOption: (blankIndex: number, optionKey: string) => void,
+  onClearBlank: (blankIndex: number) => void,
+): JSX.Element => {
+  const parts = prompt.split('[____]');
+
+  return (
+    <p className="flex flex-wrap items-center gap-x-2 gap-y-3 text-base leading-relaxed text-slate-100">
+      {parts.map((part, index) => (
+        <span key={`segment-${index}`} className="contents">
+          {part ? <span>{part}</span> : null}
+          {index < parts.length - 1 ? (
+            <button
+              type="button"
+              onDragOver={(event) => event.preventDefault()}
+              onDrop={(event) => {
+                event.preventDefault();
+                const optionKey = event.dataTransfer.getData('text/plain');
+                if (optionKey) {
+                  onDropOption(index, optionKey);
+                }
+              }}
+              onClick={() => onClearBlank(index)}
+              className={`inline-flex min-h-11 min-w-40 items-center justify-center rounded-xl border border-dashed px-4 py-2 text-sm font-semibold transition ${
+                assignedKeys[index]
+                  ? 'border-cyan-300 bg-cyan-400/10 text-cyan-100'
+                  : 'border-slate-600 bg-slate-900/70 text-slate-400 hover:border-slate-400'
+              }`}
+            >
+              {assignedKeys[index]
+                ? optionsByKey.get(assignedKeys[index] ?? '')?.label ?? assignedKeys[index]
+                : 'Drop option here'}
+            </button>
+          ) : null}
+        </span>
+      ))}
+    </p>
+  );
 };
 
 const SlideIntro = ({ slide }: { slide: IntroSlide }): JSX.Element => (
@@ -151,9 +284,53 @@ const SlideTerm = ({ slide }: { slide: TermSlide }): JSX.Element => (
 const SlideCheck = ({ slide }: { slide: CheckSlide }): JSX.Element => {
   const [revealed, setRevealed] = useState(false);
   const [selectedBinaryChoice, setSelectedBinaryChoice] = useState<'True' | 'False' | null>(null);
-  const [scratchpad, setScratchpad] = useState('');
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const presentation = getCheckSlidePresentation(slide.q);
   const partLabels = presentation.mode === 'multi_part' ? extractPartLabels(slide.q) : [];
+  const choiceOptions = extractChoiceOptions(slide.q);
+  const fillBlankData = extractFillBlankData(slide.q, slide.a);
+  const [assignedBlankKeys, setAssignedBlankKeys] = useState<Array<string | null>>(
+    fillBlankData ? Array.from({ length: fillBlankData.blankCount }, () => null) : [],
+  );
+  const [fillBlankChecked, setFillBlankChecked] = useState<boolean | null>(null);
+  const optionsByKey = new Map(choiceOptions.map((option) => [option.key, option]));
+
+  useEffect(() => {
+    setRevealed(false);
+    setSelectedBinaryChoice(null);
+    setSelectedOption(null);
+    setFillBlankChecked(null);
+    setAssignedBlankKeys(fillBlankData ? Array.from({ length: fillBlankData.blankCount }, () => null) : []);
+  }, [slide.q, slide.a, fillBlankData?.blankCount]);
+
+  const handleDropOption = (blankIndex: number, optionKey: string): void => {
+    setAssignedBlankKeys((current) => {
+      const next = current.map((value, index) =>
+        value === optionKey && index !== blankIndex ? null : value,
+      );
+      next[blankIndex] = optionKey;
+      return next;
+    });
+  };
+
+  const handleClearBlank = (blankIndex: number): void => {
+    setAssignedBlankKeys((current) => current.map((value, index) => (index === blankIndex ? null : value)));
+  };
+
+  const handleConfirmFillBlank = (): void => {
+    if (!fillBlankData) {
+      return;
+    }
+
+    const isCorrect = fillBlankData.correctKeys.every((key, index) => assignedBlankKeys[index] === key);
+    setFillBlankChecked(isCorrect);
+    setRevealed(true);
+  };
+
+  const availableChoiceOptions =
+    fillBlankData && fillBlankData.options.length > 0
+      ? fillBlankData.options.filter((option) => !assignedBlankKeys.includes(option.key))
+      : choiceOptions;
 
   return (
     <div className={`${baseSlidePanelClass} px-7 py-8`}>
@@ -187,69 +364,144 @@ const SlideCheck = ({ slide }: { slide: CheckSlide }): JSX.Element => {
           </div>
         ) : null}
 
-        {presentation.mode === 'fill_blank' ? (
-          <div className="mt-5 space-y-2">
-            <label className="block text-sm font-medium text-slate-300" htmlFor="fill-blank-response">
-              Your answer
-            </label>
-            <input
-              id="fill-blank-response"
-              type="text"
-              value={scratchpad}
-              onChange={(event) => setScratchpad(event.target.value)}
-              placeholder="Type the missing claim or premise"
-              className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
-            />
+        {fillBlankData && fillBlankData.options.length > 0 ? (
+          <div className="mt-5 space-y-4">
+            {renderFillBlankPrompt(
+              fillBlankData.prompt,
+              assignedBlankKeys,
+              optionsByKey,
+              handleDropOption,
+              handleClearBlank,
+            )}
+            <div className="space-y-3">
+              <p className="text-sm font-medium text-slate-300">Option cards</p>
+              <div className="flex flex-wrap gap-3">
+                {availableChoiceOptions.map((option) => (
+                  <button
+                    key={option.key}
+                    type="button"
+                    draggable
+                    onDragStart={(event) => {
+                      event.dataTransfer.setData('text/plain', option.key);
+                      event.dataTransfer.effectAllowed = 'move';
+                    }}
+                    onClick={() => {
+                      const firstEmptyIndex = assignedBlankKeys.findIndex((value) => value === null);
+                      if (firstEmptyIndex >= 0) {
+                        handleDropOption(firstEmptyIndex, option.key);
+                      }
+                    }}
+                    className={`rounded-xl border px-4 py-2 text-sm font-semibold transition ${presentation.buttonClass}`}
+                  >
+                    <span className="mr-2 opacity-70">{option.key}.</span>
+                    {option.label}
+                  </button>
+                ))}
+                {availableChoiceOptions.length === 0 ? (
+                  <p className="text-sm text-slate-500">All options placed. Click a blank to clear it if needed.</p>
+                ) : null}
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleConfirmFillBlank}
+                disabled={assignedBlankKeys.some((value) => value === null)}
+                className="rounded-lg border border-cyan-500/60 bg-cyan-500/10 px-5 py-2 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Confirm answer
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setAssignedBlankKeys(Array.from({ length: fillBlankData.blankCount }, () => null));
+                  setFillBlankChecked(null);
+                  setRevealed(false);
+                }}
+                className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800"
+              >
+                Reset blanks
+              </button>
+            </div>
+            {fillBlankChecked !== null ? (
+              <p className={`text-sm font-medium ${fillBlankChecked ? 'text-emerald-300' : 'text-rose-300'}`}>
+                {fillBlankChecked ? 'Correct. Review why below.' : 'Not quite. Review the explanation below.'}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+
+        {choiceOptions.length > 0 && !fillBlankData ? (
+          <div className="mt-5 space-y-3">
+            <p className="text-sm font-medium text-slate-300">
+              {presentation.mode === 'multi_part' ? 'Step through each part' : 'Choose an option'}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {choiceOptions.map((option) => (
+                <button
+                  key={option.key}
+                  type="button"
+                  onClick={() => setSelectedOption(option.key)}
+                  className={`rounded-lg border px-4 py-2 text-sm font-semibold transition ${
+                    selectedOption === option.key
+                      ? 'border-slate-200 bg-slate-100 text-slate-950'
+                      : presentation.buttonClass
+                  }`}
+                >
+                  <span className="mr-2 opacity-70">{option.key}.</span>
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {presentation.mode === 'fill_blank' && !fillBlankData && choiceOptions.length === 0 ? (
+          <div className="mt-5 rounded-lg border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-400">
+            Fill in the missing claim mentally first, then reveal the explanation to check the exact wording.
           </div>
         ) : null}
 
         {presentation.mode === 'multi_part' ? (
           <div className="mt-5 space-y-3">
-            <div className="flex flex-wrap gap-2">
-              {partLabels.map((label) => (
-                <span
-                  key={label}
-                  className="rounded-full border border-fuchsia-500/40 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold text-fuchsia-200"
-                >
-                  {label}
-                </span>
-              ))}
-            </div>
-            <textarea
-              value={scratchpad}
-              onChange={(event) => setScratchpad(event.target.value)}
-              rows={5}
-              placeholder="Work through each part in your own words before checking the model answer"
-              className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
-            />
+            {partLabels.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {partLabels.map((label) => (
+                  <span
+                    key={label}
+                    className="rounded-full border border-fuchsia-500/40 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold text-fuchsia-200"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+            {choiceOptions.length === 0 ? (
+              <p className="text-sm leading-relaxed text-slate-400">
+                Work through each part mentally, then reveal the explanation to compare your structure.
+              </p>
+            ) : null}
           </div>
         ) : null}
 
-        {(presentation.mode === 'case' || presentation.mode === 'reflection') ? (
-          <div className="mt-5 space-y-2">
-            <label className="block text-sm font-medium text-slate-300" htmlFor="reflection-response">
-              Quick note
-            </label>
-            <textarea
-              id="reflection-response"
-              value={scratchpad}
-              onChange={(event) => setScratchpad(event.target.value)}
-              rows={4}
-              placeholder="Write your own answer first, then compare it with the explanation"
-              className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
-            />
+        {(presentation.mode === 'case' || presentation.mode === 'reflection') && choiceOptions.length === 0 ? (
+          <div className="mt-5 rounded-lg border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-400">
+            Pause and make your call first. Then reveal the explanation and compare the controlling distinction with
+            your own reasoning.
           </div>
         ) : null}
 
-        <div className="mt-5">
-          <button
-            type="button"
-            onClick={() => setRevealed((current) => !current)}
-            className={`rounded-lg border bg-transparent px-5 py-2 text-sm font-semibold ${presentation.buttonClass}`}
-          >
-            {revealed ? 'Hide explanation' : 'Reveal explanation'}
-          </button>
-        </div>
+        {!fillBlankData ? (
+          <div className="mt-5">
+            <button
+              type="button"
+              onClick={() => setRevealed((current) => !current)}
+              className={`rounded-lg border bg-transparent px-5 py-2 text-sm font-semibold ${presentation.buttonClass}`}
+            >
+              {revealed ? 'Hide explanation' : 'Reveal explanation'}
+            </button>
+          </div>
+        ) : null}
 
         {revealed ? (
           <div

@@ -87,7 +87,130 @@ export function markLessonDone(id: string): void {
   }
 }
 
-export const GEX1015_LESSONS: Lesson[] = [
+interface LessonInterleaveRule {
+  after: string;
+  questionIncludes: string;
+}
+
+const LESSON_INTERLEAVE_RULES: Partial<Record<Lesson['id'], LessonInterleaveRule[]>> = {
+  week1: [
+    { after: 'Philosophy vs. Science', questionIncludes: 'A scientist discovers that a fetus develops neural activity' },
+    { after: 'Questions This Course Explores', questionIncludes: 'What is the difference between a scientific question' },
+  ],
+  week2: [
+    { after: 'Objections to Hedonism', questionIncludes: 'Which of Nozick’s conclusions is most accurate?' },
+    { after: 'Robert Nozick — Anarchy, State, and Utopia (1974)', questionIncludes: 'What is the BEST valid logical form for Nozick' },
+    { after: 'Theory 2: The Desire Theory', questionIncludes: 'On the Desire Theory, is it possible that a person doesn’t know how valuable their life is?' },
+    { after: 'Objections to the Desire Theory', questionIncludes: 'oppressed slave' },
+    { after: 'Theory 3: Objective List Theories', questionIncludes: 'Darren\'s mother\'s only desire is to see Darren married before she dies.' },
+    { after: 'How Exam Cases Distinguish the Three Theories', questionIncludes: 'Anna wants only pleasure and decides to spend her entire life in the experience machine.' },
+  ],
+  week3: [
+    { after: 'Moral Terminology', questionIncludes: 'If an action is supererogatory' },
+    { after: 'Classic Utilitarianism', questionIncludes: 'You have two actions. Action A: 2 units of pleasure' },
+    { after: 'Moral Status on Classic Utilitarianism', questionIncludes: 'An action generates 10 units of pleasure and 10 units of pain.' },
+    { after: 'Singer’s Argument', questionIncludes: 'A philosopher responds to Singer' },
+    { after: 'Singer’s Two Versions', questionIncludes: 'Moonyoung already owns enough shoes.' },
+    { after: 'Strong vs. Moderate: What Actually Changes?', questionIncludes: 'Singer\'s strong version of his principle requires us to maximise total net happiness.' },
+  ],
+  week4: [
+    { after: 'Kant: Treating Persons Merely as a Means', questionIncludes: 'According to Kant (as interpreted in class)' },
+    { after: 'Kant: Treating Persons Merely as a Means', questionIncludes: 'In the Loop case:' },
+    { after: 'Thomson: “Turning the Trolley” (2008)', questionIncludes: 'If you don’t need another person to achieve your aim' },
+    { after: 'Summary: Who Says What?', questionIncludes: 'Both classic utilitarians and Thomson think the common intuition about the Bystander case is wrong.' },
+    { after: 'Summary: Who Says What?', questionIncludes: 'In the Transplant case, a surgeon can save 5 patients only by cutting up one healthy bystander.' },
+    { after: 'Exam Move: Same Structure, Same Verdict', questionIncludes: 'Suppose the only way to save five is to push a heavy boulder onto the track' },
+    { after: 'Exam Move: Same Structure, Same Verdict', questionIncludes: 'Both Thomson and classic utilitarianism treat the moral difference between Bridge and Bystander as irrelevant.' },
+    { after: 'Exam Move: Same Structure, Same Verdict', questionIncludes: 'Give an example for each of the four combinations:' },
+  ],
+  week5: [
+    { after: 'Validity', questionIncludes: 'An argument with all false premises and a false conclusion can still be valid.' },
+    { after: 'Soundness', questionIncludes: 'If an argument’s premises and conclusion are all true, the argument is sound.' },
+    { after: 'The Four Common Argument Forms', questionIncludes: 'Fill in the blank so the argument becomes VALID:' },
+    { after: 'Practice: Identifying Argument Forms', questionIncludes: 'How do you PROVE that an argument is invalid?' },
+    { after: 'Cultural Relativism', questionIncludes: 'According to cultural relativism, which is true?' },
+    { after: 'Rachels: Three Consequences That Make Cultural Relativism Implausible', questionIncludes: 'A cultural relativist (Samantha) responds to Rachels' },
+  ],
+  week6: [
+    { after: 'The Problem of Evil — Revised Version', questionIncludes: 'What valid argument form does the Problem of Evil use?' },
+    { after: 'The Problem of Evil — Revised Version', questionIncludes: 'Why is the first version of the Problem of Evil' },
+    { after: 'Six Theodicies (Responses to the Problem of Evil)', questionIncludes: 'If a theist accepts Theodicy 6' },
+    { after: 'Perry — Dialogue on Good, Evil, and the Existence of God', questionIncludes: 'In Perry\'s Dialogue, Miller defends the "laws of nature" theodicy' },
+  ],
+};
+
+const getSlideAnchor = (slide: LessonSlide): string | null => {
+  switch (slide.type) {
+    case 'intro':
+      return slide.week;
+    case 'concept':
+    case 'bullets':
+    case 'summary':
+      return slide.title;
+    case 'quote':
+      return slide.label;
+    case 'term':
+      return slide.term;
+    default:
+      return null;
+  }
+};
+
+const interleaveLessonChecks = (lesson: Lesson): Lesson => {
+  const rules = LESSON_INTERLEAVE_RULES[lesson.id];
+  if (!rules || rules.length === 0) {
+    return lesson;
+  }
+
+  const checks = lesson.slides.filter((slide): slide is CheckSlide => slide.type === 'check');
+  const contentSlides = lesson.slides.filter((slide) => slide.type !== 'check');
+  const usedQuestions = new Set<string>();
+  const interleavedSlides: LessonSlide[] = [];
+
+  for (const slide of contentSlides) {
+    interleavedSlides.push(slide);
+
+    const anchor = getSlideAnchor(slide);
+    if (!anchor) {
+      continue;
+    }
+
+    for (const rule of rules) {
+      if (rule.after !== anchor) {
+        continue;
+      }
+
+      const matchingCheck = checks.find((check) => !usedQuestions.has(check.q) && check.q.includes(rule.questionIncludes));
+      if (!matchingCheck) {
+        continue;
+      }
+
+      usedQuestions.add(matchingCheck.q);
+      interleavedSlides.push(matchingCheck);
+    }
+  }
+
+  const remainingChecks = checks.filter((check) => !usedQuestions.has(check.q));
+  if (remainingChecks.length === 0) {
+    return { ...lesson, slides: interleavedSlides };
+  }
+
+  const summaryIndex = interleavedSlides.findIndex((slide) => slide.type === 'summary');
+  if (summaryIndex === -1) {
+    return { ...lesson, slides: [...interleavedSlides, ...remainingChecks] };
+  }
+
+  return {
+    ...lesson,
+    slides: [
+      ...interleavedSlides.slice(0, summaryIndex),
+      ...remainingChecks,
+      ...interleavedSlides.slice(summaryIndex),
+    ],
+  };
+};
+
+const RAW_GEX1015_LESSONS: Lesson[] = [
   // ══════════════════════════════════════════════
   // WEEK 1 — Introduction to Philosophy
   // ══════════════════════════════════════════════
@@ -719,3 +842,5 @@ export const GEX1015_LESSONS: Lesson[] = [
     ],
   },
 ];
+
+export const GEX1015_LESSONS: Lesson[] = RAW_GEX1015_LESSONS.map(interleaveLessonChecks);
