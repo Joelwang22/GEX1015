@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import {
   Analytics,
   CreateTest,
@@ -20,9 +20,12 @@ const navItems = [
 ];
 
 const App = (): JSX.Element => {
+  const location = useLocation();
+  const isLessonViewerRoute = /^\/lessons\/[^/]+$/.test(location.pathname);
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="border-b border-slate-800 bg-slate-900/60 backdrop-blur">
+    <div className="flex h-dvh flex-col bg-slate-950 text-slate-100">
+      <header className="shrink-0 border-b border-slate-800 bg-slate-900/60 backdrop-blur">
         <nav className="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-4 py-4">
           <span className="text-xl font-bold text-teal-300">GEX1015</span>
           <ul className="flex flex-wrap items-center gap-3 text-sm">
@@ -44,7 +47,11 @@ const App = (): JSX.Element => {
           </ul>
         </nav>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-8">
+      <main
+        className={`mx-auto flex w-full max-w-6xl min-h-0 flex-1 flex-col px-4 ${
+          isLessonViewerRoute ? 'overflow-hidden py-6' : 'overflow-y-auto py-8'
+        }`}
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/lessons" element={<Teach />} />

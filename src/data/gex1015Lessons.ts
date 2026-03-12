@@ -89,6 +89,70 @@ export function markLessonDone(id: string): void {
 
 export const GEX1015_LESSONS: Lesson[] = [
   // ══════════════════════════════════════════════
+  // WEEK 1 — Introduction to Philosophy
+  // ══════════════════════════════════════════════
+  {
+    id: 'week1',
+    title: 'Week 1',
+    subtitle: 'Introduction to Philosophy',
+    icon: '🧠',
+    slides: [
+      {
+        type: 'intro',
+        week: 'Week 1 — Introduction',
+        question: 'What is philosophy, and what kinds of questions does it try to answer?',
+        body: 'This lesson introduces what philosophy is, how it differs from science and other disciplines, and previews the major questions this course explores.',
+      },
+      {
+        type: 'term',
+        label: 'Core Definition',
+        term: 'Philosophy',
+        def: 'Philosophy explores, using <strong>reason and argument</strong>, important questions that other disciplines are <strong>unwilling or unable to answer</strong>.<br><br>Unlike science (which answers questions through observation and experiment), philosophy tackles questions where no amount of further data can settle the matter — questions about morality, existence, knowledge, and meaning.',
+      },
+      {
+        type: 'concept',
+        title: 'Philosophy vs. Science',
+        body: '<p>Science can supply <strong>facts</strong>. Philosophy determines what those facts <strong>mean</strong> morally or conceptually.</p><p><strong>Example — Abortion:</strong> Science can tell us when a fetus\'s heartbeat begins. But that fact alone does not settle whether abortion is morally wrong. We would still need to know whether having a heartbeat has <em>moral significance</em> — i.e., whether it is always wrong to kill something with a heartbeat, and if not, when exactly it is wrong. <em>No further scientific research can answer this question.</em></p><p>Answering such questions is what philosophy aims to do.</p>',
+      },
+      {
+        type: 'bullets',
+        title: 'Questions This Course Explores',
+        items: [
+          '<strong>Ethics:</strong> Is it morally wrong not to help people dying of extreme poverty in developing countries?',
+          '<strong>Ethics:</strong> Is it morally right to sacrifice one person to save five? (Trolley problems)',
+          '<strong>Philosophy of religion:</strong> If there is a god, why do so many bad things happen? Does suffering disprove God\'s existence?',
+          '<strong>Metaphysics:</strong> Do we really have free will? Or is it just an illusion?',
+          '<strong>Philosophy of mind:</strong> Can AI be conscious? Can AI think?',
+          '<strong>Metaphysics:</strong> Are we living in a computer simulation?',
+          '<strong>Aesthetics:</strong> What is the definition of art?',
+        ],
+      },
+      {
+        type: 'check',
+        q: 'A scientist discovers that a fetus develops neural activity at 24 weeks. Does this scientific fact, by itself, settle whether abortion is morally permissible at 25 weeks?',
+        a: '<strong>No.</strong> The scientific fact tells us <em>when</em> neural activity begins, but it does not tell us whether neural activity has moral significance — e.g., whether it is wrong to end the life of something with neural activity. That is a philosophical question about the moral status of neural activity, which no experiment can answer.',
+      },
+      {
+        type: 'check',
+        q: 'What is the difference between a scientific question and a philosophical question?',
+        a: 'A <strong>scientific question</strong> can (in principle) be answered through observation, experiment, and data collection (e.g., "At what temperature does water boil?"). A <strong>philosophical question</strong> cannot be settled by empirical data alone — it requires reason and argument to evaluate competing claims about morality, meaning, existence, or concepts (e.g., "Is it wrong to kill something with a heartbeat?").',
+      },
+      {
+        type: 'summary',
+        title: 'Week 1 — Key Takeaways',
+        points: [
+          'Philosophy explores important questions using reason and argument.',
+          'It addresses questions that science and other disciplines are unable to settle with data alone.',
+          'Science gives facts; philosophy evaluates the moral and conceptual significance of those facts.',
+          'This course covers ethics (morality, right & wrong), philosophy of religion, and logic.',
+          'Key topics: goodness, consequentialism, non-consequentialism, relativism, the Problem of Evil.',
+        ],
+        cta: 'Week 1 provides the foundation — move on to Week 2 to dive into the first major theory.',
+      },
+    ],
+  },
+
+  // ══════════════════════════════════════════════
   // WEEK 2 — Goodness
   // ══════════════════════════════════════════════
   {
@@ -146,6 +210,11 @@ export const GEX1015_LESSONS: Lesson[] = [
       },
       {
         type: 'concept',
+        title: 'How Exam Cases Distinguish the Three Theories',
+        body: '<p>Exam questions often describe a case and ask <strong>which theory best explains the verdict</strong>.</p><p><strong>Hedonism:</strong> if one life has more pleasure and less pain, it is better. So if someone says Deception is better than Honesty just because it feels better from the inside, that points to hedonism.</p><p><strong>Desire Theory:</strong> what matters is whether the person\u2019s desires are actually fulfilled. This is why it can say Anna should plug into the experience machine if she only wants pleasure. But it also implies that serving the master is good for the oppressed slave if that is their only desire \u2014 which is the problem.</p><p><strong>Objective List Theory:</strong> things like knowledge, autonomy, friendship, and achievement can be good for a person whether or not they want them. So if someone says Deception is worse because the mother lacks knowledge, that points to an objective list theory.</p>',
+      },
+      {
+        type: 'concept',
         title: 'Theory 3: Objective List Theories',
         body: '<p><strong>Objective List Theories</strong> hold that there are things that are <strong>objectively</strong> non-instrumentally good for a person \u2014 whether they desire them or not.</p><p>Popular items on the list include: <strong>knowledge, autonomy, friendship, achievement, pleasure</strong>. Usually there are multiple items (so hedonism is not typically an objective list theory).</p><p><strong>Attractions:</strong> Explains why we shouldn\u2019t plug into the experience machine. Explains why fulfilling some desires (like the grass-counter\u2019s) isn\u2019t good for the person.</p><p><strong>Objections:</strong> It\u2019s <em>elitist</em> \u2014 claiming things are good for people even if they don\u2019t want them. And it\u2019s hard to explain what all the items on the list have in common.</p>',
       },
@@ -165,6 +234,21 @@ export const GEX1015_LESSONS: Lesson[] = [
         a: '<strong>(b)</strong> Nozick\u2019s point is that pleasure is <strong>not the only</strong> thing that is non-instrumentally valuable. He does NOT claim pleasure has no non-instrumental value at all \u2014 just that there must be something else that matters too.',
       },
       {
+        type: 'check',
+        q: 'What is the BEST valid logical form for Nozick\'s Experience Machine argument?',
+        a: '<strong>Modus Tollens:</strong> P1. If nothing matters besides how our lives feel from the inside, we would plug into the experience machine. P2. We would NOT plug in. C. Therefore, it is NOT the case that nothing matters besides how our lives feel.<br><br>The conclusion is <strong>not</strong> "experience/pleasure doesn\'t matter" — it is "experience is <strong>not the only thing</strong> that matters."',
+      },
+      {
+        type: 'check',
+        q: 'Darren\'s mother\'s only desire is to see Darren married before she dies. In Deception, Darren lies; she is happier but has false beliefs. In Honesty, she knows the truth and is unhappier. Eric says her life has less non-instrumental value in Deception. Which theory of non-instrumental value does Eric most likely hold, and why?',
+        a: '<strong>Objective List Theory.</strong> Eric is not a hedonist (hedonists would say Deception is better — more pleasure). He is not a desire theorist (her desire is unfulfilled in both scenarios, so equal value). He must be an objective list theorist who thinks <strong>knowledge</strong> (or contact with reality) is objectively valuable — and she lacks genuine knowledge in Deception.',
+      },
+      {
+        type: 'check',
+        q: 'Why is the “oppressed slave who only wants to serve the master” a problem for the Desire Theory?',
+        a: '<strong>Because the Desire Theory implies that serving the master is good for the slave.</strong> If desire-fulfilment is the only non-instrumental good, then fulfilling that desire makes the slave’s life go better. But that seems deeply wrong, which suggests that what is good for a person cannot depend only on whatever they happen to desire.',
+      },
+      {
         type: 'summary',
         title: 'Week 2 \u2014 Key Takeaways',
         points: [
@@ -174,7 +258,7 @@ export const GEX1015_LESSONS: Lesson[] = [
           'Objective List Theories: multiple things are objectively good. Challenged as elitist.',
           'Nozick\u2019s Experience Machine: most wouldn\u2019t plug in, suggesting we value more than just experience.',
         ],
-        cta: 'Ready to test yourself on Week 2? Review the midterm practice questions.',
+        cta: 'Ready to test yourself on Week 2? Head to Week 3 next.',
       },
     ],
   },
@@ -217,6 +301,11 @@ export const GEX1015_LESSONS: Lesson[] = [
         body: '<p><strong>Classic utilitarianism</strong> says: a right action is one that <strong>maximizes total net pleasure</strong> (total pleasure minus total pain for everyone affected by the action).</p><p>Key features: <strong>Impartial</strong> \u2014 anyone\u2019s pleasure counts equally (regardless of class, gender, race, species). <strong>Demanding</strong> \u2014 only the action that maximizes net pleasure is right; all others are wrong. <strong>Context-sensitive</strong> \u2014 no type of action (torture, robbery) is always wrong; it depends on whether it maximizes net pleasure in that context.</p><p>On classic utilitarianism, the categories of morally permissible and morally required actions <strong>collapse</strong> \u2014 there is essentially no room for supererogatory actions.</p>',
       },
       {
+        type: 'concept',
+        title: 'Moral Status on Classic Utilitarianism',
+        body: '<p>Exam questions often ask whether an action is <strong>permissible, required, neutral, supererogatory, or wrong</strong>.</p><p><strong>Main rule:</strong> any action that <strong>maximizes</strong> total net pleasure is right/permissible. If there is <strong>only one</strong> such action, it is also <strong>morally required</strong>. Any action that produces less net pleasure than the best available action is <strong>wrong</strong>.</p><p><strong>Important consequence:</strong> classic utilitarianism leaves almost no room for <strong>supererogatory</strong> or <strong>morally neutral</strong> actions in choice situations. If one option is best, that option is required and the rest are wrong. If several options tie for best, each tied option is permissible.</p><p><strong>Another trap:</strong> an action can still be right even if it produces only pain, as long as every other available action produces even more pain.</p>',
+      },
+      {
         type: 'bullets',
         title: 'Why \u201cGreatest Happiness for Greatest Number\u201d Is Misleading',
         items: [
@@ -246,6 +335,16 @@ export const GEX1015_LESSONS: Lesson[] = [
         body: '<p><strong>Strong version:</strong> We ought to prevent as much suffering as we can without sacrificing something of <em>comparable</em> moral importance.</p><p><strong>Moderate version:</strong> We ought to prevent bad occurrences unless, to do so, we had to sacrifice something <em>morally significant</em>.</p><p>Even the moderate version is <strong>very demanding:</strong> buying new clothes, bottled water, etc. when that money could prevent suffering is morally wrong.</p><p><strong>Important:</strong> Even the strong version only concerns <em>reducing suffering</em>, not maximizing total happiness. So Singer (in this paper) can still allow for supererogatory actions like making already-happy people happier.</p>',
       },
       {
+        type: 'bullets',
+        title: 'Strong vs. Moderate: What Actually Changes?',
+        items: [
+          '<strong>Strong version:</strong> You keep giving until giving more would require sacrificing something of <em>comparable</em> moral importance. This demands more from you.',
+          '<strong>Moderate version:</strong> You may stop earlier \u2014 once further giving would require sacrificing something morally significant.',
+          '<strong>Both versions:</strong> are about <strong>reducing suffering</strong>, not maximizing total happiness.',
+          '<strong>Both versions:</strong> still allow some supererogatory actions. Making already-happy people even happier can go beyond what Singer\u2019s principle requires.',
+        ],
+      },
+      {
         type: 'quote',
         label: 'Peter Singer \u2014 \u201cFamine, Affluence, and Morality\u201d (1972)',
         text: '\u201cThe fact that a person is physically near to us, so that we have personal contact with him, may make it more likely that we shall assist him, but this does not show that we ought to help him rather than another who happens to be further away.\u201d',
@@ -270,6 +369,16 @@ export const GEX1015_LESSONS: Lesson[] = [
         type: 'check',
         q: 'Moonyoung already owns enough shoes. She buys a cheaper pair for $50 and donates $50 to a malaria charity instead of buying the $100 shoes she wanted. What would Singer say?',
         a: '<strong>Her action is morally wrong.</strong> She is still spending $50 on shoes she doesn\u2019t need when that money could prevent suffering. Even if everyone else in her situation donated $50 and that would eliminate malaria, Singer says (p. 233) that the hypothetical \u201cif everyone gave\u201d does not reduce her actual obligation since not everyone WILL give.',
+      },
+      {
+        type: 'check',
+        q: 'True or false: Singer\'s strong version of his principle requires us to maximise total net happiness.',
+        a: '<strong>False.</strong> Neither the strong nor moderate version is about maximising happiness. Both are about <strong>reducing suffering</strong>. The strong version only requires preventing suffering up to the point where you\'d be sacrificing something of comparable moral importance. If people in developing countries were already happy (not suffering), neither version would require us to make them even happier. Both versions also allow supererogatory actions — e.g., making already-happy people even happier goes beyond what either version requires.',
+      },
+      {
+        type: 'check',
+        q: 'True or false: If an action is supererogatory, then it is morally permissible.',
+        a: '<strong>True.</strong> Supererogatory actions go above and beyond duty. That means they are morally good but not required \u2014 so they must be permissible rather than wrong.',
       },
       {
         type: 'summary',
@@ -348,6 +457,11 @@ export const GEX1015_LESSONS: Lesson[] = [
         ],
       },
       {
+        type: 'concept',
+        title: 'Exam Move: Same Structure, Same Verdict',
+        body: '<p>Past exams repeatedly test whether you can apply Thomson\u2019s view to a <strong>new case</strong> by asking whether its structure matches Driver, Bystander, or Bridge.</p><p><strong>Driver structure:</strong> kill one vs kill five. Foot and Thomson say kill one. <strong>Bystander structure:</strong> kill one vs let five die. Foot and Thomson say let five die. <strong>Bridge structure:</strong> also kill one vs let five die, so Thomson treats it the same as Bystander; the \u201cdrastic\u201d nature of the means does not matter morally.</p><p>This is why a <strong>boulder case</strong> where pushing the boulder kills one innocent bystander but the bystander\u2019s body is not needed as a means still comes out like Bystander for Thomson: it is still <strong>killing one instead of letting five die</strong>, so she says it is wrong.</p>',
+      },
+      {
         type: 'check',
         q: 'TRUE or FALSE: According to Kant (as interpreted in class), Option 2 amounts to treating a person merely as a means in both Bystander and Bridge.',
         a: '<strong>FALSE.</strong> In Bystander, you\u2019re not even treating the person as a means (you can achieve your aim of saving five even if the person on the side track disappears). In Bridge, you ARE treating the person as a means (you need their body to stop the trolley).',
@@ -366,6 +480,26 @@ export const GEX1015_LESSONS: Lesson[] = [
         type: 'check',
         q: 'In the Loop case: (a) Are you treating the one person as a means? (b) What would Thomson probably say? (c) What would classic utilitarians say?',
         a: '<strong>(a) Yes</strong> \u2014 if the person disappears, you can\u2019t save the five (the trolley goes around the loop). <strong>(b) Thomson would say it\u2019s morally wrong</strong> to throw the switch (she already thinks it\u2019s wrong in regular Bystander; Loop adds even more reason since you\u2019re using the person as a means). <strong>(c) Utilitarians would say it\u2019s permissible</strong> \u2014 more lives saved, and only consequences matter.',
+      },
+      {
+        type: 'check',
+        q: 'In the Transplant case, a surgeon can save 5 patients only by cutting up one healthy bystander. (a) Is the surgeon treating the bystander as a means? (b) What would Kant say? (c) What would Foot say?',
+        a: '<strong>(a) Yes</strong> — the bystander\'s organs are the route to success; if the bystander disappeared, the plan fails. <strong>(b) Kant\'s key point:</strong> treating someone as a means is NOT always wrong — treating someone <em>merely</em> as a means is. Still, cutting someone up likely treats them merely as a means, which Kant would condemn. <strong>(c) Foot: it\'s morally wrong</strong> — cutting up = killing; not operating = letting the five die. Since killing is worse than letting die, the surgeon must not operate.',
+      },
+      {
+        type: 'check',
+        q: 'Suppose the only way to save five is to push a heavy boulder onto the track, and the boulder will crush one innocent bystander. The bystander\u2019s body plays no role in stopping the trolley. What would Thomson likely say?',
+        a: '<strong>She would still say it is morally wrong</strong>. Even though the bystander is not being used as a means, pushing the boulder still counts as <strong>killing one person</strong>, while not pushing it counts as <strong>letting five die</strong>. That gives the case the same moral structure as Bystander on Thomson\u2019s view.',
+      },
+      {
+        type: 'check',
+        q: 'True or false: Both Thomson and classic utilitarianism treat the moral difference between Bridge and Bystander as irrelevant.',
+        a: '<strong>True.</strong> Both agree the Bridge/Bystander difference doesn\'t matter morally, but they reach opposite conclusions. <strong>Utilitarians:</strong> only consequences matter; the method (push vs. flip switch) doesn\'t affect consequences, so both are equally permissible. <strong>Thomson:</strong> "how drastic the means is" is morally irrelevant; what matters is that both cases involve killing one to let five live — so both are equally wrong.',
+      },
+      {
+        type: 'check',
+        q: 'Give an example for each of the four combinations: (a) killing + treating as means, (b) killing without treating as means, (c) treating as means without killing, (d) neither killing nor treating as means.',
+        a: '<strong>(a) Bridge:</strong> pushing the large person kills them AND uses their body to stop the trolley. <strong>(b) Bystander:</strong> throwing the switch kills the person on the side track, but they are NOT needed as a means (if they disappeared, the five would still be saved). <strong>(c) Bus driver / lying:</strong> you use the driver to get somewhere (treating as means) but don\'t kill them. <strong>(d) Not interacting with another person at all.</strong>',
       },
       {
         type: 'summary',
@@ -472,6 +606,16 @@ export const GEX1015_LESSONS: Lesson[] = [
         a: '<strong>(C) None of the above.</strong> (A) is false because cultural relativism allows a culture\u2019s own code to be intolerant \u2014 there\u2019s no universal rule of tolerance. (B) is false because a person CAN violate their own culture\u2019s moral code, which would be morally wrong within that culture.',
       },
       {
+        type: 'check',
+        q: 'How do you PROVE that an argument is invalid? Is it enough to show that a premise is false? That the conclusion is false?',
+        a: '<strong>No.</strong> Showing false premises or a false conclusion does NOT prove invalidity. A valid argument can have false premises, a false conclusion, or even all false statements. To prove invalidity, you must show that it is <strong>possible for all premises to be true while the conclusion is false at the same time</strong>. This is the only method.',
+      },
+      {
+        type: 'check',
+        q: 'A cultural relativist (Samantha) responds to Rachels\' argument that cultural relativism implies moral progress is impossible. She distinguishes between a society\'s common practices and its underlying ideals. How does this help her deny that moral progress is impossible?',
+        a: 'Samantha denies P1 (that if CR is true, moral progress is impossible). She argues that even on cultural relativism, a society can improve morally: when a society fails to live up to its own ideals, and then succeeds in living up to them, that counts as moral progress. This redefines progress in culturally relative terms — progress toward the society\'s own standards — rather than requiring universal standards.',
+      },
+      {
         type: 'summary',
         title: 'Week 5 \u2014 Key Takeaways',
         points: [
@@ -554,6 +698,11 @@ export const GEX1015_LESSONS: Lesson[] = [
         type: 'check',
         q: 'If a theist accepts Theodicy 6 (God\u2019s reasons are beyond human understanding), what problematic consequence follows?',
         a: 'We lose our <strong>moral compass</strong>: if we don\u2019t know what is truly good (in God\u2019s sense), we can\u2019t know whether to prevent suffering or not. We also can\u2019t predict God\u2019s behaviour \u2014 we have no reason to think our afterlife will be good (in our sense of good). And if God is all-loving, why doesn\u2019t he at least help us understand his reasons or make his presence more evident?',
+      },
+      {
+        type: 'check',
+        q: 'In Perry\'s Dialogue, Miller defends the "laws of nature" theodicy using the fishing-day analogy (getting up early is uncomfortable, but leads to a good day). What is Gretchen\'s deeper objection?',
+        a: 'Gretchen points out that if God is all-powerful, God created the very <strong>dependencies and laws of nature</strong> that make suffering necessary for good outcomes. God could have created people who enjoy waking early, or fish that prefer afternoon, or removed sharp fishhooks entirely. So the laws of nature don\'t excuse suffering — they just push the responsibility back to whoever designed those laws. Miller\'s only remaining move is essentially Theodicy 6: perhaps God had incomprehensible reasons for creating those particular dependencies.',
       },
       {
         type: 'summary',

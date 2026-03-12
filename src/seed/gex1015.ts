@@ -6,6 +6,7 @@ const now = new Date().toISOString();
 const subjectId = 'gex1015';
 
 const topics: Topic[] = [
+  { id: 'gex-intro', subjectId, name: 'Week 1: Introduction to Philosophy' },
   { id: 'gex-goodness', subjectId, name: 'Week 2: Goodness (Hedonism, Desire Theory, Objective List Theory)' },
   { id: 'gex-right-wrong-1', subjectId, name: 'Week 3: Right & Wrong I (Consequentialism, Utilitarianism, Singer)' },
   { id: 'gex-right-wrong-2', subjectId, name: 'Week 4: Right & Wrong II (Non-Consequentialism, Kant, Trolley Problems, Thomson)' },
@@ -14,6 +15,102 @@ const topics: Topic[] = [
 ];
 
 const questions: Question[] = [
+  // ═══════════════════════════════════════════════════════════════════════
+  // WEEK 1: INTRODUCTION TO PHILOSOPHY
+  // ═══════════════════════════════════════════════════════════════════════
+
+  {
+    id: 'gex-076',
+    subjectId,
+    topicIds: ['gex-intro'],
+    type: 'mcq_single',
+    stem: 'Which of the following best describes what philosophy does?',
+    choices: [
+      { id: 'a', text: 'It studies the natural world through observation and experiment' },
+      { id: 'b', text: 'It explores important questions that other disciplines are unwilling or unable to answer, using reason and argument' },
+      { id: 'c', text: 'It describes how societies and cultures function' },
+      { id: 'd', text: 'It analyses historical events to explain the present' },
+    ],
+    correctChoiceIds: ['b'],
+    explanation: 'Philosophy explores, using reason and argument, important questions that other disciplines (like science, history, or sociology) are unwilling or unable to answer — such as whether abortion is morally wrong, or what makes an action right or wrong.',
+    difficulty: 1,
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: 'gex-077',
+    subjectId,
+    topicIds: ['gex-intro'],
+    type: 'mcq_single',
+    stem: 'Science can tell us when a fetus\'s heartbeat begins. Why does this fact alone NOT settle whether abortion is morally wrong?',
+    choices: [
+      { id: 'a', text: 'Because the heartbeat data is unreliable' },
+      { id: 'b', text: 'Because we would still need to know whether having a heartbeat has moral significance — e.g., whether it is always wrong to kill something with a heartbeat' },
+      { id: 'c', text: 'Because science has not yet reached a consensus on the question' },
+      { id: 'd', text: 'Because moral questions can only be answered by religion, not science or philosophy' },
+    ],
+    correctChoiceIds: ['b'],
+    explanation: 'Science can supply facts (e.g., when the heartbeat starts), but those facts alone do not answer the moral question. We would still need to determine whether having a heartbeat has moral significance — for example, whether it is always wrong to kill something with a heartbeat. These are philosophical questions that cannot be settled by further scientific research.',
+    difficulty: 2,
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: 'gex-078',
+    subjectId,
+    topicIds: ['gex-intro'],
+    type: 'mcq_single',
+    stem: 'Which of the following is a philosophical question rather than a purely scientific one?',
+    choices: [
+      { id: 'a', text: 'What is the boiling point of water at sea level?' },
+      { id: 'b', text: 'At what gestational age does a fetus develop neural activity?' },
+      { id: 'c', text: 'Is it morally wrong not to help people dying of extreme poverty in developing countries?' },
+      { id: 'd', text: 'What percentage of the human genome do we share with chimpanzees?' },
+    ],
+    correctChoiceIds: ['c'],
+    explanation: 'The question of whether we are morally obligated to help the poor is a philosophical (specifically ethical) question — it cannot be answered purely by gathering empirical data. Options A, B, and D are all empirical questions that science can (in principle) answer.',
+    difficulty: 1,
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: 'gex-079',
+    subjectId,
+    topicIds: ['gex-intro'],
+    type: 'mcq_multi',
+    stem: 'Which of the following are philosophical questions discussed in this course? Select all that apply.',
+    choices: [
+      { id: 'a', text: 'Do we really have free will, or is it an illusion?' },
+      { id: 'b', text: 'What is the chemical composition of DNA?' },
+      { id: 'c', text: 'If there is a god, why do so many bad things happen in the world?' },
+      { id: 'd', text: 'Is it morally right to sacrifice one person to save five?' },
+      { id: 'e', text: 'What is the average life expectancy in Singapore?' },
+    ],
+    correctChoiceIds: ['a', 'c', 'd'],
+    explanation: 'A (free will), C (problem of evil), and D (trolley problems) are all philosophical questions explored in this course. B is a scientific (biochemical) question and E is an empirical demographic question — neither requires philosophical reasoning to answer.',
+    difficulty: 2,
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: 'gex-080',
+    subjectId,
+    topicIds: ['gex-intro'],
+    type: 'mcq_single',
+    stem: 'What is the primary method philosophy uses to answer questions?',
+    choices: [
+      { id: 'a', text: 'Laboratory experiments and controlled observation' },
+      { id: 'b', text: 'Surveys and statistical analysis of human behaviour' },
+      { id: 'c', text: 'Reason and argument' },
+      { id: 'd', text: 'Historical analysis of written texts' },
+    ],
+    correctChoiceIds: ['c'],
+    explanation: 'Philosophy\'s primary method is reason and argument — developing, analysing, and evaluating arguments for or against positions. Unlike science, it does not rely on empirical experiments; unlike history, it does not rely on historical sources. It uses logical reasoning to address questions that other disciplines can\'t settle.',
+    difficulty: 1,
+    createdAt: now,
+    updatedAt: now,
+  },
+
   // ═══════════════════════════════════════════════════════════════════════
   // WEEK 2: GOODNESS
   // ═══════════════════════════════════════════════════════════════════════
@@ -1404,6 +1501,228 @@ const questions: Question[] = [
     correctChoiceIds: ['c'],
     explanation: 'Natural evils are suffering not caused by human choice — earthquakes, floods, tsunamis, cancer, etc. Moral evils (murder, theft, lying) are caused by human free will. The free will theodicy cannot address natural evils.',
     difficulty: 1,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // SUPPLEMENTARY — From 2026 Midterm & New Readings
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // --- Cultural Relativist Response to Rachels (2026 midterm Q1) ---
+  {
+    id: 'gex-081',
+    subjectId,
+    topicIds: ['gex-logic-relativism'],
+    type: 'mcq_single',
+    stem: 'Samantha is a cultural relativist responding to this argument: "P1. If cultural relativism is true, moral progress is impossible. P2. Moral progress is not impossible. C. Therefore, cultural relativism is not true." Which of the following best describes Samantha\'s response?',
+    choices: [
+      { id: 'a', text: 'She denies P2 — she accepts that moral progress really is impossible' },
+      { id: 'b', text: 'She denies P1 — by distinguishing a society\'s common practices from its ideals, she argues that moral progress is possible even if cultural relativism is true (a society can improve by better living up to its own ideals)' },
+      { id: 'c', text: 'She denies the argument is valid — she claims the conclusion does not follow from the premises' },
+      { id: 'd', text: 'She concedes the argument is sound and abandons cultural relativism' },
+    ],
+    correctChoiceIds: ['b'],
+    explanation: 'Samantha denies P1. She distinguishes between a society\'s common practices and its underlying ideals (fundamental standards). She argues that even on cultural relativism, a society can make moral progress when it moves from failing to live up to its own ideals to succeeding in doing so. This redefines "moral progress" in culturally relative terms, rather than requiring universal moral standards. (From 2026 midterm Q1.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- How to PROVE an Argument Invalid (2026 midterm Q3) ---
+  {
+    id: 'gex-082',
+    subjectId,
+    topicIds: ['gex-logic-relativism'],
+    type: 'mcq_single',
+    stem: 'Chris thinks an argument (with P1, P2, and a conclusion) is invalid. Which of the following would be SUFFICIENT to prove that it is invalid?',
+    choices: [
+      { id: 'a', text: 'Showing that P1 is false' },
+      { id: 'b', text: 'Showing that P2 is false' },
+      { id: 'c', text: 'Showing that it is possible for P1 and P2 to both be true while the conclusion is false' },
+      { id: 'd', text: 'Showing that the conclusion is false' },
+    ],
+    correctChoiceIds: ['c'],
+    explanation: 'To prove an argument is invalid, you must show that it is POSSIBLE for all the premises to be true while the conclusion is false at the same time. A valid argument is one where the truth of all premises guarantees the conclusion — so an invalid argument is one where that guarantee does not hold. Showing that individual premises are false (A, B), or that the conclusion is false (D), does not prove invalidity — because valid arguments can have false premises, false conclusions, or even all false components. (From 2026 midterm Q3.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Boulder Case (2026 midterm Q6) ---
+  {
+    id: 'gex-083',
+    subjectId,
+    topicIds: ['gex-right-wrong-2'],
+    type: 'mcq_multi',
+    stem: 'A trolley heads toward five people. The only way to save them is to push a large boulder onto the track; as it rolls, it will crush an innocent bystander standing nearby. The boulder would stop the trolley even if the bystander were not there — the bystander\'s body plays no role in stopping it. Based on Thomson\'s view in "Turning the Trolley", which of the following are TRUE? Select all that apply.',
+    choices: [
+      { id: 'a', text: 'Thomson would say pushing the boulder is permissible because you are not treating the bystander as a means' },
+      { id: 'b', text: 'Thomson would say pushing the boulder is permissible because, although the means used is drastic, the drastic nature of the means is morally irrelevant' },
+      { id: 'c', text: 'Thomson would say pushing the boulder is morally wrong because it counts as killing the bystander, whereas not pushing it counts as letting five people die' },
+      { id: 'd', text: 'Thomson would say pushing the boulder has the same moral status as throwing the switch in the original Bystander case' },
+    ],
+    correctChoiceIds: ['c', 'd'],
+    explanation: 'C is true: Thomson says throwing the switch in Bystander is wrong because it counts as killing, and killing is morally worse than letting die. The Boulder case has the same structure — your options are killing one (pushing the boulder) or letting five die. So Thomson would say pushing the boulder is also wrong. D is true: both Boulder and Bystander involve the same choice (kill one vs. let five die), so Thomson\'s verdict is the same for both. A is false: Thomson would not call it permissible. B is false: Thomson\'s very point about Bridge vs. Bystander is that how drastic the means is does NOT matter morally — but this does NOT make the action permissible; it makes both cases equally wrong. (From 2026 midterm Q6.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Bridge/Bystander: both Thomson AND utilitarians treat difference as irrelevant (2026 midterm Q7) ---
+  {
+    id: 'gex-084',
+    subjectId,
+    topicIds: ['gex-right-wrong-2'],
+    type: 'mcq_single',
+    stem: 'True or false: Thomson\'s view AND classic utilitarianism BOTH treat the moral difference between Bridge and Bystander as irrelevant.',
+    choices: [
+      { id: 'a', text: 'True' },
+      { id: 'b', text: 'False' },
+    ],
+    correctChoiceIds: ['a'],
+    explanation: 'True. Both treat the Bridge/Bystander difference as morally irrelevant, but for different reasons and with opposite verdicts. Classic utilitarianism: only consequences matter; the method (pushing vs. flipping a switch) makes no difference to consequences. Therefore the Bridge/Bystander distinction is irrelevant, and both are permissible (Option 2 in each saves 4 net lives). Thomson: the method ("how drastic" the means is) is also morally irrelevant. What matters is that Option 2 is killing in both cases, and Option 1 is letting die in both cases. Therefore both are wrong. Both theories agree the difference doesn\'t matter — they just disagree on what follows from that. (From 2026 midterm Q7.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Transplant Case (2026 midterm Q8) ---
+  {
+    id: 'gex-085',
+    subjectId,
+    topicIds: ['gex-right-wrong-2'],
+    type: 'mcq_multi',
+    stem: 'In the Transplant case, a surgeon can save 5 dying patients only by cutting up one healthy bystander (who has not volunteered) and distributing their organs. Which of the following are TRUE? Select all that apply.',
+    choices: [
+      { id: 'a', text: 'Thomson brings up Transplant to show there is NO morally relevant difference between Driver and Bystander' },
+      { id: 'b', text: 'If the surgeon cuts up the bystander, the surgeon is treating the bystander as a means' },
+      { id: 'c', text: 'Kant would say cutting up the bystander is morally wrong because Kant claims treating a person as a means is always morally wrong' },
+      { id: 'd', text: 'Foot would say it is morally wrong for the surgeon to cut up the bystander' },
+    ],
+    correctChoiceIds: ['b', 'd'],
+    explanation: 'B is true: The bystander\'s organs are part of the route to success — if the bystander disappeared before the surgery, the five patients could not be saved. So the bystander is treated as a means. D is true: Foot\'s distinction is killing vs. letting die. Cutting up the bystander = killing; not operating = letting the five die. Since killing is morally worse than letting die, Foot says it is wrong. A is false: Thomson actually brings up Transplant to show there IS a morally relevant difference between Driver and Bystander. In Driver, both options count as killing; in Bystander, Option 1 is letting die and Option 2 is killing — hence Option 2 is wrong in Bystander but permissible in Driver. C is false: This is a critical point. Kant does NOT claim that treating a person as a means is always wrong. What Kant claims is always wrong is treating a person MERELY as a means (as an end in themselves is entirely disregarded). (From 2026 midterm Q8.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- All 4 Combinations of Killing / Treating as Means (2026 midterm Q9) ---
+  {
+    id: 'gex-086',
+    subjectId,
+    topicIds: ['gex-right-wrong-2'],
+    type: 'mcq_multi',
+    stem: 'Interpret "killing" in Thomson\'s sense and "treating as a means" in the Kantian sense. Which of the following combinations are POSSIBLE? Select all that apply.',
+    choices: [
+      { id: 'a', text: 'Killing a person while treating them as a means' },
+      { id: 'b', text: 'Killing a person without treating them as a means' },
+      { id: 'c', text: 'Treating a person as a means without killing them' },
+      { id: 'd', text: 'Neither killing a person nor treating them as a means' },
+    ],
+    correctChoiceIds: ['a', 'b', 'c', 'd'],
+    explanation: 'All four combinations are possible: A — Bridge: pushing someone off the bridge kills them AND their body is used as the means to stop the trolley (if they disappeared, the plan fails). B — Bystander: throwing the switch kills the person on the side track, but that person is NOT a means to saving the five (if they disappeared before the switch was thrown, the trolley would still be diverted and the five saved). C — Bus driver: you use the driver as a means to reach your destination (without their driving, your plan fails), but you do not kill them. Lying to someone for personal gain is another example. D — Any situation where you simply don\'t interact with another person at all. (From 2026 midterm Q9.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Identifying Theory from Case Verdict: Darren's Mother (2026 midterm Q16) ---
+  {
+    id: 'gex-087',
+    subjectId,
+    topicIds: ['gex-goodness'],
+    type: 'mcq_single',
+    stem: 'Darren\'s mother\'s only desire is that Darren gets married before she dies. In Deception, Darren lies and she happily believes he is married, then dies. In Honesty, Darren tells the truth and she dies unhappy. Her life is more pleasant in Deception. Eric, a philosopher, says her life has LESS non-instrumental value in Deception than in Honesty. Which of the following can Eric NOT accept?',
+    choices: [
+      { id: 'a', text: 'The happiness Darren\'s mother feels in Deception can be instrumentally good' },
+      { id: 'b', text: 'A person may not know exactly how valuable their life is' },
+      { id: 'c', text: 'What is good for a person depends only on what that person wants' },
+      { id: 'd', text: 'We should not plug into Nozick\'s experience machine for life' },
+    ],
+    correctChoiceIds: ['c'],
+    explanation: 'First, identify Eric\'s theory. Eric is NOT a hedonist (a hedonist would say Deception has MORE value — it\'s more pleasant). Eric is NOT a desire theorist (her desire for Darren to be married is unfulfilled in BOTH scenarios, so a desire theorist would say equal value). Therefore Eric is an OBJECTIVE LIST THEORIST — he thinks knowledge (or contact with reality) is objectively non-instrumentally good, which is why Deception, where she has false beliefs, has less value. An objective list theorist CANNOT accept C ("what is good depends only on what a person wants") — that is precisely the desire theory\'s claim, which objective list theories reject. A is acceptable (instrumental goodness is separate from non-instrumental goodness). B is acceptable (we may not know what items we possess from the list). D is acceptable (objective list theorists have reason not to plug in since non-experiential goods matter). (From 2026 midterm Q16.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Nozick's Argument in Modus Tollens Form (2026 midterm Q17) ---
+  {
+    id: 'gex-088',
+    subjectId,
+    topicIds: ['gex-goodness'],
+    type: 'mcq_single',
+    stem: 'Which of the following is the BEST way to put Nozick\'s Experience Machine argument into valid premise-conclusion form?',
+    choices: [
+      { id: 'a', text: 'P1: If nothing matters besides how our lives feel from the inside, we would choose to plug into the experience machine for life. P2: We would NOT choose to plug in. C: Therefore, it is NOT the case that nothing matters besides how our lives feel from the inside.' },
+      { id: 'b', text: 'P1: If we would choose to plug in, then nothing matters besides how our lives feel. P2: We would NOT choose to plug in. C: Therefore, it is NOT the case that nothing matters besides how our lives feel.' },
+      { id: 'c', text: 'P1: If it matters to us how our lives feel, we would choose to plug in. P2: We would NOT choose to plug in. C: Therefore, it does NOT matter to us how our lives feel.' },
+      { id: 'd', text: 'P1: If we would not choose to plug in, then experience/pleasure doesn\'t matter to us. P2: We would not choose to plug in. C: Therefore, experience/pleasure doesn\'t matter to us.' },
+    ],
+    correctChoiceIds: ['a'],
+    explanation: 'Option A is both valid (Modus Tollens: If A then B; not B; therefore not A) and has the CORRECT conclusion. The conclusion should be "it is NOT the case that nothing matters besides experience" — i.e., something OTHER than experience also matters. This is NOT the same as saying experience doesn\'t matter at all. Option B is INVALID (Denying the Antecedent: If A then B; not A; therefore not B). Options C and D get the conclusion wrong — Nozick does not claim experience/pleasure is worthless, only that it is not the ONLY thing that is non-instrumentally good. (From 2026 midterm Q17.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Singer Strong vs. Moderate: Neither Maximises Happiness (2026 midterm Q11) ---
+  {
+    id: 'gex-089',
+    subjectId,
+    topicIds: ['gex-right-wrong-1'],
+    type: 'mcq_multi',
+    stem: 'Singer proposes two versions: Strong ("prevent suffering unless it sacrifices something of COMPARABLE moral importance") and Moderate ("unless it sacrifices something of moral importance"). Which of the following CORRECTLY describe differences between them? Select all that apply.',
+    choices: [
+      { id: 'a', text: 'The strong version requires us to maximise total net happiness; the moderate version only requires reducing suffering' },
+      { id: 'b', text: 'The strong version makes supererogatory actions impossible; the moderate version makes them possible' },
+      { id: 'c', text: 'The strong version requires us to donate more money to charity than the moderate version does' },
+      { id: 'd', text: 'The strong version applies only to extreme poverty; the moderate version applies to all forms of suffering' },
+    ],
+    correctChoiceIds: ['c'],
+    explanation: 'Only C is correct. C: The strong version requires you to keep donating until you reach near-poverty yourself (until sacrificing would cost you something of comparable importance — e.g., your own food). The moderate version allows you to stop before that, when further giving would cost you something merely important (e.g., your child\'s education) — so you can stop while still much better off. A is false: NEITHER version is about maximising total happiness. Both concern reducing suffering. Even the strong version only addresses suffering, not maximising happiness for those already happy. B is false: BOTH versions allow supererogatory actions. Making already-happy people even happier is supererogatory on both versions (since neither requires it). D is false: Both versions apply to all forms of suffering, not just extreme poverty. (From 2026 midterm Q11.)',
+    difficulty: 3,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Denying the Antecedent Applied to Singer (2026 midterm Q12) ---
+  {
+    id: 'gex-090',
+    subjectId,
+    topicIds: ['gex-logic-relativism'],
+    type: 'mcq_single',
+    stem: 'Is the following argument valid or invalid? P1: If Singer\'s argument is sound, then it is morally wrong to buy a luxury car when people suffer from extreme poverty. P2: Singer\'s argument is NOT sound. C: Therefore, it is NOT morally wrong to buy a luxury car when people suffer from extreme poverty.',
+    choices: [
+      { id: 'a', text: 'Valid — Modus Ponens' },
+      { id: 'b', text: 'Valid — Modus Tollens' },
+      { id: 'c', text: 'Invalid — Denying the Antecedent' },
+      { id: 'd', text: 'Invalid — Affirming the Consequent' },
+    ],
+    correctChoiceIds: ['c'],
+    explanation: 'The argument has the form: If A then B; Not A; Therefore Not B. This is Denying the Antecedent — always invalid. Even if Singer\'s specific argument is unsound, buying a luxury car could still be morally wrong for other reasons (another argument, another moral principle). You cannot infer "not B" just because "not A" — there may be other reasons for B. A common error: students think that if an argument is unsound, its conclusion must be false. But an unsound argument only tells you that this particular route to the conclusion fails, not that the conclusion itself is false. (From 2026 midterm Q12.)',
+    difficulty: 2,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // --- Problem of Evil: God's Responsibility for Natural Laws (Perry Dialogue) ---
+  {
+    id: 'gex-091',
+    subjectId,
+    topicIds: ['gex-religion'],
+    type: 'mcq_single',
+    stem: 'In Perry\'s Dialogue, Gretchen raises a deeper challenge to the "laws of nature" theodicy. Miller argues that suffering is a necessary by-product of the laws of nature, which are good overall (e.g., getting up early is uncomfortable, but leads to a good fishing day). What is Gretchen\'s objection?',
+    choices: [
+      { id: 'a', text: 'Laws of nature are beyond God\'s control, so God cannot be blamed for them' },
+      { id: 'b', text: 'Suffering from laws of nature is less morally significant than suffering from human choices' },
+      { id: 'c', text: 'Since God created the laws of nature, God bears responsibility for the dependencies that make suffering inevitable — and an all-powerful God could have created different laws (e.g., people who enjoy waking early, fish that prefer afternoon)' },
+      { id: 'd', text: 'The fishing day analogy proves that suffering is never unjustified' },
+    ],
+    correctChoiceIds: ['c'],
+    explanation: 'Gretchen\'s deeper challenge is that the theodicy shifts the question back one level: God didn\'t just allow suffering within the existing laws of nature — God CREATED the very laws and dependencies that make suffering inevitable. An all-powerful God could have made people who enjoy waking early, or fish that prefer afternoon, or removed the sharp fishhooks. Miller\'s response is that there may be good reasons for having those dependencies that are beyond human understanding — but this is essentially the "incomprehensible divine reasons" theodicy, which has its own severe costs. (From Perry\'s Dialogue, First Morning.)',
+    difficulty: 3,
     createdAt: now,
     updatedAt: now,
   },

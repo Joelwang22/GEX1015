@@ -6,9 +6,20 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "debug:ui": "node scripts/playwright-debug.mjs",
+    "debug:ui:auto": "node scripts/playwright-debug.mjs --auto --close",
+    "gen": "node generate-questions.cjs",
+    "agent": "node agent-generate.mjs",
+    "validate": "node validate-questions.cjs",
+    "gen:safe": "node generate-questions.cjs && node validate-questions.cjs",
+    "agent:safe": "node agent-generate.mjs && node validate-questions.cjs"
   },
   "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.72",
+    "@anthropic-ai/sdk": "^0.78.0",
     "dexie": "^4.0.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -16,6 +27,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.2",

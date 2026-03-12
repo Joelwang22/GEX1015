@@ -1,5 +1,14 @@
 node_modules
 dist
+playwright-report
+test-results
+.playwright-debug-profile
 *.local
 .DS_Store
 *.tsbuildinfo
+midterm prep/*.txt
+midterm prep/transcripts/*.txt
+convert-docx.cjs
+generated-questions.ts
+codex_lesson_layout*.png
+.claude/

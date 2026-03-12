@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   GEX1015_LESSONS,
@@ -13,10 +13,12 @@ import {
   type SummarySlide,
 } from '../data/gex1015Lessons';
 
+const baseSlidePanelClass = 'min-h-full rounded-2xl border border-slate-700 bg-slate-900/60';
+
 // ── Slide renderers ──────────────────────────
 
 const SlideIntro = ({ slide }: { slide: IntroSlide }): JSX.Element => (
-  <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-10 text-center sm:p-14">
+  <div className={`${baseSlidePanelClass} p-10 text-center sm:p-14`}>
     <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-400">{slide.week}</p>
     <h2 className="mt-3 text-2xl font-bold leading-snug sm:text-3xl">{slide.question}</h2>
     <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-slate-400">{slide.body}</p>
@@ -24,7 +26,7 @@ const SlideIntro = ({ slide }: { slide: IntroSlide }): JSX.Element => (
 );
 
 const SlideConcept = ({ slide }: { slide: ConceptSlide }): JSX.Element => (
-  <div className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-900/60">
+  <div className={`${baseSlidePanelClass} overflow-hidden`}>
     <div className="border-b border-slate-700 bg-slate-800/60 px-6 py-3 text-sm font-bold tracking-wide text-teal-400">
       {slide.title}
     </div>
@@ -36,7 +38,7 @@ const SlideConcept = ({ slide }: { slide: ConceptSlide }): JSX.Element => (
 );
 
 const SlideBullets = ({ slide }: { slide: BulletsSlide }): JSX.Element => (
-  <div className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-900/60">
+  <div className={`${baseSlidePanelClass} overflow-hidden`}>
     <div className="border-b border-slate-700 bg-slate-800/60 px-6 py-3 text-sm font-bold tracking-wide text-violet-400">
       {slide.title}
     </div>
@@ -52,7 +54,7 @@ const SlideBullets = ({ slide }: { slide: BulletsSlide }): JSX.Element => (
 );
 
 const SlideQuote = ({ slide }: { slide: QuoteSlide }): JSX.Element => (
-  <div className="rounded-2xl border border-slate-700 border-l-4 border-l-teal-500 bg-slate-900/60 px-7 py-8">
+  <div className={`${baseSlidePanelClass} border-l-4 border-l-teal-500 px-7 py-8`}>
     <p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-400">{slide.label}</p>
     <blockquote className="mt-4 text-lg italic leading-relaxed text-slate-200">
       {slide.text}
@@ -65,7 +67,7 @@ const SlideQuote = ({ slide }: { slide: QuoteSlide }): JSX.Element => (
 );
 
 const SlideTerm = ({ slide }: { slide: TermSlide }): JSX.Element => (
-  <div className="rounded-2xl border border-slate-700 bg-slate-900/60 px-7 py-8">
+  <div className={`${baseSlidePanelClass} px-7 py-8`}>
     <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">{slide.label}</p>
     <p className="mt-3 inline-block rounded-lg border border-teal-800 bg-teal-900/20 px-5 py-2 text-xl font-bold text-teal-300">
       {slide.term}
@@ -81,7 +83,7 @@ const SlideCheck = ({ slide }: { slide: CheckSlide }): JSX.Element => {
   const [revealed, setRevealed] = useState(false);
 
   return (
-    <div className="rounded-2xl border border-slate-700 bg-slate-900/60 px-7 py-8">
+    <div className={`${baseSlidePanelClass} px-7 py-8`}>
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-violet-400">
         Knowledge Check
       </p>
@@ -106,7 +108,7 @@ const SlideCheck = ({ slide }: { slide: CheckSlide }): JSX.Element => {
 };
 
 const SlideSummary = ({ slide }: { slide: SummarySlide }): JSX.Element => (
-  <div className="rounded-2xl border border-emerald-700 bg-slate-900/60 px-7 py-8">
+  <div className="min-h-full rounded-2xl border border-emerald-700 bg-slate-900/60 px-7 py-8">
     <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">Summary</p>
     <h3 className="mt-3 text-lg font-semibold">{slide.title}</h3>
     <ul className="mt-4 space-y-2">
@@ -150,6 +152,7 @@ const LessonViewer = (): JSX.Element => {
 
   const [current, setCurrent] = useState(0);
   const [finished, setFinished] = useState(false);
+  const slideViewportRef = useRef<HTMLDivElement | null>(null);
 
   const total = lesson?.slides.length ?? 0;
   const isLast = current === total - 1;
@@ -184,6 +187,10 @@ const LessonViewer = (): JSX.Element => {
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [finished, goNext, goPrev]);
+
+  useEffect(() => {
+    slideViewportRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+  }, [current]);
 
   if (!lesson) {
     return (
@@ -242,7 +249,7 @@ const LessonViewer = (): JSX.Element => {
   const slide = lesson.slides[current];
 
   return (
-    <section className="space-y-5">
+    <section className="mx-auto grid h-full w-full max-w-5xl min-h-0 grid-rows-[auto_auto_minmax(0,7fr)_minmax(5.5rem,1fr)] gap-5 overflow-hidden">
       {/* Header */}
       <div className="flex items-center gap-3">
         <button
@@ -281,49 +288,62 @@ const LessonViewer = (): JSX.Element => {
       </div>
 
       {/* Slide */}
-      <div className="min-h-[320px]" key={current}>
-        {slide ? <RenderSlide slide={slide} /> : null}
+      <div
+        ref={slideViewportRef}
+        data-testid="lesson-slide-viewport"
+        className="min-h-0 overflow-y-auto px-2"
+      >
+        <div className="mx-auto min-h-full w-full" key={current}>
+          {slide ? <RenderSlide slide={slide} /> : null}
+        </div>
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-center gap-3">
-        <button
-          type="button"
-          onClick={goPrev}
-          disabled={current === 0}
-          className="rounded-md border border-slate-700 bg-transparent px-6 py-2 text-sm text-slate-200 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          &larr; Prev
-        </button>
-        <span className="min-w-[60px] text-center text-xs text-slate-500">
-          {current + 1} / {total}
-        </span>
-        <button
-          type="button"
-          onClick={goNext}
-          className={`rounded-md px-6 py-2 text-sm font-semibold ${
-            isLast
-              ? 'bg-violet-600 text-white hover:bg-violet-500'
-              : 'border border-slate-700 bg-transparent text-slate-200 hover:bg-slate-800'
-          }`}
-        >
-          {isLast ? 'Finish \u2713' : 'Next \u2192'}
-        </button>
+      <div
+        data-testid="lesson-nav"
+        className="flex min-h-0 items-end border-t border-slate-800 bg-slate-950/90 pt-4 backdrop-blur"
+      >
+        <div className="w-full space-y-3">
+          <div className="flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={goPrev}
+              disabled={current === 0}
+              className="rounded-md border border-slate-700 bg-transparent px-6 py-2 text-sm text-slate-200 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              &larr; Prev
+            </button>
+            <span className="min-w-[60px] text-center text-xs text-slate-500">
+              {current + 1} / {total}
+            </span>
+            <button
+              type="button"
+              onClick={goNext}
+              className={`rounded-md px-6 py-2 text-sm font-semibold ${
+                isLast
+                  ? 'bg-violet-600 text-white hover:bg-violet-500'
+                  : 'border border-slate-700 bg-transparent text-slate-200 hover:bg-slate-800'
+              }`}
+            >
+              {isLast ? 'Finish \u2713' : 'Next \u2192'}
+            </button>
+          </div>
+          <p className="text-center text-xs text-slate-600">
+            <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 font-mono text-[0.65rem]">
+              &larr;
+            </kbd>{' '}
+            prev &nbsp;{' '}
+            <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 font-mono text-[0.65rem]">
+              &rarr;
+            </kbd>{' '}
+            /{' '}
+            <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 font-mono text-[0.65rem]">
+              Space
+            </kbd>{' '}
+            next
+          </p>
+        </div>
       </div>
-      <p className="text-center text-xs text-slate-600">
-        <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 font-mono text-[0.65rem]">
-          &larr;
-        </kbd>{' '}
-        prev &nbsp;{' '}
-        <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 font-mono text-[0.65rem]">
-          &rarr;
-        </kbd>{' '}
-        /{' '}
-        <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 font-mono text-[0.65rem]">
-          Space
-        </kbd>{' '}
-        next
-      </p>
     </section>
   );
 };
