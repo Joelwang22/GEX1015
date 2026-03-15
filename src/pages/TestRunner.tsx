@@ -14,6 +14,194 @@ import {
 import { gradeQuestion } from '../logic/grader';
 import { formatExplanationWithOptionLineBreaks } from '../logic/formatExplanation';
 
+interface NavigatorItem {
+  index: number;
+  questionId: string;
+  answered: boolean;
+  marked: boolean;
+}
+
+interface ReviewItem extends NavigatorItem {
+  stem: string;
+}
+
+const normalizeChoiceIds = (choiceIds: string[] | undefined): string[] =>
+  Array.isArray(choiceIds) ? [...choiceIds].sort() : [];
+
+const serializeStoredAnswer = (question: Question, answer?: TestAttemptAnswer): string => {
+  if (isMCQ(question)) {
+    return JSON.stringify(normalizeChoiceIds(answer?.chosenChoiceIds));
+  }
+
+  return JSON.stringify(answer?.pbqAnswer ?? null);
+};
+
+const serializeDraftAnswer = (
+  question: Question,
+  localChoices: string[],
+  localPBQAnswer: unknown,
+): string => {
+  if (isMCQ(question)) {
+    return JSON.stringify(normalizeChoiceIds(localChoices));
+  }
+
+  return JSON.stringify(localPBQAnswer ?? null);
+};
+
+const QuestionNavigator = ({
+  items,
+  currentIndex,
+  onJump,
+  onOpenReview,
+}: {
+  items: NavigatorItem[];
+  currentIndex: number;
+  onJump: (index: number) => void;
+  onOpenReview: () => void;
+}): JSX.Element => (
+  <aside className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+    <div className="space-y-1">
+      <h2 className="text-lg font-semibold">Question Navigator</h2>
+      <p className="text-sm text-slate-400">Jump to any saved question or open the review screen.</p>
+    </div>
+    <div className="grid grid-cols-5 gap-2">
+      {items.map((item) => {
+        const isCurrent = item.index === currentIndex;
+        const classes = isCurrent
+          ? 'border-teal-400 bg-teal-500/20 text-teal-100'
+          : item.marked
+          ? 'border-amber-500 bg-amber-500/10 text-amber-200'
+          : item.answered
+          ? 'border-emerald-600 bg-emerald-500/10 text-emerald-200'
+          : 'border-slate-700 bg-slate-950/70 text-slate-300 hover:bg-slate-800';
+
+        return (
+          <button
+            key={item.questionId}
+            type="button"
+            onClick={() => onJump(item.index)}
+            className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${classes}`}
+            aria-label={`Go to question ${item.index + 1}`}
+          >
+            {item.index + 1}
+          </button>
+        );
+      })}
+    </div>
+    <div className="space-y-2 text-xs text-slate-400">
+      <p>Current: teal</p>
+      <p>Answered: green</p>
+      <p>Marked: amber</p>
+      <p>Unanswered: slate</p>
+    </div>
+    <button
+      type="button"
+      onClick={onOpenReview}
+      className="w-full rounded-md border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-800"
+    >
+      Open review screen
+    </button>
+  </aside>
+);
+
+const ReviewScreen = ({
+  items,
+  unansweredCount,
+  markedCount,
+  correctCount,
+  onJump,
+  onClose,
+  onComplete,
+}: {
+  items: ReviewItem[];
+  unansweredCount: number;
+  markedCount: number;
+  correctCount: number;
+  onJump: (index: number) => void;
+  onClose: () => void;
+  onComplete: () => void;
+}): JSX.Element => (
+  <div className="space-y-5 rounded-2xl border border-slate-800 bg-slate-900/50 p-5">
+    <header className="space-y-2">
+      <h2 className="text-2xl font-semibold">Review Quiz</h2>
+      <p className="text-sm text-slate-400">
+        Check unanswered or marked questions before you submit the test.
+      </p>
+    </header>
+
+    <div className="grid gap-4 sm:grid-cols-3">
+      <div className="rounded-xl border border-emerald-800 bg-emerald-900/10 p-4">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-300">Correct so far</p>
+        <p className="mt-2 text-2xl font-semibold text-emerald-100">{correctCount}</p>
+      </div>
+      <div className="rounded-xl border border-amber-800 bg-amber-900/10 p-4">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-amber-300">Marked</p>
+        <p className="mt-2 text-2xl font-semibold text-amber-100">{markedCount}</p>
+      </div>
+      <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Unanswered</p>
+        <p className="mt-2 text-2xl font-semibold text-slate-100">{unansweredCount}</p>
+      </div>
+    </div>
+
+    {unansweredCount > 0 ? (
+      <p className="rounded-xl border border-amber-700/60 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+        Answer every question before you submit the quiz.
+      </p>
+    ) : null}
+
+    <div className="space-y-3">
+      {items.map((item) => (
+        <button
+          key={item.questionId}
+          type="button"
+          onClick={() => onJump(item.index)}
+          className="w-full rounded-xl border border-slate-800 bg-slate-950/50 p-4 text-left transition hover:border-teal-400 hover:bg-slate-900"
+        >
+          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
+            <span className="rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-slate-300">
+              Question {item.index + 1}
+            </span>
+            {item.answered ? (
+              <span className="rounded-full border border-emerald-700 bg-emerald-900/20 px-3 py-1 text-emerald-300">
+                Answered
+              </span>
+            ) : (
+              <span className="rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-slate-400">
+                Unanswered
+              </span>
+            )}
+            {item.marked ? (
+              <span className="rounded-full border border-amber-700 bg-amber-900/20 px-3 py-1 text-amber-300">
+                Marked
+              </span>
+            ) : null}
+          </div>
+          <p className="mt-3 text-sm leading-relaxed text-slate-200">{item.stem}</p>
+        </button>
+      ))}
+    </div>
+
+    <div className="flex flex-wrap gap-3">
+      <button
+        type="button"
+        onClick={onClose}
+        className="rounded-md border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-800"
+      >
+        Back to quiz
+      </button>
+      <button
+        type="button"
+        onClick={onComplete}
+        disabled={unansweredCount > 0}
+        className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-teal-600 disabled:cursor-not-allowed disabled:bg-slate-700"
+      >
+        Submit quiz
+      </button>
+    </div>
+  </div>
+);
+
 const TestRunner = (): JSX.Element => {
   const { testId } = useParams<{ testId: string }>();
   const navigate = useNavigate();
@@ -29,6 +217,7 @@ const TestRunner = (): JSX.Element => {
   const [config, setConfig] = useState<AppConfig | null>(null);
   const [timeRemainingMs, setTimeRemainingMs] = useState<number | null>(null);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
+  const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
 
   const interactionTimestamp = useRef<number>(Date.now());
   const timerPersistRef = useRef<number>(0);
@@ -75,24 +264,24 @@ const TestRunner = (): JSX.Element => {
     }
   }, [testId]);
 
-useEffect(() => {
-  void loadTest();
-}, [loadTest]);
+  useEffect(() => {
+    void loadTest();
+  }, [loadTest]);
 
-useEffect(() => {
-  const fetchConfig = async (): Promise<void> => {
-    const settings = await db.config.get('settings');
-    setConfig(settings ?? { id: 'settings', masteryThreshold: 3, timerEnabled: false });
-  };
-  void fetchConfig();
-}, []);
+  useEffect(() => {
+    const fetchConfig = async (): Promise<void> => {
+      const settings = await db.config.get('settings');
+      setConfig(settings ?? { id: 'settings', masteryThreshold: 3, timerEnabled: false });
+    };
+
+    void fetchConfig();
+  }, []);
 
   const currentQuestion = useMemo(() => {
     if (!test) {
       return undefined;
     }
-    const question = questions[test.currentIndex];
-    return question;
+    return questions[test.currentIndex];
   }, [test, questions]);
 
   useEffect(() => {
@@ -125,39 +314,43 @@ useEffect(() => {
 
     const storedAnswer = test.answers[currentQuestion.id];
     setLocalChoices(isMCQ(currentQuestion) ? storedAnswer?.chosenChoiceIds ?? [] : []);
-    if (storedAnswer?.pbqAnswer !== undefined) {
-      setLocalPBQAnswer(storedAnswer.pbqAnswer);
-    } else if (currentQuestion.type === 'pbq_order') {
-      const config = currentQuestion.pbqSpec.configuration as { ordering?: string[] };
-      const baseOrdering = Array.isArray(config.ordering) ? [...config.ordering] : [];
-      for (let i = baseOrdering.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const currentValue = baseOrdering[i];
-        const swapValue = baseOrdering[j];
-        if (currentValue === undefined || swapValue === undefined) {
-          continue;
-        }
-        baseOrdering[i] = swapValue;
-        baseOrdering[j] = currentValue;
-      }
-      setLocalPBQAnswer(baseOrdering);
-    } else if (currentQuestion.type === 'pbq_match') {
-      const config = currentQuestion.pbqSpec.configuration as {
-        pairs?: Array<{ secure: string; legacy: string }>;
-      };
-      setLocalPBQAnswer(
-        Array.isArray(config.pairs)
-          ? config.pairs.map((pair) => ({ secure: pair.secure, legacy: '' }))
-          : [],
-      );
-    } else if (currentQuestion.type === 'pbq_fill') {
-      setLocalPBQAnswer(typeof storedAnswer?.pbqAnswer === 'string' ? storedAnswer.pbqAnswer : '');
-    } else {
-      setLocalPBQAnswer(storedAnswer?.pbqAnswer);
-    }
+    setLocalPBQAnswer(storedAnswer?.pbqAnswer);
     interactionTimestamp.current = Date.now();
   }, [test, currentQuestion]);
 
+  const questionItems = useMemo<NavigatorItem[]>(() => {
+    if (!test) {
+      return [];
+    }
+
+    return questions.map((question, index) => ({
+      index,
+      questionId: question.id,
+      answered: Boolean(test.answers[question.id]),
+      marked: test.markedForReview.includes(question.id),
+    }));
+  }, [questions, test]);
+
+  const reviewItems = useMemo<ReviewItem[]>(
+    () =>
+      questionItems.map((item) => ({
+        ...item,
+        stem: questions[item.index]?.stem ?? 'Question unavailable.',
+      })),
+    [questionItems, questions],
+  );
+
+  const answeredCount = useMemo(
+    () => questionItems.filter((item) => item.answered).length,
+    [questionItems],
+  );
+
+  const markedCount = useMemo(
+    () => questionItems.filter((item) => item.marked).length,
+    [questionItems],
+  );
+
+  const unansweredCount = questions.length - answeredCount;
 
   const correctCount = useMemo(() => {
     if (!test) {
@@ -170,21 +363,53 @@ useEffect(() => {
     if (!test || questions.length === 0) {
       return 'No questions loaded';
     }
-    const index = test.currentIndex + 1;
-    return `Question ${Math.min(index, questions.length)} of ${questions.length}`;
-  }, [test, questions.length]);
+    return `Question ${Math.min(test.currentIndex + 1, questions.length)} of ${questions.length}`;
+  }, [questions.length, test]);
 
-  const testIdentifier = test?.id ?? null;
+  const hasUnsavedChanges = useMemo(() => {
+    if (!test || !currentQuestion) {
+      return false;
+    }
+
+    return (
+      serializeStoredAnswer(currentQuestion, test.answers[currentQuestion.id]) !==
+      serializeDraftAnswer(currentQuestion, localChoices, localPBQAnswer)
+    );
+  }, [currentQuestion, localChoices, localPBQAnswer, test]);
 
   const persistTimeRemaining = useCallback(
     async (remaining: number) => {
-      if (!testIdentifier) {
+      if (!test?.id) {
         return;
       }
-      await db.tests.update(testIdentifier, { timeRemainingMs: remaining });
+
+      await db.tests.update(test.id, { timeRemainingMs: remaining });
       setTest((current) => (current ? { ...current, timeRemainingMs: remaining } : current));
     },
-    [testIdentifier],
+    [test],
+  );
+
+  const updateTestRecord = useCallback(
+    async (updates: Partial<Test>): Promise<Test | null> => {
+      if (!test) {
+        return null;
+      }
+
+      const timeDelta = Date.now() - interactionTimestamp.current;
+      const nextTimeSpent = (test.timeSpentMs ?? 0) + timeDelta;
+
+      const nextRecord: Test = {
+        ...test,
+        ...updates,
+        timeSpentMs: nextTimeSpent,
+      };
+
+      await db.tests.put(nextRecord);
+      setTest(nextRecord);
+      interactionTimestamp.current = Date.now();
+      return nextRecord;
+    },
+    [test],
   );
 
   const handleToggleChoice = (choiceId: string): void => {
@@ -200,123 +425,55 @@ useEffect(() => {
       if (current.includes(choiceId)) {
         return current.filter((id) => id !== choiceId);
       }
+
       return [...current, choiceId];
     });
   };
 
-  const updateTestRecord = async (updates: Partial<Test>): Promise<Test | null> => {
-    if (!test) {
-      return null;
-    }
-
-    const timeDelta = Date.now() - interactionTimestamp.current;
-    const nextTimeSpent = (test.timeSpentMs ?? 0) + timeDelta;
-
-    const nextRecord: Test = {
-      ...test,
-      ...updates,
-      timeSpentMs: nextTimeSpent,
-    };
-
-    await db.tests.put(nextRecord);
-    setTest(nextRecord);
-    interactionTimestamp.current = Date.now();
-    return nextRecord;
-  };
-
-  const handleSubmit = async (): Promise<void> => {
-    if (!test || !currentQuestion) {
-      return;
-    }
-
-    setSubmitting(true);
-
-    try {
-      let pbqAnswer = localPBQAnswer;
-      if (currentQuestion.type === 'pbq_group' && typeof pbqAnswer === 'string') {
-        try {
-          pbqAnswer = JSON.parse(pbqAnswer);
-        } catch {
-          setStatusMessage('Unable to parse PBQ group answer, please provide valid JSON.');
-          setSubmitting(false);
-          return;
-        }
-      }
-
-      const outcome = gradeQuestion(currentQuestion, {
-        selectedChoiceIds: localChoices,
-        pbqAnswer,
+  const persistAttempts = useCallback(
+    async (finalTest: Test): Promise<void> => {
+      const attempts: Attempt[] = questions.map((question) => {
+        const answer = finalTest.answers[question.id];
+        return {
+          id:
+            typeof crypto !== 'undefined' && 'randomUUID' in crypto
+              ? crypto.randomUUID()
+              : `attempt-${question.id}-${Date.now()}`,
+          questionId: question.id,
+          testId: finalTest.id,
+          submittedAt: answer?.submittedAt ?? new Date().toISOString(),
+          isCorrect: Boolean(answer?.isCorrect),
+          chosenChoiceIds: answer?.chosenChoiceIds,
+          pbqAnswer: answer?.pbqAnswer,
+          subjectId: question.subjectId,
+          topicIds: question.topicIds,
+        };
       });
 
-      setLocalPBQAnswer(pbqAnswer);
-
-      const updatedAnswers: Record<string, TestAttemptAnswer> = {
-        ...test.answers,
-        [currentQuestion.id]: {
-          questionId: currentQuestion.id,
-          chosenChoiceIds: localChoices,
-          pbqAnswer,
-          isCorrect: outcome.isCorrect,
-          submittedAt: new Date().toISOString(),
-        },
-      };
-
-      const updatedTest = await updateTestRecord({ answers: updatedAnswers });
-
-      if (!updatedTest) {
-        setStatusMessage('Failed to record answer.');
-        return;
-      }
-
-      setStatusMessage(outcome.isCorrect ? 'Correct answer recorded.' : 'Answer recorded. Review later.');
-    } catch (submitError) {
-      setStatusMessage(submitError instanceof Error ? submitError.message : 'Failed to grade answer.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const persistAttempts = async (finalTest: Test): Promise<void> => {
-    const attempts: Attempt[] = questions.map((question) => {
-      const answer = finalTest.answers[question.id];
-      return {
-        id:
-          typeof crypto !== 'undefined' && 'randomUUID' in crypto
-            ? crypto.randomUUID()
-            : `attempt-${question.id}-${Date.now()}`,
-        questionId: question.id,
-        testId: finalTest.id,
-        submittedAt: answer?.submittedAt ?? new Date().toISOString(),
-        isCorrect: Boolean(answer?.isCorrect),
-        chosenChoiceIds: answer?.chosenChoiceIds,
-        pbqAnswer: answer?.pbqAnswer,
-        subjectId: question.subjectId,
-        topicIds: question.topicIds,
-      };
-    });
-
-    try {
-      await db.attempts.bulkAdd(attempts);
-    } catch (attemptError) {
-      console.error('Failed bulkAdd, retrying individually', attemptError);
-      for (const attempt of attempts) {
-        try {
-          await db.attempts.put(attempt);
-        } catch (singleError) {
-          console.error('Failed to persist attempt', singleError);
+      try {
+        await db.attempts.bulkAdd(attempts);
+      } catch (attemptError) {
+        console.error('Failed bulkAdd, retrying individually', attemptError);
+        for (const attempt of attempts) {
+          try {
+            await db.attempts.put(attempt);
+          } catch (singleError) {
+            console.error('Failed to persist attempt', singleError);
+          }
         }
       }
-    }
-  };
+    },
+    [questions],
+  );
 
-  const handleComplete = async (): Promise<void> => {
-    if (!test) {
+  const handleComplete = useCallback(async (): Promise<void> => {
+    if (!test || unansweredCount > 0) {
+      setStatusMessage('Answer every question before submitting the quiz.');
       return;
     }
 
-    const totalCorrect = correctCount;
     const totalQuestions = questions.length;
-    const score = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+    const score = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
     const completedAt = new Date().toISOString();
 
     try {
@@ -343,7 +500,7 @@ useEffect(() => {
     } catch (completeError) {
       setStatusMessage(completeError instanceof Error ? completeError.message : 'Failed to complete test.');
     }
-  };
+  }, [correctCount, navigate, persistAttempts, questions.length, test, unansweredCount, updateTestRecord]);
 
   useEffect(() => {
     if (!config?.timerEnabled || !test || test.status !== 'in_progress') {
@@ -362,6 +519,7 @@ useEffect(() => {
         if (current === null) {
           return current;
         }
+
         const next = Math.max(0, current - 1000);
         timerPersistRef.current += 1000;
         if (timerPersistRef.current >= 5000 || next === 0) {
@@ -378,7 +536,90 @@ useEffect(() => {
     return () => window.clearTimeout(timer);
   }, [config?.timerEnabled, handleComplete, persistTimeRemaining, test, timeRemainingMs]);
 
-  const handleNext = async (): Promise<void> => {
+  const handleSubmit = useCallback(async (): Promise<void> => {
+    if (!test || !currentQuestion) {
+      return;
+    }
+
+    if (isMCQ(currentQuestion) && localChoices.length === 0) {
+      setStatusMessage('Select an answer before submitting.');
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      let pbqAnswer = localPBQAnswer;
+      if (currentQuestion.type === 'pbq_group' && typeof pbqAnswer === 'string') {
+        try {
+          pbqAnswer = JSON.parse(pbqAnswer);
+        } catch {
+          setStatusMessage('Unable to parse PBQ group answer, please provide valid JSON.');
+          setSubmitting(false);
+          return;
+        }
+      }
+
+      const outcome = gradeQuestion(currentQuestion, {
+        selectedChoiceIds: localChoices,
+        pbqAnswer,
+      });
+
+      const updatedAnswers: Record<string, TestAttemptAnswer> = {
+        ...test.answers,
+        [currentQuestion.id]: {
+          questionId: currentQuestion.id,
+          chosenChoiceIds: localChoices,
+          pbqAnswer,
+          isCorrect: outcome.isCorrect,
+          submittedAt: new Date().toISOString(),
+        },
+      };
+
+      const updatedTest = await updateTestRecord({ answers: updatedAnswers });
+
+      if (!updatedTest) {
+        setStatusMessage('Failed to record answer.');
+        return;
+      }
+
+      setStatusMessage(outcome.isCorrect ? 'Correct answer recorded.' : 'Answer recorded. Review later.');
+    } catch (submitError) {
+      setStatusMessage(submitError instanceof Error ? submitError.message : 'Failed to grade answer.');
+    } finally {
+      setSubmitting(false);
+    }
+  }, [currentQuestion, localChoices, localPBQAnswer, test, updateTestRecord]);
+
+  const handleJumpToQuestion = useCallback(
+    async (index: number): Promise<void> => {
+      if (!test) {
+        return;
+      }
+
+      if (hasUnsavedChanges) {
+        setStatusMessage('Submit or clear your current answer before leaving this question.');
+        return;
+      }
+
+      setIsReviewOpen(false);
+      setStatusMessage('');
+      await updateTestRecord({ currentIndex: index });
+    },
+    [hasUnsavedChanges, test, updateTestRecord],
+  );
+
+  const handleOpenReview = useCallback((): void => {
+    if (hasUnsavedChanges) {
+      setStatusMessage('Submit or clear your current answer before opening review.');
+      return;
+    }
+
+    setIsReviewOpen(true);
+    setStatusMessage('');
+  }, [hasUnsavedChanges]);
+
+  const handleNext = useCallback(async (): Promise<void> => {
     if (!test) {
       return;
     }
@@ -389,30 +630,40 @@ useEffect(() => {
       return;
     }
 
-    const answeredCurrent = Boolean(test.answers[currentQuestionId]);
+    if (hasUnsavedChanges) {
+      setStatusMessage('Submit or clear your current answer before moving on.');
+      return;
+    }
 
-    if (!answeredCurrent && test.currentIndex < questions.length - 1) {
+    const answeredCurrent = Boolean(test.answers[currentQuestionId]);
+    if (!answeredCurrent) {
       setStatusMessage('Please submit an answer before moving to the next question.');
       return;
     }
 
     if (test.currentIndex >= questions.length - 1) {
-      await handleComplete();
+      setIsReviewOpen(true);
+      setStatusMessage('');
       return;
     }
 
     await updateTestRecord({ currentIndex: test.currentIndex + 1 });
-  };
+  }, [hasUnsavedChanges, questions.length, test, updateTestRecord]);
 
-  const handlePrev = async (): Promise<void> => {
+  const handlePrev = useCallback(async (): Promise<void> => {
     if (!test) {
       return;
     }
-    const previousIndex = Math.max(0, test.currentIndex - 1);
-    await updateTestRecord({ currentIndex: previousIndex });
-  };
 
-  const handleToggleReview = async (): Promise<void> => {
+    if (hasUnsavedChanges) {
+      setStatusMessage('Submit or clear your current answer before leaving this question.');
+      return;
+    }
+
+    await updateTestRecord({ currentIndex: Math.max(0, test.currentIndex - 1) });
+  }, [hasUnsavedChanges, test, updateTestRecord]);
+
+  const handleToggleReview = useCallback(async (): Promise<void> => {
     if (!test || !currentQuestion) {
       return;
     }
@@ -427,16 +678,24 @@ useEffect(() => {
         ? 'Question marked for review.'
         : 'Question unmarked from review.',
     );
-  };
+  }, [currentQuestion, test, updateTestRecord]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
-      if (!currentQuestion) {
+      const activeElement = document.activeElement as HTMLElement | null;
+      if (activeElement && ['INPUT', 'SELECT', 'TEXTAREA'].includes(activeElement.tagName)) {
         return;
       }
 
-      const activeElement = document.activeElement as HTMLElement | null;
-      if (activeElement && ['INPUT', 'SELECT', 'TEXTAREA'].includes(activeElement.tagName)) {
+      if (isReviewOpen) {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          setIsReviewOpen(false);
+        }
+        return;
+      }
+
+      if (!currentQuestion) {
         return;
       }
 
@@ -469,10 +728,10 @@ useEffect(() => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentQuestion, handleNext, handleSubmit, handleToggleReview]);
+  }, [currentQuestion, handleNext, handleSubmit, handleToggleReview, isReviewOpen]);
 
   if (isLoading) {
-    return <p className="text-slate-300">Loading test…</p>;
+    return <p className="text-slate-300">Loading test...</p>;
   }
 
   if (error) {
@@ -492,7 +751,9 @@ useEffect(() => {
         <h1 className="text-3xl font-semibold">Test Runner</h1>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-teal-300">{progressLabel}</p>
+            <p className="text-sm font-semibold text-teal-300">
+              {isReviewOpen ? 'Review screen' : progressLabel}
+            </p>
             <p className="text-sm text-slate-400">
               Score so far: {correctCount}/{questions.length} correct
             </p>
@@ -503,88 +764,142 @@ useEffect(() => {
                 <TimerDisplay remainingMs={timeRemainingMs} />
               </div>
             ) : null}
-            <div className="min-w-[200px]">
-              <ProgressBar current={test.currentIndex + 1} total={questions.length} />
+            <div className="min-w-[220px]">
+              <ProgressBar
+                current={test.currentIndex + 1}
+                total={questions.length}
+                answeredCount={answeredCount}
+                markedCount={markedCount}
+              />
             </div>
           </div>
         </div>
       </header>
 
-      {isMCQ(currentQuestion) ? (
-        <MCQQuestion
-          question={currentQuestion}
-          selectedChoiceIds={localChoices}
-          onToggleChoice={handleToggleChoice}
-        />
-      ) : null}
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
+        <div className="space-y-6">
+          {isReviewOpen ? (
+            <ReviewScreen
+              items={reviewItems}
+              unansweredCount={unansweredCount}
+              markedCount={markedCount}
+              correctCount={correctCount}
+              onJump={(index) => {
+                void handleJumpToQuestion(index);
+              }}
+              onClose={() => setIsReviewOpen(false)}
+              onComplete={() => {
+                void handleComplete();
+              }}
+            />
+          ) : (
+            <>
+              {isMCQ(currentQuestion) ? (
+                <MCQQuestion
+                  question={currentQuestion}
+                  selectedChoiceIds={localChoices}
+                  onToggleChoice={handleToggleChoice}
+                />
+              ) : (
+                <div className="rounded-lg border border-slate-700 bg-slate-900/40 p-4 text-sm text-slate-300">
+                  This question type is not yet supported in the runner UI.
+                </div>
+              )}
 
-      {answered && currentQuestion.explanation ? (
-        <div className="space-y-1 rounded-lg border border-slate-800 bg-slate-900/40 p-4">
-          <h3 className="text-sm font-semibold text-slate-200">Explanation</h3>
-          <p className="whitespace-pre-line text-sm text-slate-300">
-            {isMCQ(currentQuestion)
-              ? formatExplanationWithOptionLineBreaks(currentQuestion.explanation, currentQuestion.choices.length)
-              : currentQuestion.explanation.trim()}
-          </p>
+              {answered && currentQuestion.explanation ? (
+                <div className="space-y-1 rounded-lg border border-slate-800 bg-slate-900/40 p-4">
+                  <h3 className="text-sm font-semibold text-slate-200">Explanation</h3>
+                  <p className="whitespace-pre-line text-sm text-slate-300">
+                    {isMCQ(currentQuestion)
+                      ? formatExplanationWithOptionLineBreaks(currentQuestion.explanation, currentQuestion.choices.length)
+                      : currentQuestion.explanation.trim()}
+                  </p>
+                </div>
+              ) : null}
+
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleSubmit();
+                  }}
+                  className="rounded-md bg-primary px-4 py-2 font-semibold text-white hover:bg-teal-600 disabled:opacity-50"
+                  disabled={submitting}
+                >
+                  {submitting ? 'Saving...' : answered ? 'Resubmit answer' : 'Submit answer'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handlePrev();
+                  }}
+                  className="rounded-md border border-slate-700 px-4 py-2 hover:bg-slate-800"
+                  disabled={test.currentIndex === 0}
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleNext();
+                  }}
+                  className="rounded-md border border-slate-700 px-4 py-2 hover:bg-slate-800"
+                >
+                  {test.currentIndex >= questions.length - 1 ? 'Review quiz' : 'Next'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleToggleReview();
+                  }}
+                  className={`rounded-md border px-4 py-2 ${
+                    isMarked ? 'border-amber-500 bg-amber-500/20 text-amber-300' : 'border-slate-700 hover:bg-slate-800'
+                  }`}
+                >
+                  {isMarked ? 'Unmark review' : 'Mark for review'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleOpenReview}
+                  className="rounded-md border border-slate-700 px-4 py-2 text-sm hover:bg-slate-800"
+                >
+                  Review screen
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsHelpOpen(true)}
+                  className="rounded-md border border-slate-700 px-4 py-2 text-sm hover:bg-slate-800"
+                >
+                  Keyboard help
+                </button>
+              </div>
+            </>
+          )}
+
+          <div role="status" aria-live="polite" className="text-sm text-slate-300">
+            {statusMessage}
+          </div>
         </div>
-      ) : null}
 
-      <div className="flex flex-wrap items-center gap-3">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className="rounded-md bg-primary px-4 py-2 font-semibold text-white hover:bg-teal-600 disabled:opacity-50"
-          disabled={submitting}
-        >
-          {submitting ? 'Saving…' : 'Submit answer'}
-        </button>
-        <button
-          type="button"
-          onClick={handlePrev}
-          className="rounded-md border border-slate-700 px-4 py-2 hover:bg-slate-800"
-          disabled={test.currentIndex === 0}
-        >
-          Previous
-        </button>
-        <button
-          type="button"
-          onClick={handleNext}
-          className="rounded-md border border-slate-700 px-4 py-2 hover:bg-slate-800"
-          disabled={!answered}
-        >
-          {test.currentIndex >= questions.length - 1 ? 'Finish test' : 'Next'}
-        </button>
-        <button
-          type="button"
-          onClick={handleToggleReview}
-          className={`rounded-md border px-4 py-2 ${
-            isMarked ? 'border-amber-500 bg-amber-500/20 text-amber-300' : 'border-slate-700 hover:bg-slate-800'
-          }`}
-        >
-          {isMarked ? 'Unmark review' : 'Mark for review'}
-        </button>
-        <button
-          type="button"
-          onClick={() => setIsHelpOpen(true)}
-          className="rounded-md border border-slate-700 px-4 py-2 text-sm hover:bg-slate-800"
-        >
-          Keyboard help
-        </button>
-      </div>
-
-      <div role="status" aria-live="polite" className="text-sm text-slate-300">
-        {statusMessage}
+        <QuestionNavigator
+          items={questionItems}
+          currentIndex={test.currentIndex}
+          onJump={(index) => {
+            void handleJumpToQuestion(index);
+          }}
+          onOpenReview={handleOpenReview}
+        />
       </div>
 
       {isHelpOpen ? (
         <OverlayModal title="Keyboard shortcuts" onClose={() => setIsHelpOpen(false)}>
           <ul className="space-y-2 text-sm text-slate-200">
-            <li><strong>1 – 9</strong>: Toggle the corresponding option</li>
+            <li><strong>1 - 9</strong>: Toggle the corresponding option</li>
             <li><strong>Enter</strong>: Submit the current answer</li>
             <li><strong>N</strong>: Move to the next question</li>
             <li><strong>R</strong>: Mark or unmark the question for review</li>
-            <li><strong>Arrow keys / buttons</strong>: Adjust PBQ order items</li>
-            <li><strong>Tab</strong>: Navigate between interactive controls</li>
+            <li><strong>Esc</strong>: Close the review or help overlay</li>
+            <li><strong>Tab</strong>: Move between interactive controls</li>
           </ul>
         </OverlayModal>
       ) : null}
@@ -603,7 +918,7 @@ const OverlayModal = ({ title, children, onClose }: OverlayModalProps): JSX.Elem
     <div className="w-full max-w-md rounded-lg border border-slate-800 bg-slate-950 shadow-xl" role="dialog" aria-modal="true">
       <header className="flex items-center justify-between border-b border-slate-800 p-4">
         <h2 className="text-lg font-semibold text-slate-200">{title}</h2>
-        <button className="text-slate-400" onClick={onClose}>
+        <button type="button" className="text-slate-400" onClick={onClose}>
           Close
         </button>
       </header>

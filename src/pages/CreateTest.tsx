@@ -8,6 +8,26 @@ type SourceOption = Test['selectionPolicy']['source'];
 
 const DEFAULT_SIZE = 20;
 
+const getTopicSortValue = (topic: Topic): { week: number; name: string } => {
+  const match = topic.name.match(/week\s+(\d+)/i);
+  return {
+    week: match ? Number(match[1]) : Number.POSITIVE_INFINITY,
+    name: topic.name,
+  };
+};
+
+const sortTopicsByWeek = (topics: Topic[]): Topic[] =>
+  [...topics].sort((left, right) => {
+    const leftValue = getTopicSortValue(left);
+    const rightValue = getTopicSortValue(right);
+
+    if (leftValue.week !== rightValue.week) {
+      return leftValue.week - rightValue.week;
+    }
+
+    return leftValue.name.localeCompare(rightValue.name);
+  });
+
 const CreateTest = (): JSX.Element => {
   const navigate = useNavigate();
   const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -34,7 +54,7 @@ const CreateTest = (): JSX.Element => {
       ]);
 
       setSubjects(subjectsData);
-      setTopics(topicsData);
+      setTopics(sortTopicsByWeek(topicsData));
       setQuestions(questionsData);
       setConfig(configData ?? { id: 'settings', masteryThreshold: 3, timerEnabled: false });
     };

@@ -13,11 +13,15 @@ const MCQQuestion = ({ question, selectedChoiceIds, onToggleChoice }: MCQQuestio
     <div className="space-y-4 rounded-lg border border-slate-700 bg-slate-900/40 p-4">
       <header className="space-y-1">
         <h2 className="text-xl font-semibold">{question.stem}</h2>
+        <p className="text-sm text-slate-400">
+          {isMulti ? 'Select every answer that applies.' : 'Select the best answer.'}
+        </p>
       </header>
       <div className="space-y-2" role="group" aria-label="Answer choices">
         {question.choices.map((choice, index) => {
           const inputId = `${question.id}-${choice.id}`;
           const checked = selectedChoiceIds.includes(choice.id);
+
           return (
             <label
               key={choice.id}
@@ -44,7 +48,7 @@ const MCQQuestion = ({ question, selectedChoiceIds, onToggleChoice }: MCQQuestio
         })}
       </div>
       <p className="text-xs text-slate-500">
-        Keyboard: 1–9 to toggle options, Enter to submit, N to move next, R to mark for review.
+        Keyboard: 1-9 toggle options, Enter submits, N moves next, R marks for review.
       </p>
     </div>
   );

@@ -14,11 +14,17 @@ const formatTime = (ms: number): string => {
 };
 
 const TimerDisplay: FC<TimerDisplayProps> = ({ remainingMs }) => {
+  const isUrgent = remainingMs <= 5 * 60 * 1000;
+
   return (
     <div className="rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-center">
       <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">Time Remaining</h2>
-      <p className="text-2xl font-mono text-accent">{formatTime(remainingMs)}</p>
-      <p className="text-xs text-slate-500">TODO: Hook into store timer controls with pause/resume.</p>
+      <p className={`text-2xl font-mono ${isUrgent ? 'text-amber-300' : 'text-accent'}`}>
+        {formatTime(remainingMs)}
+      </p>
+      <p className="text-xs text-slate-500">
+        {isUrgent ? 'Less than 5 minutes left.' : 'Timer updates automatically while you work.'}
+      </p>
     </div>
   );
 };
