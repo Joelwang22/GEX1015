@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   GEX1015_LESSONS,
   markLessonDone,
@@ -14,6 +14,14 @@ import {
 } from '../data/gex1015Lessons';
 
 const baseSlidePanelClass = 'min-h-full rounded-2xl border border-slate-700 bg-slate-900/60';
+
+const clampSlideIndex = (value: number, total: number): number => {
+  if (!Number.isFinite(value) || total <= 0) {
+    return 0;
+  }
+
+  return Math.min(Math.max(Math.trunc(value), 0), total - 1);
+};
 
 type CheckSlideMode = 'binary' | 'fill_blank' | 'multiple_choice' | 'multi_part' | 'case' | 'reflection';
 
@@ -552,6 +560,7 @@ const RenderSlide = ({ slide }: { slide: LessonSlide }): JSX.Element => {
 const LessonViewer = (): JSX.Element => {
   const navigate = useNavigate();
   const { lessonIdx } = useParams<{ lessonIdx: string }>();
+  const [searchParams] = useSearchParams();
   const idx = Number(lessonIdx ?? '0');
   const lesson = GEX1015_LESSONS[idx];
 
@@ -560,6 +569,9 @@ const LessonViewer = (): JSX.Element => {
   const slideViewportRef = useRef<HTMLDivElement | null>(null);
 
   const total = lesson?.slides.length ?? 0;
+  const requestedSlideParam = Number(searchParams.get('slide') ?? '1') - 1;
+  const hasRequestedSlide = searchParams.has('slide');
+  const requestedSlideIndex = clampSlideIndex(requestedSlideParam, total);
   const isLast = current === total - 1;
   const pct = total > 0 ? Math.round(((current + 1) / total) * 100) : 0;
 
@@ -597,9 +609,9 @@ const LessonViewer = (): JSX.Element => {
   }, [current, lesson?.id]);
 
   useEffect(() => {
-    setCurrent(0);
+    setCurrent(hasRequestedSlide ? requestedSlideIndex : 0);
     setFinished(false);
-  }, [lesson?.id]);
+  }, [hasRequestedSlide, lesson?.id, requestedSlideIndex]);
 
   if (!lesson) {
     return (

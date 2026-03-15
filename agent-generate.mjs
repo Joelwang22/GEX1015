@@ -74,6 +74,7 @@ const TOPICS = {
     files: [
       'midterm prep/LUE 2026 Week6 Religion student version.txt',
       'midterm prep/Week 6 Perry Dialogue on Good, Evil and the Existence of God.txt',
+      'midterm prep/transcripts/Week6 transcript.txt',
     ],
   },
 };

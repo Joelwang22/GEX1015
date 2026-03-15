@@ -28,7 +28,7 @@ export class GEX1015DB extends Dexie {
   constructor() {
     super('GEX1015DB');
 
-    this.version(1).stores({
+    const schema = {
       subjects: 'id',
       topics: 'id, subjectId',
       questions: 'id, subjectId, *topicIds, type, difficulty',
@@ -36,24 +36,32 @@ export class GEX1015DB extends Dexie {
       attempts: 'id, questionId, testId, subjectId, *topicIds, isCorrect',
       userState: 'id',
       config: 'id',
-    });
+    } as const;
 
-    this.on('populate', async () => {
-      await this.populateFromSeed();
-    });
-  }
+    this.version(1).stores(schema);
 
-  private async populateFromSeed(): Promise<void> {
-    await this.transaction('rw', this.subjects, this.topics, this.questions, async () => {
-      await this.subjects.bulkAdd(gex1015Seed.subjects);
-      await this.topics.bulkAdd(gex1015Seed.topics);
-      await this.questions.bulkAdd(
+    this.version(2).stores(schema).upgrade(async (tx) => {
+      await tx.table<Subject, string>('subjects').bulkPut(gex1015Seed.subjects);
+      await tx.table<Topic, string>('topics').bulkPut(gex1015Seed.topics);
+      await tx.table<Question, string>('questions').bulkPut(
         gex1015Seed.questions.map((q) => ({
           ...q,
           difficulty: q.difficulty ?? DEFAULT_DIFFICULTY,
         })),
       );
     });
+
+    this.on('populate', async () => {
+      await this.populateFromSeed();
+    });
+
+    this.on('ready', async () => {
+      await this.syncSeedData();
+    });
+  }
+
+  private async populateFromSeed(): Promise<void> {
+    await this.ensureSeedData();
 
     await this.transaction('rw', this.userState, this.config, async () => {
       await this.userState.put({ id: 'singleton' });
@@ -63,6 +71,26 @@ export class GEX1015DB extends Dexie {
         timerEnabled: false,
       });
     });
+  }
+
+  private async syncSeedData(): Promise<void> {
+    await this.transaction('rw', this.subjects, this.topics, this.questions, async () => {
+      await this.subjects.bulkPut(gex1015Seed.subjects);
+      await this.topics.bulkPut(gex1015Seed.topics);
+      await this.questions.bulkPut(
+        gex1015Seed.questions.map((q) => ({
+          ...q,
+          difficulty: q.difficulty ?? DEFAULT_DIFFICULTY,
+        })),
+      );
+    });
+  }
+
+  async ensureSeedData(): Promise<void> {
+    if (!this.isOpen()) {
+      await this.open();
+    }
+    await this.syncSeedData();
   }
 }
 

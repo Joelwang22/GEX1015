@@ -79,6 +79,7 @@ const TOPICS = {
     files: [
       'LUE 2026 Week6 Religion student version.txt',
       'Week 6 Perry Dialogue on Good, Evil and the Existence of God.txt',
+      'transcripts/Week6 transcript.txt',
     ],
   },
 };

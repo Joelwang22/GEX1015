@@ -134,6 +134,7 @@ const LESSON_INTERLEAVE_RULES: Partial<Record<Lesson['id'], LessonInterleaveRule
   week6: [
     { after: 'The Problem of Evil — Revised Version', questionIncludes: 'What valid argument form does the Problem of Evil use?' },
     { after: 'The Problem of Evil — Revised Version', questionIncludes: 'Why is the first version of the Problem of Evil' },
+    { after: 'The Problem of Evil — Revised Version', questionIncludes: 'Why does the debate over the revised Problem of Evil usually focus on Premise 2' },
     { after: 'Six Theodicies (Responses to the Problem of Evil)', questionIncludes: 'If a theist accepts Theodicy 6' },
     { after: 'Perry — Dialogue on Good, Evil, and the Existence of God', questionIncludes: 'In Perry\'s Dialogue, Miller defends the "laws of nature" theodicy' },
   ],
@@ -218,7 +219,7 @@ const RAW_GEX1015_LESSONS: Lesson[] = [
     id: 'week1',
     title: 'Week 1',
     subtitle: 'Introduction to Philosophy',
-    icon: '🧠',
+    icon: '\uD83E\uDDE0',
     slides: [
       {
         type: 'intro',
@@ -841,6 +842,203 @@ const RAW_GEX1015_LESSONS: Lesson[] = [
       },
     ],
   },
+  {
+    id: 'week8',
+    title: 'Week 8',
+    subtitle: 'Free Will and the Dilemma of Determinism',
+    icon: '\u26D3',
+    slides: [
+      {
+        type: 'intro',
+        week: 'Week 8 — Free Will',
+        question: 'Do we possess free will, or do determinism and randomness each undermine moral responsibility?',
+        body: 'This lesson introduces the standard argument against free will, the concepts of determinism and indeterminism, and the major positions of compatibilism, incompatibilism, and libertarianism.',
+      },
+      {
+        type: 'concept',
+        title: 'The Core Argument Against Free Will',
+        body: '<p><strong>P1.</strong> Either determinism is true, or determinism is false.</p><p><strong>P2.</strong> If determinism is true, we do not have free will or moral responsibility.</p><p><strong>P3.</strong> If determinism is false, we do not have free will or moral responsibility.</p><p><strong>C.</strong> Therefore, we do not have free will or moral responsibility.</p><p>This argument is <strong>valid</strong>: if determinism is true, P2 gives the conclusion; if determinism is false, P3 gives the conclusion. So anyone who wants to keep free will must reject <strong>P2</strong>, <strong>P3</strong>, or both.</p>',
+      },
+      {
+        type: 'check',
+        q: 'If you do NOT want to accept the conclusion of the argument against free will, which premise(s) should you target?',
+        a: 'You should target <strong>P2 and/or P3</strong>. <strong>P1</strong> is just the law of excluded middle: either determinism is true or it is false. So the real debate is whether free will survives <strong>determinism</strong>, <strong>indeterminism</strong>, or neither.',
+      },
+      {
+        type: 'term',
+        label: 'Key Concept',
+        term: 'Determinism',
+        def: 'Roughly: what happens now is fixed by what happened in the past, together with the laws of nature. <strong>Given the same past, only one future is possible.</strong><br><br><strong>Important:</strong> determinism does <em>not</em> mean some external force drags you around against your will. It works <strong>through</strong> your own desires, motives, deliberation, and choices. The worry is that even those were themselves fixed by factors outside your control.',
+      },
+      {
+        type: 'concept',
+        title: 'Why Determinism Seems to Threaten Free Will',
+        body: '<p>If determinism is true, then when the mugger attacks, there were <strong>no genuine alternative possibilities</strong>. Given the past and the laws of nature, he <em>could not have done otherwise</em>.</p><p><strong>Incompatibilists</strong> think this destroys free will, because they say alternative possibilities are necessary for moral responsibility. <strong>Compatibilists</strong> reject that assumption: they argue a person can still act freely even if the action was determined, so long as it flows from the person\'s own will rather than from coercion.</p>',
+      },
+      {
+        type: 'check',
+        q: 'What is the difference between compatibilists and incompatibilists in this lecture?',
+        a: '<strong>Incompatibilists</strong> think <strong>P2 is true</strong>: if determinism is true, then free will and moral responsibility are impossible. <strong>Compatibilists</strong> think <strong>P2 is false</strong>: even in a deterministic world, we can still be free and morally responsible. The core disagreement is whether <strong>alternative possibilities</strong> are necessary.',
+      },
+      {
+        type: 'concept',
+        title: 'Frankfurt-Style Pressure on Alternative Possibilities',
+        body: '<p>Compatibilists often try to show that <strong>alternative possibilities are not necessary</strong> for responsibility. The basic strategy is to describe a case where a person <strong>could not have done otherwise</strong>, yet still seems morally responsible because the action came from their own decision.</p><p>This is the motivation behind <strong>Frankfurt-style cases</strong>. Even if those cases are debated, they are meant to weaken the idea that "could have done otherwise" is required for blame or praise.</p>',
+      },
+      {
+        type: 'check',
+        q: 'What are Frankfurt-style cases trying to show?',
+        a: 'They try to show that a person can be <strong>morally responsible even without alternative possibilities</strong>. If that works, then the incompatibilist move from determinism to "no free will" is blocked, because <strong>P2</strong> would be false.',
+      },
+      {
+        type: 'concept',
+        title: 'Why Indeterminism Also Looks Problematic',
+        body: '<p>You might think indeterminism helps because it allows you to <strong>do otherwise</strong>. But the lecture and reading press a different worry: if your choice is not determined by your prior character, desires, values, and deliberation, then it can start to look <strong>random</strong>.</p><p>That is the pressure behind <strong>P3</strong>. If a decision just happens rather than being determined by you, it becomes unclear why you should be responsible for it. The problem is no longer "you could not have done otherwise" but rather "what explains this choice instead of the other one?"</p>',
+      },
+      {
+        type: 'quote',
+        label: 'The Reading\'s Worry About Indeterminism',
+        text: '"as if a coin were flipped in the mugger\'s head."',
+        source: '<em>Do We Possess Free Will?</em> — the thought is that a purely indeterministic choice looks like chance, not control.',
+      },
+      {
+        type: 'check',
+        q: 'Why might someone think P3 is true even though indeterminism gives us alternative possibilities?',
+        a: 'Because <strong>alternative possibilities alone are not enough</strong>. If indeterminism means that, given exactly the same prior state, either choice could occur purely by chance, then it looks as if the outcome is <strong>random</strong> rather than <strong>under your control</strong>. That is why indeterminism can seem just as threatening as determinism.',
+      },
+      {
+        type: 'bullets',
+        title: 'The Dilemma of Determinism',
+        items: [
+          '<strong>If determinism is true:</strong> your action was fixed by prior factors outside your control, so incompatibilists say you are not free.',
+          '<strong>If indeterminism is true:</strong> your action risks looking like a chance event, so critics say you are not in control either.',
+          '<strong>Compatibilists:</strong> reject the first horn by denying that determinism rules out responsibility.',
+          '<strong>Libertarians:</strong> reject the second horn by arguing that indeterminism can still leave room for genuine agency.',
+          '<strong>Hard-line skeptics:</strong> accept both horns and conclude that free will or moral responsibility is an illusion.',
+        ],
+      },
+      {
+        type: 'check',
+        q: 'Who are libertarians in this topic?',
+        a: '<strong>Libertarians</strong> are <strong>incompatibilists</strong> who still believe we have free will and moral responsibility. So they deny that determinism is compatible with freedom, and they also deny <strong>P3</strong> by claiming we can be free even if determinism is false.',
+      },
+      {
+        type: 'summary',
+        title: 'Week 8 — Key Takeaways',
+        points: [
+          'The standard anti-free-will argument is valid: either determinism or indeterminism is true, and each seems to threaten responsibility.',
+          'Determinism says the past plus the laws of nature fix a single future; it does not mean an outside force overrides your will.',
+          'Incompatibilists say determinism removes alternative possibilities; compatibilists deny that alternative possibilities are necessary.',
+          'Frankfurt-style cases try to show moral responsibility without the ability to do otherwise.',
+          'Indeterminism gives alternative possibilities but may make choice look random, which is why P3 is tempting.',
+        ],
+        cta: 'Week 8 sets up the central final-exam debate over compatibilism, incompatibilism, libertarianism, and whether moral responsibility survives either horn of the dilemma.',
+      },
+    ],
+  },
 ];
 
 export const GEX1015_LESSONS: Lesson[] = RAW_GEX1015_LESSONS.map(interleaveLessonChecks);
+
+export interface LessonSearchResult {
+  lessonId: Lesson['id'];
+  lessonIndex: number;
+  lessonTitle: string;
+  lessonSubtitle: string;
+  slideIndex: number;
+  slideType: LessonSlide['type'];
+  slideLabel: string;
+  snippet: string;
+}
+
+const stripHtml = (value: string): string => value.replace(/<[^>]+>/g, ' ');
+
+const normalizeWhitespace = (value: string): string => value.replace(/\s+/g, ' ').trim();
+
+export const getSlideLabel = (slide: LessonSlide): string => {
+  switch (slide.type) {
+    case 'intro':
+      return slide.question;
+    case 'concept':
+    case 'bullets':
+    case 'summary':
+      return slide.title;
+    case 'quote':
+      return slide.label;
+    case 'term':
+      return slide.term;
+    case 'check':
+      return slide.q;
+  }
+};
+
+const getSlideSearchText = (slide: LessonSlide): string => {
+  switch (slide.type) {
+    case 'intro':
+      return normalizeWhitespace([slide.week, slide.question, slide.body].join(' '));
+    case 'concept':
+      return normalizeWhitespace([slide.title, stripHtml(slide.body)].join(' '));
+    case 'bullets':
+      return normalizeWhitespace([slide.title, ...slide.items.map(stripHtml)].join(' '));
+    case 'quote':
+      return normalizeWhitespace([slide.label, slide.text, stripHtml(slide.source)].join(' '));
+    case 'term':
+      return normalizeWhitespace([slide.label, slide.term, stripHtml(slide.def)].join(' '));
+    case 'check':
+      return normalizeWhitespace([slide.q, stripHtml(slide.a)].join(' '));
+    case 'summary':
+      return normalizeWhitespace([slide.title, ...slide.points, slide.cta].join(' '));
+  }
+};
+
+const createSnippet = (searchText: string, queryTerms: string[]): string => {
+  const lowerText = searchText.toLowerCase();
+  const firstMatchTerm = queryTerms.find((term) => lowerText.includes(term)) ?? queryTerms[0] ?? '';
+  const matchIndex = firstMatchTerm ? lowerText.indexOf(firstMatchTerm) : -1;
+
+  if (matchIndex === -1) {
+    return searchText.slice(0, 160).trim();
+  }
+
+  const start = Math.max(0, matchIndex - 55);
+  const end = Math.min(searchText.length, matchIndex + Math.max(firstMatchTerm.length, 24) + 85);
+  const prefix = start > 0 ? '...' : '';
+  const suffix = end < searchText.length ? '...' : '';
+
+  return `${prefix}${searchText.slice(start, end).trim()}${suffix}`;
+};
+
+export const searchLessons = (query: string): LessonSearchResult[] => {
+  const trimmedQuery = query.trim().toLowerCase();
+  if (!trimmedQuery) {
+    return [];
+  }
+
+  const queryTerms = trimmedQuery.split(/\s+/).filter(Boolean);
+  const results: LessonSearchResult[] = [];
+
+  GEX1015_LESSONS.forEach((lesson, lessonIndex) => {
+    lesson.slides.forEach((slide, slideIndex) => {
+      const searchText = getSlideSearchText(slide);
+      const lowerText = searchText.toLowerCase();
+      const isMatch = queryTerms.every((term) => lowerText.includes(term));
+
+      if (!isMatch) {
+        return;
+      }
+
+      results.push({
+        lessonId: lesson.id,
+        lessonIndex,
+        lessonTitle: lesson.title,
+        lessonSubtitle: lesson.subtitle,
+        slideIndex,
+        slideType: slide.type,
+        slideLabel: getSlideLabel(slide),
+        snippet: createSnippet(searchText, queryTerms),
+      });
+    });
+  });
+
+  return results;
+};

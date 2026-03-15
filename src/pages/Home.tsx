@@ -12,6 +12,7 @@ const Home = (): JSX.Element => {
 
   useEffect(() => {
     const load = async (): Promise<void> => {
+      await db.ensureSeedData();
       const [state, count] = await Promise.all([
         db.userState.get('singleton'),
         db.questions.count(),
@@ -45,7 +46,7 @@ const Home = (): JSX.Element => {
           <p className="text-xs font-bold uppercase tracking-widest text-teal-400">Study Mode</p>
           <h3 className="text-lg font-semibold">Guided Lessons</h3>
           <p className="text-sm text-slate-400">
-            {GEX1015_LESSONS.length} structured lessons covering weeks 2–6.
+            {GEX1015_LESSONS.length} structured lessons covering the loaded course topics.
           </p>
           <button
             type="button"

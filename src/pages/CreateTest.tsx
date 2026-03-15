@@ -24,6 +24,8 @@ const CreateTest = (): JSX.Element => {
 
   useEffect(() => {
     const load = async (): Promise<void> => {
+      await db.ensureSeedData();
+
       const [subjectsData, topicsData, questionsData, configData] = await Promise.all([
         db.subjects.toArray(),
         db.topics.toArray(),
@@ -173,7 +175,7 @@ const CreateTest = (): JSX.Element => {
                   </label>
                 ))}
                 {topics.length === 0 ? (
-                  <p className="text-sm text-slate-400">Loading topics…</p>
+                  <p className="text-sm text-slate-400">Loading topics...</p>
                 ) : null}
               </div>
             </div>
@@ -214,7 +216,7 @@ const CreateTest = (): JSX.Element => {
             className="rounded-md bg-primary px-4 py-2 font-semibold text-white hover:bg-teal-600 disabled:cursor-not-allowed disabled:bg-slate-700"
             disabled={isSubmitting || questions.length === 0}
           >
-            {isSubmitting ? 'Building quiz…' : 'Build quiz'}
+            {isSubmitting ? 'Building quiz...' : 'Build quiz'}
           </button>
           {error ? <p className="text-sm text-red-400">{error}</p> : null}
           {diagnostics.length > 0 ? (
