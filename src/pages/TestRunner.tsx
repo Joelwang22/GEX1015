@@ -70,10 +70,10 @@ const QuestionNavigator = ({
       <button
         type="button"
         onClick={onToggleCollapsed}
-        className="w-full rounded-2xl border border-slate-800 bg-slate-900/50 p-3 text-center hover:bg-slate-800/60"
+        className="w-full rounded-2xl border border-slate-800 bg-slate-900/50 px-2 py-2.5 text-center hover:bg-slate-800/60"
         aria-label="Expand question navigator"
       >
-        <span className="text-sm font-semibold text-slate-100">Question Navigator</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-100">Navigator</span>
       </button>
     );
   }
@@ -814,8 +814,8 @@ const TestRunner = (): JSX.Element => {
                     markedCount={markedCount}
                   />
                 </div>
-                {isNavigatorCollapsed ? (
-                  <div className="w-[6.5rem] shrink-0">
+                <div className="w-[5.5rem] shrink-0">
+                  {isNavigatorCollapsed ? (
                     <QuestionNavigator
                       items={questionItems}
                       currentIndex={test.currentIndex}
@@ -827,8 +827,10 @@ const TestRunner = (): JSX.Element => {
                       isReviewOpen={isReviewOpen}
                       onToggleReviewScreen={handleToggleReviewScreen}
                     />
-                  </div>
-                ) : null}
+                  ) : (
+                    <div aria-hidden className="h-[2.75rem] w-full" />
+                  )}
+                </div>
               </div>
             </div>
           </div>

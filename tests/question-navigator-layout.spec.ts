@@ -47,11 +47,13 @@ test('opening the question navigator does not shrink the quiz content on desktop
   await expandNavigatorButton.click();
 
   const questionCardAfter = await questionCard.boundingBox();
+  const progressBarAfter = await progressBar.boundingBox();
   const navigator = page
     .getByRole('button', { name: 'Collapse question navigator' })
     .locator('xpath=ancestor::aside[1]');
 
   expect(questionCardAfter).not.toBeNull();
+  expect(progressBarAfter).not.toBeNull();
   await expect(navigator).toBeVisible();
   await expect(page.getByRole('dialog')).toHaveCount(0);
 
@@ -63,6 +65,8 @@ test('opening the question navigator does not shrink the quiz content on desktop
 
   expect(Math.abs(questionCardAfter!.width - questionCardBefore!.width)).toBeLessThanOrEqual(8);
   expect(Math.abs(questionCardAfter!.x - questionCardBefore!.x)).toBeLessThanOrEqual(8);
+  expect(Math.abs(progressBarAfter!.x - progressBarBox!.x)).toBeLessThanOrEqual(8);
+  expect(Math.abs(progressBarAfter!.y - progressBarBox!.y)).toBeLessThanOrEqual(8);
   expect(navigatorBox!.x + navigatorBox!.width).toBeLessThanOrEqual(mainBox!.x + mainBox!.width + 8);
   expect(navigatorBox!.x).toBeGreaterThanOrEqual(questionCardAfter!.x + questionCardAfter!.width + 8);
 });
