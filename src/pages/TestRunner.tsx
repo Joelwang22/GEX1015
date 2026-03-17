@@ -52,57 +52,82 @@ const QuestionNavigator = ({
   items,
   currentIndex,
   onJump,
-  onOpenReview,
+  isCollapsed,
+  onToggleCollapsed,
+  isReviewOpen,
+  onToggleReviewScreen,
 }: {
   items: NavigatorItem[];
   currentIndex: number;
   onJump: (index: number) => void;
-  onOpenReview: () => void;
-}): JSX.Element => (
-  <aside className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
-    <div className="space-y-1">
-      <h2 className="text-lg font-semibold">Question Navigator</h2>
-      <p className="text-sm text-slate-400">Jump to any saved question or open the review screen.</p>
-    </div>
-    <div className="grid grid-cols-5 gap-2">
-      {items.map((item) => {
-        const isCurrent = item.index === currentIndex;
-        const classes = isCurrent
-          ? 'border-teal-400 bg-teal-500/20 text-teal-100'
-          : item.marked
-          ? 'border-amber-500 bg-amber-500/10 text-amber-200'
-          : item.answered
-          ? 'border-emerald-600 bg-emerald-500/10 text-emerald-200'
-          : 'border-slate-700 bg-slate-950/70 text-slate-300 hover:bg-slate-800';
+  isCollapsed: boolean;
+  onToggleCollapsed: () => void;
+  isReviewOpen: boolean;
+  onToggleReviewScreen: () => void;
+}): JSX.Element => {
+  if (isCollapsed) {
+    return (
+      <button
+        type="button"
+        onClick={onToggleCollapsed}
+        className="w-full rounded-2xl border border-slate-800 bg-slate-900/50 p-3 text-center hover:bg-slate-800/60"
+        aria-label="Expand question navigator"
+      >
+        <span className="text-sm font-semibold text-slate-100">Question Navigator</span>
+      </button>
+    );
+  }
 
-        return (
-          <button
-            key={item.questionId}
-            type="button"
-            onClick={() => onJump(item.index)}
-            className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${classes}`}
-            aria-label={`Go to question ${item.index + 1}`}
-          >
-            {item.index + 1}
-          </button>
-        );
-      })}
-    </div>
-    <div className="space-y-2 text-xs text-slate-400">
-      <p>Current: teal</p>
-      <p>Answered: green</p>
-      <p>Marked: amber</p>
-      <p>Unanswered: slate</p>
-    </div>
-    <button
-      type="button"
-      onClick={onOpenReview}
-      className="w-full rounded-md border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-800"
-    >
-      Open review screen
-    </button>
-  </aside>
-);
+  return (
+    <aside className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div className="space-y-1">
+          <h2 className="text-lg font-semibold">Question Navigator</h2>
+        </div>
+        <button
+          type="button"
+          onClick={onToggleCollapsed}
+          className="rounded-md border border-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-800"
+          aria-expanded
+          aria-label="Collapse question navigator"
+        >
+          Collapse
+        </button>
+      </div>
+
+      <div className="grid grid-cols-5 gap-2">
+        {items.map((item) => {
+          const classes = item.index === currentIndex
+            ? 'border-teal-400 bg-teal-500/20 text-teal-100'
+            : item.marked
+            ? 'border-amber-500 bg-amber-500/10 text-amber-200'
+            : item.answered
+            ? 'border-emerald-600 bg-emerald-500/10 text-emerald-200'
+            : 'border-slate-700 bg-slate-950/70 text-slate-300 hover:bg-slate-800';
+
+          return (
+            <button
+              key={item.questionId}
+              type="button"
+              onClick={() => onJump(item.index)}
+              className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${classes}`}
+              aria-label={`Go to question ${item.index + 1}`}
+            >
+              {item.index + 1}
+            </button>
+          );
+        })}
+      </div>
+      <button
+        type="button"
+        onClick={onToggleReviewScreen}
+        className="w-full rounded-md border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-800"
+      >
+        {isReviewOpen ? 'Close review screen' : 'Open review screen'}
+      </button>
+    </aside>
+  );
+};
 
 const ReviewScreen = ({
   items,
@@ -218,6 +243,7 @@ const TestRunner = (): JSX.Element => {
   const [timeRemainingMs, setTimeRemainingMs] = useState<number | null>(null);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
+  const [isNavigatorCollapsed, setIsNavigatorCollapsed] = useState<boolean>(true);
 
   const interactionTimestamp = useRef<number>(Date.now());
   const timerPersistRef = useRef<number>(0);
@@ -619,6 +645,20 @@ const TestRunner = (): JSX.Element => {
     setStatusMessage('');
   }, [hasUnsavedChanges]);
 
+  const handleCloseReview = useCallback((): void => {
+    setIsReviewOpen(false);
+    setStatusMessage('');
+  }, []);
+
+  const handleToggleReviewScreen = useCallback((): void => {
+    if (isReviewOpen) {
+      handleCloseReview();
+      return;
+    }
+
+    handleOpenReview();
+  }, [handleCloseReview, handleOpenReview, isReviewOpen]);
+
   const handleNext = useCallback(async (): Promise<void> => {
     if (!test) {
       return;
@@ -758,25 +798,42 @@ const TestRunner = (): JSX.Element => {
               Score so far: {correctCount}/{questions.length} correct
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-start justify-end gap-4">
             {config?.timerEnabled && timeRemainingMs !== null ? (
               <div className="min-w-[180px]">
                 <TimerDisplay remainingMs={timeRemainingMs} />
               </div>
             ) : null}
-            <div className="min-w-[220px]">
-              <ProgressBar
-                current={test.currentIndex + 1}
-                total={questions.length}
-                answeredCount={answeredCount}
-                markedCount={markedCount}
-              />
+            <div className="flex flex-wrap items-start justify-end gap-4">
+              <div className="min-w-[220px]">
+                <ProgressBar
+                  current={test.currentIndex + 1}
+                  total={questions.length}
+                  answeredCount={answeredCount}
+                  markedCount={markedCount}
+                />
+              </div>
+              {isNavigatorCollapsed ? (
+                <div className="w-[6.5rem] shrink-0">
+                  <QuestionNavigator
+                    items={questionItems}
+                    currentIndex={test.currentIndex}
+                    onJump={(index) => {
+                      void handleJumpToQuestion(index);
+                    }}
+                    isCollapsed
+                    onToggleCollapsed={() => setIsNavigatorCollapsed(false)}
+                    isReviewOpen={isReviewOpen}
+                    onToggleReviewScreen={handleToggleReviewScreen}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
       </header>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
+      <div className={`gap-6 ${!isNavigatorCollapsed ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_20rem]' : ''}`}>
         <div className="space-y-6">
           {isReviewOpen ? (
             <ReviewScreen
@@ -787,7 +844,7 @@ const TestRunner = (): JSX.Element => {
               onJump={(index) => {
                 void handleJumpToQuestion(index);
               }}
-              onClose={() => setIsReviewOpen(false)}
+              onClose={handleCloseReview}
               onComplete={() => {
                 void handleComplete();
               }}
@@ -860,10 +917,10 @@ const TestRunner = (): JSX.Element => {
                 </button>
                 <button
                   type="button"
-                  onClick={handleOpenReview}
+                  onClick={handleToggleReviewScreen}
                   className="rounded-md border border-slate-700 px-4 py-2 text-sm hover:bg-slate-800"
                 >
-                  Review screen
+                  {isReviewOpen ? 'Close review screen' : 'Open review screen'}
                 </button>
                 <button
                   type="button"
@@ -881,15 +938,41 @@ const TestRunner = (): JSX.Element => {
           </div>
         </div>
 
-        <QuestionNavigator
-          items={questionItems}
-          currentIndex={test.currentIndex}
-          onJump={(index) => {
-            void handleJumpToQuestion(index);
-          }}
-          onOpenReview={handleOpenReview}
-        />
+        {!isNavigatorCollapsed ? (
+          <aside className="hidden xl:block">
+            <QuestionNavigator
+              items={questionItems}
+              currentIndex={test.currentIndex}
+              onJump={(index) => {
+                void handleJumpToQuestion(index);
+              }}
+              isCollapsed={false}
+              onToggleCollapsed={() => setIsNavigatorCollapsed(true)}
+              isReviewOpen={isReviewOpen}
+              onToggleReviewScreen={handleToggleReviewScreen}
+            />
+          </aside>
+        ) : null}
       </div>
+
+      {!isNavigatorCollapsed ? (
+        <div className="xl:hidden">
+          <OverlayModal title="Question Navigator" onClose={() => setIsNavigatorCollapsed(true)}>
+            <QuestionNavigator
+              items={questionItems}
+              currentIndex={test.currentIndex}
+              onJump={(index) => {
+                void handleJumpToQuestion(index);
+                setIsNavigatorCollapsed(true);
+              }}
+              isCollapsed={false}
+              onToggleCollapsed={() => setIsNavigatorCollapsed(true)}
+              isReviewOpen={isReviewOpen}
+              onToggleReviewScreen={handleToggleReviewScreen}
+            />
+          </OverlayModal>
+        </div>
+      ) : null}
 
       {isHelpOpen ? (
         <OverlayModal title="Keyboard shortcuts" onClose={() => setIsHelpOpen(false)}>
