@@ -95,7 +95,7 @@ const QuestionNavigator = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {items.map((item) => {
           const classes = item.index === currentIndex
             ? 'border-teal-400 bg-teal-500/20 text-teal-100'
@@ -110,7 +110,7 @@ const QuestionNavigator = ({
               key={item.questionId}
               type="button"
               onClick={() => onJump(item.index)}
-              className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${classes}`}
+              className={`rounded-lg border px-2 py-2 text-sm font-semibold transition ${classes}`}
               aria-label={`Go to question ${item.index + 1}`}
             >
               {item.index + 1}
@@ -786,54 +786,54 @@ const TestRunner = (): JSX.Element => {
   const isMarked = test.markedForReview.includes(currentQuestion.id);
 
   return (
-    <section className="space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-semibold">Test Runner</h1>
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold text-teal-300">
-              {isReviewOpen ? 'Review screen' : progressLabel}
-            </p>
-            <p className="text-sm text-slate-400">
-              Score so far: {correctCount}/{questions.length} correct
-            </p>
-          </div>
-          <div className="flex flex-wrap items-start justify-end gap-4">
-            {config?.timerEnabled && timeRemainingMs !== null ? (
-              <div className="min-w-[180px]">
-                <TimerDisplay remainingMs={timeRemainingMs} />
-              </div>
-            ) : null}
+    <section className="relative space-y-6">
+      <div className="mx-auto w-full max-w-4xl space-y-6">
+        <header className="space-y-2">
+          <h1 className="text-3xl font-semibold">Test Runner</h1>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-teal-300">
+                {isReviewOpen ? 'Review screen' : progressLabel}
+              </p>
+              <p className="text-sm text-slate-400">
+                Score so far: {correctCount}/{questions.length} correct
+              </p>
+            </div>
             <div className="flex flex-wrap items-start justify-end gap-4">
-              <div className="min-w-[220px]">
-                <ProgressBar
-                  current={test.currentIndex + 1}
-                  total={questions.length}
-                  answeredCount={answeredCount}
-                  markedCount={markedCount}
-                />
-              </div>
-              {isNavigatorCollapsed ? (
-                <div className="w-[6.5rem] shrink-0">
-                  <QuestionNavigator
-                    items={questionItems}
-                    currentIndex={test.currentIndex}
-                    onJump={(index) => {
-                      void handleJumpToQuestion(index);
-                    }}
-                    isCollapsed
-                    onToggleCollapsed={() => setIsNavigatorCollapsed(false)}
-                    isReviewOpen={isReviewOpen}
-                    onToggleReviewScreen={handleToggleReviewScreen}
-                  />
+              {config?.timerEnabled && timeRemainingMs !== null ? (
+                <div className="min-w-[180px]">
+                  <TimerDisplay remainingMs={timeRemainingMs} />
                 </div>
               ) : null}
+              <div className="flex flex-wrap items-start justify-end gap-4">
+                <div className="min-w-[220px]">
+                  <ProgressBar
+                    current={test.currentIndex + 1}
+                    total={questions.length}
+                    answeredCount={answeredCount}
+                    markedCount={markedCount}
+                  />
+                </div>
+                {isNavigatorCollapsed ? (
+                  <div className="w-[6.5rem] shrink-0">
+                    <QuestionNavigator
+                      items={questionItems}
+                      currentIndex={test.currentIndex}
+                      onJump={(index) => {
+                        void handleJumpToQuestion(index);
+                      }}
+                      isCollapsed
+                      onToggleCollapsed={() => setIsNavigatorCollapsed(false)}
+                      isReviewOpen={isReviewOpen}
+                      onToggleReviewScreen={handleToggleReviewScreen}
+                    />
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <div className={`gap-6 ${!isNavigatorCollapsed ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_20rem]' : ''}`}>
         <div className="space-y-6">
           {isReviewOpen ? (
             <ReviewScreen
@@ -937,9 +937,11 @@ const TestRunner = (): JSX.Element => {
             {statusMessage}
           </div>
         </div>
+      </div>
 
-        {!isNavigatorCollapsed ? (
-          <aside className="hidden xl:block">
+      {!isNavigatorCollapsed ? (
+        <div className="absolute left-[calc(50%+29rem)] top-0 hidden w-56 xl:block">
+          <div className="sticky top-4 max-h-[calc(100dvh-3rem)] overflow-y-auto pl-1">
             <QuestionNavigator
               items={questionItems}
               currentIndex={test.currentIndex}
@@ -951,9 +953,9 @@ const TestRunner = (): JSX.Element => {
               isReviewOpen={isReviewOpen}
               onToggleReviewScreen={handleToggleReviewScreen}
             />
-          </aside>
-        ) : null}
-      </div>
+          </div>
+        </div>
+      ) : null}
 
       {!isNavigatorCollapsed ? (
         <div className="xl:hidden">

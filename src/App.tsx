@@ -22,6 +22,7 @@ const navItems = [
 const App = (): JSX.Element => {
   const location = useLocation();
   const isLessonViewerRoute = /^\/lessons\/[^/]+$/.test(location.pathname);
+  const isTestRunnerRoute = /^\/test\/[^/]+$/.test(location.pathname);
 
   return (
     <div className="flex h-dvh flex-col bg-slate-950 text-slate-100">
@@ -48,7 +49,9 @@ const App = (): JSX.Element => {
         </nav>
       </header>
       <main
-        className={`mx-auto flex w-full max-w-6xl min-h-0 flex-1 flex-col px-4 ${
+        className={`mx-auto flex w-full min-h-0 flex-1 flex-col px-4 ${
+          isTestRunnerRoute ? 'max-w-none xl:px-6 2xl:px-8' : 'max-w-6xl'
+        } ${
           isLessonViewerRoute ? 'overflow-hidden py-6' : 'overflow-y-auto py-8'
         }`}
       >
