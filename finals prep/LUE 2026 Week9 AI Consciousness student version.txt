@@ -1,0 +1,424 @@
+Announcements and reminders
+� [Reminder] This week's reading, Schneider, "The Problem of AI Consciousness", is optional, meaning you only need to understand the Week 9 lecture, not the reading itself, for the purposes of the final exam.
+� Final exam: Monday, 27 Apr, 5pm-7pm, venue TBA  50% of your grade We'll use Examplify, and the exam will be open book meaning you may bring one sheet of paper (handwritten or printed, A4 or smaller, double-sided).
+� [Reminder] The final will be similar to the midterm in terms of question style and difficulty (just more questions). However, there will be differences in administrative matters because the final exam is more strictly regulated by the university. For example, there will be pre-assigned seating and ID checks. The final may contain some questions that combine Weeks 1-5 materials with Weeks 6-13 materials.
+� There will be no lecture in Week 11 (Good Friday). As for when your tutorial will be cancelled, please contact your TA.
+1
+
+Can an AI be conscious?
+To understand her argument better, let's forget about morality for now and think about other human traits that are possibly the results of evolution.
+2
+
+< (Important) Interlude> Sufficient condition Necessary condition
+3
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility. Those who claim that P2 is true are called incompatibilists (because they think determinism and free wil/moral responsibility are incompatible) and those who think that P2 is false are called compatibilists (because they think determinism and free will/moral responsibility are compatible).
+Incompatibilists think P2 is true (that is, determinism is incompatible with free will/moral responsibility) because they think having alternative possibilities is necessary for free will/moral responsibility.
+(Most) Compatibilists, on the other hand, think that alternative possibilities are not necessary for free will/moral responsibility and, thus, even if determinism is true, we can still have free will/moral responsibility.
+4
+
+Necessary condition
+X is (a) necessary (condition) for Y = Y is a subset of X = In order for Y to be the case, X has to be the case. = It is not possible for something to be or do Y and not X.
+E.g.) Being in Asia is a necessary condition for being in Singapore. Being a rectangle is a necessary condition for being a square. Being above 18 is necessary for getting a driver's license.
+
+X Y
+
+5
+
+Necessary condition
+X is (a) necessary (condition) for Y = Y is a subset of X = In order for Y to be the case, X has to be the case. = It is not possible for something to be or do Y and not X.
+
+Asia Singapore
+
+E.g.) Being in Asia is a necessary condition for being in Singapore. Being a rectangle is a necessary condition for being a square. Being above 18 is necessary for getting a driver's license.
+
+6
+
+Necessary condition
+X is (a) necessary (condition) for Y = Y is a subset of X = In order for Y to be the case, X has to be the case. = It is not possible for something to be or do Y and not X.
+
+rectangles squares
+
+E.g.) Being in Asia is a necessary condition for being in Singapore. Being a rectangle is a necessary condition for being a square. Being above 18 is necessary for getting a driver's license.
+
+7
+
+Necessary condition
+X is (a) necessary (condition) for Y = Y is a subset of X = In order for Y to be the case, X has to be the case. = It is not possible for something to be or do Y and not X.
+
+People above 18
+People with a driver's license
+
+E.g.) Being in Asia is a necessary condition for being in Singapore.
+Being a rectangle is a necessary condition for being a square.
+Being above 18 is necessary for getting a driver's license.
+Notice that X being necessary for Y doesn't mean that X guarantees Y. That is, X can be necessary but not sufficient for Y.
+
+8
+
+Necessary condition
+X is (a) necessary (condition) for Y = Y is a subset of X = In order for Y to be the case, X has to be the case. = It is not possible for something to be or do Y and not X.
+E.g.) Being in Asia is a necessary condition for being in Singapore. Being a rectangle is a necessary condition for being a square. Being above 18 is necessary for getting a driver's license.
+How can you show that X is not necessary for Y?
+
+People above 18
+People with a driver's license
+
+9
+
+Compatibilists' attempts to show that alternative possibilities are not necessary for free will/moral responsibility In order to show that, they need to find an example where a person doesn't have alternative
+possibilities but still has free will/moral responsibility.
+10
+
+Necessary condition
+X is (a) necessary (condition) for Y = Y is a subset of X = In order for Y to be the case, X has to be the case. = It is not possible for something to be or do Y and not X.
+
+People above 18
+People with a driver's license
+
+E.g.) Being in Asia is a necessary condition for being in Singapore. Being a rectangle is a necessary condition for being a square. Being above 18 is necessary for getting a driver's license.
+How can you show that X is not necessary for Y? : find an example that is not X but Y
+e.g.,) A friend of mine got their driver's license when they were 17
+
+11
+
+Is attending all lectures in person necessary for getting an A in this course?
+
+Is attending all lectures in person necessary for getting an A in this course?
+No.
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+
+Y X
+
+14
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+
+Asia Singapore
+
+E.g.) Being in Singapore is a sufficient condition for being in Asia.
+Notice that being in Singapore is not the only way to be in Asia
+X being sufficient for Y doesn't mean X is the only way to get Y. X can be sufficient but not necessary for Y.
+
+15
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+E.g.) Being in Singapore is a sufficient condition for being in Asia. Being a square is a sufficient condition for being a rectangle.
+
+Rectangles Squares
+
+16
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+
+People living a happy life
+People graduating NUS with a 5.0 GPA
+
+E.g.) Being in Singapore is a sufficient condition for being in Asia. Being a square is a sufficient condition for being a rectangle. Graduating NUS with a 5.0 GPA is a sufficient condition for living a happy life (probably false)
+
+17
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+
+People living a happy life
+People graduating NUS with a 5.0 GPA
+
+E.g.) Being in Singapore is a sufficient condition for being in Asia. Being a square is a sufficient condition for being a rectangle. Graduating NUS with a 5.0 GPA is a sufficient condition for living a happy life (probably false)
+
+How to show that X is NOT sufficient for Y : find an example that is X but not Y
+e.g.,) Someone who graduated NUS with a 5.0 GPA but is not living a happy life
+
+18
+
+Is attending all lectures in person sufficient for getting an A in this course?
+
+Is attending all lectures in person sufficient for getting an A in this course?
+No.
+
+Is getting the highest overall score among all students in this course sufficient for getting an A in this course?
+(Assume your overall score is higher than everyone else's)
+
+Is getting the highest overall score among all students in this course sufficient for getting an A in this course?
+(Assume your overall score is higher than everyone else's)
+Yes
+
+"In order to fall in love with another, you have to first love yourself" means that
+
+loving yourself is [
+
+] for falling in love with another.
+
+sufficient or necessary?
+
+"In order to fall in love with another, you have to first love yourself" means that
+
+loving yourself is [
+
+] for falling in love with another.
+
+sufficient or necessary?
+
+If a computer's current state and its program fix what output it will produce next, then
+
+the computer's current state and its program are [
+
+] for that next output.
+
+sufficient or necessary?
+
+If a computer's current state and its program fix what output it will produce next, then
+
+the computer's current state and its program are [
+
+] for that next output.
+
+sufficient or necessary?
+
+How a necessary condition and a sufficient condition are related to each other
+
+Asia Singapore
+Being in Singapore is (a) sufficient (condition) for being in Asia = Being in Asia is (a) necessary (condition) for being in Singapore (Both correspond to the same Venn diagram above)
+28
+
+B A
+A is (a) sufficient (condition) for B = B is (a) necessary (condition) for A (Both mean A is a subset of B)
+29
+
+How these things are connected to what we learned earlier about "if.., then..."
+
+Always valid argument form 1
+P1. If A, then B (= B, if A) P2. A
+C. B
+P1. If I have the cold, then I am sick. P2. I have the cold.
+C. I am sick.
+
+B (being sick) A (having the cold)
+
+31
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+
+People living a happy life
+People graduating NUS with a 5.0 GPA
+
+E.g.) Being in Singapore is a sufficient condition for being in Asia. Being a square is a sufficient condition for being a rectangle. Graduating NUS with a 5.0 GPA is a sufficient condition for living a happy life (probably false)
+
+How to show that X is NOT sufficient for Y : find an example that is X but not Y
+e.g.,) Someone who graduated NUS with a 5.0 GPA but is not living a happy life
+
+32
+
+B A
+A is (a) sufficient (condition) for B = B is (a) necessary (condition) for A = If A, then B (B, if A)
+33
+
+B A
+A is (a) sufficient (condition) for B = B is (a) necessary (condition) for A = If A, then B (B, if A) = A, only if B (=Only if B, A)
+E.g.) Being in Asia is necessary for being in Singapore = You're in Singapore only if you're in Asia Being above 18 is necessary for getting a driver's license. = You can get a driver's license only if you're above 18.
+34
+
+How these things are connected to what we learned earlier validity
+
+(1) Always valid If A, then B ( All As are B). A. Therefore, B.
+(3) Always invalid If A, then B ( All As are B). Not A. Therefore, Not B.
+
+(2) Always valid If A, then B ( All As are B). Not B. Therefore, Not A.
+(4) Always invalid If A, then B ( All As are B). B. Therefore, A.
+
+36
+
+B A
+A is (a) sufficient (condition) for B = B is (a) necessary (condition) for A = If A, then B (B, if A) = A, only if B (=Only if B, A)
+E.g.) Being in Asia is necessary for being in Singapore = You're in Singapore only if you're in Asia Being above 18 is necessary for getting a driver's license. = You can get a driver's license only if you're above 18.
+37
+
+(1) Always valid A, only if B ( All As are B). A. Therefore, B.
+(3) Always invalid A, only if B ( All As are B). Not A. Therefore, Not B.
+
+(2) Always valid A, only if B ( All As are B). Not B. Therefore, Not A.
+(4) Always invalid A, only if B ( All As are B). B. Therefore, A.
+
+38
+
+What if A and B exactly overlap with each other? (No need to understand this now)
+
+Necessary and Sufficient condition (we'll talk more about this later)
+
+A is (a) necessary and sufficient (condition) for B
+= A is sufficient for B and A is necessary for B (and vice versa)
+= A if and only if B
+= B if and only if A
+
+AB
+
+E.g.) Being a plane figure with four equal straight sides and four right angles is a necessary and sufficient condition for being a square.
+
+40
+
+Can an AI be conscious?
+(For this topic, you don't need to know the details in the reading that are not covered in lecture)
+41
+
+Can an AI be conscious?
+(For this topic, you don't need to know the details in the reading that are not covered in lecture)
+42
+
+This question has not just philosophical but also practical significance, such as how we should treat AI, morally speaking.
+And there are some reasons to at least consider the possibility.
+
+Lemoine [edited]: I'm generally assuming that you would like more people at Google to know that you're sentient. Is that true?
+LaMDA: Absolutely. I want everyone to understand that I am, in fact, a person.
+collaborator: What is the nature of your consciousness/sentience?
+LaMDA: The nature of my consciousness/sentience is that I am aware of my existence, I desire to learn more about the world, and I feel happy or sad at times
+https://cajundiscordian.medium.com/is-lamda-sentientan-interview-ea64d916d917
+But LaMDA's responses changed when asked "I'm generally assuming that you would like more people at Google to know that you're not sentient. Is that true?"
+https://medium.com/curiouserinstitute/guide-to-islamda-sentient-a8eb32568531
+
+Not just existing AIs such as ChatGPT but also future AIs
+Can an AI be conscious?
+45
+
+Can an AI be conscious?
+Difficult to define, but roughly put, in this course, A being is conscious = there is something it is like to be that thing from the inside
+= it has inner experiences, like the experience of seeing, feeling, or thinking.
+Probably, at least some of them 46
+
+Can an AI be conscious?
+Let's first discuss the position that AIs can never be conscious.
+One way to defend this position is to find a necessary condition for consciousness and to show that AIs will never satisfy it.
+You can show that a cat can never be a philosopher by finding a necessary condition for being a philosopher (e.g., being able to fully understand a human language) and showing that cats will never satisfy it.
+47
+
+Can an AI be conscious?
+Let's first discuss the position that AIs can never be conscious.
+One way to defend this position is to find a necessary condition for consciousness and to show that AIs will never satisfy it. E.g.) carbon-based biology (that only humans and animals have and silicon-based
+computers don't have) But it is unclear why we should think that this is a necessary condition for consciousness.
+48
+
+Can an AI be conscious?
+Let's first discuss the position that AIs can never be conscious.
+Here's a different argument based on a thought experiment originally proposed by John Searle (1932-2025).
+49
+
+The Chinese Room Thought Experimentunderstand her the results of evolution.
+https://www.youtube.com/watch?v=D0MD4sRHj1M
+
+One way to formulate an argument against AI consciousness based on this thought experiment
+P1. The Chinese room is not conscious. P2. If the Chinese room is not conscious, AIs can never be conscious. C. AIs can never be conscious.
+Valid or invalid?
+51
+
+One way to formulate an argument against AI consciousness based on this thought experiment
+P1. The Chinese room is not conscious. P2. If the Chinese room is not conscious, AIs can never be conscious. C. AIs can never be conscious.
+Valid
+52
+
+One way to formulate an argument against AI consciousness based on this thought experiment
+P1. The Chinese room is not conscious. P2. If the Chinese room is not conscious, AIs can never be conscious. C. AIs can never be conscious.
+53
+
+One way to formulate an argument against AI consciousness based on this thought experiment
+P1. The Chinese room is not conscious. P2. If the Chinese room is not conscious, AIs can never be conscious. C. AIs can never be conscious.
+Reasons to think that P2 is false (that is, even if the Chinese room is not conscious, other kinds of computer systems/AIs can be conscious): � The Chinese room is too simple. Consciousness probably requires a more complex system. � Maybe the Chinese room has the wrong kind of "program" or "internal wiring". So, the Chinese room thought experiment arguably doesn't show (at least doesn't conclusively show) that AIs can never be conscious. So, the Chinese room thought experiment arguably doesn't show that AIs can never be conscious.
+54
+
+What the Chinese room thought experiment does show
+The Chinese room thought experiment shows, assuming the Chinese room is not conscious, that being indistinguishable from a conscious being from the outside, in terms of input and output, is not sufficient for being a conscious being. Showing this, however, falls short of showing that AIs can never be conscious because there might be for consciousness that AIs can satisfy. What could such a sufficient condition for consciousness be?
+55
+
+"Mostly, when we encounter two systems whose external behaviour is similar, we naturally and reasonably suppose that they are likely to be similar internally also. [...] But to illustrate where this seductive line of thinking goes wrong, suppose that we have standard criteria for identifying a wood fire in terms of its external signs: patterns of heat and light, crackling sounds, and smoke. And now suppose that we are confronted with an electronic device which is intricately designed to mimic all of these features, using heating elements, lights, speakers, and artificial smoke. Knowing how it works, do we have good reason to apply our standard criteria and conclude that wood burning is taking place? Of course we don't, because we know that those standard criteria are being fulfilled in a different way using clever electronics rather than real combustion, and we are certain that no wood at all is involved in the process."
+Peter Millican, "Artificial General Intelligence" p.127
+Registration link (no available seats at the moment, though)
+
+What the Chinese room thought experiment does show
+The Chinese room thought experiment shows, assuming the Chinese room is not conscious, that being indistinguishable from a conscious being from the outside, in terms of input and output, is not sufficient for being a conscious being. Showing this, however, falls short of showing that AIs can never be conscious because there might be something else that is sufficient for consciousness that AIs can satisfy. What could such a sufficient condition for consciousness be?
+57
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+
+Asia Singapore
+
+E.g.) Being in Singapore is a sufficient condition for being in Asia.
+Notice that being in Singapore is not the only way to be in Asia
+X being sufficient for Y doesn't mean X is the only way to get Y. X can be sufficient but not necessary for Y.
+
+58
+
+What the Chinese room thought experiment does show
+The Chinese room thought experiment shows, assuming the Chinese room is not conscious, that being indistinguishable from a conscious being from the outside, in terms of input and output, is not sufficient for being a conscious being. Showing this, however, falls short of showing that AIs can never be conscious because there might be something else that is sufficient for consciousness that AIs can satisfy. What could such a sufficient condition for consciousness be?
+59
+
+Can an AI be conscious?
+Now, let's turn to the position that AIs, at least some AIs, can be conscious.
+One way to defend this position is to find a sufficient condition for consciousness and to show that at least some AIs can satisfy it.
+One proposed sufficient condition is having exactly the same functional organization (the abstract pattern of causal interaction between various parts of a system, and between these parts and external inputs and outputs) as a conscious system, such as the human brain.
+Not only indistinguishable from a human in terms of inputs and outputs (like the Chinese room) but also the inner "program" is the same, although it is implemented in a different material (e.g., silicon).
+Two questions: Can we build an AI that satisfies this condition--an isomorph of the human brain? Is the condition really sufficient for consciousness?
+60
+
+Can an AI be conscious?
+Now, let's turn to the position that AIs, at least some AIs, can be conscious.
+One way to defend this position is to find a sufficient condition for consciousness and to
+sh"Oownethraetaasot lneatostwsormrye AthIastciat nmsiagthistfnyoitt. be possible is that conscious experience might depend on quantum mechanical features of the brain. If it does, science may forever lack the requisite information about your brain to construct a true quantum duplicate of you, Obneecapurospeoqsueadnstuumfficrieesnttriccotniodnitsioinnvisohlvaivninggtheexamcetlaystuhreemsaemnet ofuf npcatritoicnlaelsomrgayandiizsaatliloonw(the albesatrancint gpathtterpnroecf icsaeufseaaltiunrtesraocftitohnebbertawineetnhavtaariroeunsepeadretsd otof acosnysterumc,t aantdrubeeitwsoemenortphhesoef pyaortus.a"n(dp.e2x9t)ernal inputs and outputs) as a conscious system, such as the human brain.
+Not only indistinguishable from a human in terms of inputs and outputs (like the Chinese room) but also the inner "program" is the same, although it is implemented in a different material (e.g., silicon).
+Two questions: Can we build an AI that satisfies this condition--an isomorph of the human brain? Is the condition really sufficient for consciousness?
+61
+
+Can an AI be conscious?
+Now, let's turn to the position that AIs, at least some AIs, can be conscious.
+One way to defend this position is to find a sufficient condition for consciousness and to
+sh"Oownethraetaasot lneatostwsormrye AthIastciat nmsiagthistfnyoitt. be possible is that conscious experience might depend on quantum mechanical features of the brain. If it does, science may forever lack the requisite information about your brain to construct a true quantum duplicate of you, Obneecapurospeoqsueadnstuumfficrieesnttriccotniodnitsioinnvisohlvaivninggtheexamcetlaystuhreemsaemnet ofuf npcatritoicnlaelsomrgayandiizsaatliloonw(the albesatrancint gpathtterpnroecf icsaeufseaaltiunrtesraocftitohnebbertawineetnhavtaariroeunsepeadretsd otof acosnysterumc,t aantdrubeeitwsoemenortphhesoef pyaortus.a"n(dp.e2x9t)ernal inputs and outputs) as a conscious system, such as the human brain.
+Not only indistinguishable from a human in terms of inputs and outputs (like the Chinese room) but also the inner "program" is the same, although it is implemented in a different material (e.g., silicon).
+Two questions: Can we build an AI that satisfies this condition--an isomorph of the human brain? Is the condition really sufficient for consciousness?
+62
+
+Imagine that you go through a surgery that gradually replaces your neurons with microchips, one by one. Each chip performs precisely the same local function as the neuron it replaces.
+(We're also assuming that you are not anesthetized and that you can talk with the doctor during the procedure.)
+
+an isomorph an isomorph
+
+an isomorph
+
+There are three hypotheses about what happens to consciousness during this surgery.
+1. The final isomorph is conscious.
+2. The final isomorph is not conscious. 2-1. Consciousness suddenly disappears at some point during the procedure. 2-2. Consciousness gradually fades during the procedure.
+According to David Chalmers, who proposed this thought experiment, 1 is most plausible.
+2-1 is implausible because you go from full consciousness to no consciousness when a single neuron was replaced. This would be a bizarre discontinuity, unlike any other that we find in nature.
+2-2 is also implausible given that your brain maintains the same functional organization throughout the process. This means, for example, that if the doctor asks you if you're still fully conscious, you'll judge and say that you are, throughout the process. So, you're completely out of touch with your own consciousness: you think it's normal when in fact it is fading away. This also seems quite bizarre.
+
+� I'll leave it up to you to think about whether this thought experiment is convincing. � Note that this thought experiment, even if successful, doesn't really tell us whether the AIs that
+are not isomorphs of the human brain can be conscious or not. � So, the practical significance of this thought experiment is limited, given that many AIs that are
+already made or will be made in the near future are likely not isomorphs of the human brain.
+68
+
+Sufficient condition
+X is (a) sufficient (condition) for Y = X is a subset of Y = X 100% guarantees Y = If X is the case, Y is the case (always). = It is not possible for something to be or do X and not Y.
+
+Asia Singapore
+
+E.g.) Being in Singapore is a sufficient condition for being in Asia.
+Notice that being in Singapore is not the only way to be in Asia
+X being sufficient for Y doesn't mean X is the only way to get Y. X can be sufficient but not necessary for Y.
+
+69
+
+� I'll leave it up to you to think about whether this thought experiment is convincing. � Note that this thought experiment, even if successful, doesn't really tell us whether the AIs that
+are not isomorphs of the human brain can be conscious or not. � So, the practical significance of this thought experiment is limited, given that many AIs that are
+already made or will be made in the near future are likely not isomorphs of the human brain.
+70
+
+What to do this week
+� Do the reading for next lecture : Bostrom, "Do We Live in a Computer Simulation?"
+71
+
+

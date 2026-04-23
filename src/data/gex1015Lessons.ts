@@ -138,6 +138,25 @@ const LESSON_INTERLEAVE_RULES: Partial<Record<Lesson['id'], LessonInterleaveRule
     { after: 'Six Theodicies (Responses to the Problem of Evil)', questionIncludes: 'If a theist accepts Theodicy 6' },
     { after: 'Perry — Dialogue on Good, Evil, and the Existence of God', questionIncludes: 'In Perry\'s Dialogue, Miller defends the "laws of nature" theodicy' },
   ],
+  week9: [
+    { after: 'The Chinese Room and Its Limit', questionIncludes: 'What does the Chinese Room thought experiment show' },
+    { after: 'Functional Organization and Isomorphs', questionIncludes: 'What is an isomorph in the Week 9 discussion?' },
+    { after: 'Why Techno-Optimism Is Still Premature', questionIncludes: 'Why does Schneider think techno-optimists move too quickly' },
+  ],
+  week12: [
+    { after: 'Necessary and Sufficient Conditions for Art', questionIncludes: 'If X is a necessary and sufficient condition for art' },
+    { after: 'Beauty Is Not the Definition of Art', questionIncludes: 'Why is beauty not a successful definition of art' },
+    { after: 'Levinson: A Historical Definition of Art', questionIncludes: 'According to Levinson' },
+    { after: 'The Three Kinds of Art-Making Intention', questionIncludes: 'Why does Levinson include art-unconscious intention' },
+    { after: 'Revolutionary Art', questionIncludes: 'How does Levinson respond to the objection about revolutionary art' },
+  ],
+  week13: [
+    { after: 'Nagel: The Deprivation Account', questionIncludes: 'On Nagel' },
+    { after: 'First Challenge: Can Deprivation Be Bad If You Do Not Mind It?', questionIncludes: 'What is the point of Nagel' },
+    { after: 'Second Challenge: When Is Death Bad for You?', questionIncludes: 'Which premise should Nagel reject' },
+    { after: 'Third Challenge: Prenatal and Posthumous Nonexistence', questionIncludes: 'Why does Nagel reject Lucretius' },
+    { after: 'Death at an Old Age', questionIncludes: 'Why might Nagel still think death is bad' },
+  ],
 };
 
 const getSlideAnchor = (slide: LessonSlide): string | null => {
@@ -856,8 +875,18 @@ const RAW_GEX1015_LESSONS: Lesson[] = [
       },
       {
         type: 'concept',
+        title: 'Ordinary Thought and the Free Will Hypothesis',
+        body: '<p>The reading opens with the mugging of a 101-year-old woman to highlight a commonsense idea: we normally hold people <strong>morally responsible</strong> for what they do, unlike animals or mere accidents.</p><p>That commonsense picture suggests that a responsible agent can <strong>step back</strong>, resist an impulse, and choose otherwise. But the text also adds an important qualification: people are only <strong>usually</strong> responsible, because excuses such as coercion, hypnosis, or deception can remove responsibility in special cases.</p>',
+      },
+      {
+        type: 'concept',
         title: 'The Core Argument Against Free Will',
         body: '<p><strong>P1.</strong> Either determinism is true, or determinism is false.</p><p><strong>P2.</strong> If determinism is true, we do not have free will or moral responsibility.</p><p><strong>P3.</strong> If determinism is false, we do not have free will or moral responsibility.</p><p><strong>C.</strong> Therefore, we do not have free will or moral responsibility.</p><p>This argument is <strong>valid</strong>: if determinism is true, P2 gives the conclusion; if determinism is false, P3 gives the conclusion. So anyone who wants to keep free will must reject <strong>P2</strong>, <strong>P3</strong>, or both.</p>',
+      },
+      {
+        type: 'check',
+        q: 'Why does the reading say that people are usually responsible, rather than always responsible, for what they do?',
+        a: 'Because ordinary moral practice already recognizes <strong>excuses</strong>. Someone who is <strong>forced, hypnotized, or tricked</strong> into acting badly is not responsible in the normal way. So the commonsense claim is not that every human action is blameworthy, but that responsibility is the <strong>usual default</strong> when those excuses are absent.',
       },
       {
         type: 'check',
@@ -874,6 +903,11 @@ const RAW_GEX1015_LESSONS: Lesson[] = [
         type: 'concept',
         title: 'Why Determinism Seems to Threaten Free Will',
         body: '<p>If determinism is true, then when the mugger attacks, there were <strong>no genuine alternative possibilities</strong>. Given the past and the laws of nature, he <em>could not have done otherwise</em>.</p><p><strong>Incompatibilists</strong> think this destroys free will, because they say alternative possibilities are necessary for moral responsibility. <strong>Compatibilists</strong> reject that assumption: they argue a person can still act freely even if the action was determined, so long as it flows from the person\'s own will rather than from coercion.</p>',
+      },
+      {
+        type: 'concept',
+        title: 'Why Introspection Does Not Settle the Issue',
+        body: '<p>It may feel obvious, from the inside, that nothing determines your choice in advance. But the reading argues that this does <strong>not</strong> show your choice is undetermined.</p><p>At most, introspection shows that you are <strong>unaware</strong> of whatever determines your decision. Just as not seeing the cause of lightning does not prove there was no cause, not feeling a determining force does not prove that no determining factors were operating.</p>',
       },
       {
         type: 'check',
@@ -926,13 +960,327 @@ const RAW_GEX1015_LESSONS: Lesson[] = [
         type: 'summary',
         title: 'Week 8 — Key Takeaways',
         points: [
+          'Ordinary moral practice starts from the idea that people are usually responsible, while still allowing special excuses such as coercion, hypnosis, or trickery.',
           'The standard anti-free-will argument is valid: either determinism or indeterminism is true, and each seems to threaten responsibility.',
           'Determinism says the past plus the laws of nature fix a single future; it does not mean an outside force overrides your will.',
+          'The feeling of conscious choice does not prove that choices are undetermined; it may show only ignorance of the determining factors.',
           'Incompatibilists say determinism removes alternative possibilities; compatibilists deny that alternative possibilities are necessary.',
           'Frankfurt-style cases try to show moral responsibility without the ability to do otherwise.',
           'Indeterminism gives alternative possibilities but may make choice look random, which is why P3 is tempting.',
         ],
         cta: 'Week 8 sets up the central final-exam debate over compatibilism, incompatibilism, libertarianism, and whether moral responsibility survives either horn of the dilemma.',
+      },
+    ],
+  },
+  {
+    id: 'week9',
+    title: 'Week 9',
+    subtitle: 'AI Consciousness, Chinese Room, and Isomorphs',
+    icon: '\uD83E\uDD16',
+    slides: [
+      {
+        type: 'intro',
+        week: 'Week 9 — AI Consciousness',
+        question: 'Could an AI genuinely be conscious, or would intelligence and human-like behavior still fall short of inner experience?',
+        body: 'This lesson introduces the Week 9 debate over whether AI can be conscious, what the Chinese Room does and does not prove, and why isomorph thought experiments do not settle the practical question about real-world AI.',
+      },
+      {
+        type: 'term',
+        label: 'Core Definition',
+        term: 'Consciousness',
+        def: 'Roughly, a being is conscious if there is <strong>something it is like to be that thing from the inside</strong>.<br><br>Consciousness involves <strong>inner experience</strong>: seeing, feeling, thinking, tasting, hearing, or having a point of view. The question is not merely whether a system behaves intelligently, but whether its information processing is accompanied by felt experience.',
+      },
+      {
+        type: 'concept',
+        title: 'The Hard Problem vs. the AI Question',
+        body: '<p>Schneider distinguishes two issues. Chalmers\'s <strong>hard problem of consciousness</strong> asks why our own brain processing feels like something from the inside.</p><p>The <strong>Problem of AI Consciousness</strong> asks something different: whether a system built from a different substrate, such as silicon, is even <strong>capable</strong> of consciousness at all. The AI debate therefore starts one step earlier than the ordinary hard problem.</p>',
+      },
+      {
+        type: 'bullets',
+        title: 'Necessary and Sufficient Conditions in This Debate',
+        items: [
+          '<strong>To argue AIs can never be conscious:</strong> find a <strong>necessary condition</strong> for consciousness and show AI cannot satisfy it.',
+          '<strong>To argue some AIs can be conscious:</strong> find a <strong>sufficient condition</strong> for consciousness and show at least some AI can satisfy it.',
+          '<strong>Necessary</strong> means the thing must be present whenever consciousness is present.',
+          '<strong>Sufficient</strong> means that if the condition is present, consciousness is guaranteed.',
+          'The lecture uses this distinction to explain both biological-naturalist and techno-optimist strategies.',
+        ],
+      },
+      {
+        type: 'concept',
+        title: 'The Anti-AI Strategy: Biological Naturalism',
+        body: '<p>One anti-AI strategy says consciousness requires some special <strong>biological feature</strong> that ordinary computers lack. The lecture uses <strong>carbon-based biology</strong> as a candidate example.</p><p>The problem is that simply naming a biological feature does not show it is <strong>necessary</strong> for consciousness. The lecture and reading both stress that this move is too quick unless we can explain why only that sort of substrate can ever support experience.</p>',
+      },
+      {
+        type: 'concept',
+        title: 'The Chinese Room and Its Limit',
+        body: '<p>Searle\'s Chinese Room imagines a system that gives the <strong>same outward responses</strong> as a Chinese speaker while the person inside merely manipulates symbols by rule, without understanding them.</p><p>If the room is not conscious, then the lesson is limited but important: matching a conscious being in <strong>input-output behavior</strong> is <strong>not sufficient</strong> for consciousness. That still falls short of proving that <em>no</em> AI could be conscious, because other kinds of internal organization may matter.</p>',
+      },
+      {
+        type: 'check',
+        q: 'What does the Chinese Room thought experiment show, assuming the room itself is not conscious?',
+        a: 'It shows that being <strong>indistinguishable from a conscious being from the outside</strong> is <strong>not sufficient</strong> for being conscious. But that does <strong>not</strong> show that AI can never be conscious, because some other condition, involving the right sort of internal organization, might still be sufficient for consciousness.',
+      },
+      {
+        type: 'term',
+        label: 'Proposed Sufficient Condition',
+        term: 'Functional Organization and Isomorphs',
+        def: 'A common pro-AI idea is that consciousness depends on a system\'s <strong>functional organization</strong>: the abstract pattern of causal relations among internal parts and between those parts and external inputs and outputs.<br><br>An <strong>isomorph</strong> is a system with exactly the same relevant functional organization as a conscious system, even if it is built from a different material such as silicon.',
+      },
+      {
+        type: 'concept',
+        title: 'Chalmers\'s Brain-Replacement Thought Experiment',
+        body: '<p>Imagine gradually replacing your neurons with microchips, each one preserving the same local function. Throughout the process, your overall functional organization remains the same.</p><p>Chalmers asks what happens to consciousness. The lecture presents three possibilities: the final isomorph is conscious; consciousness suddenly disappears at some point; or consciousness gradually fades. Chalmers argues the first option looks most plausible, because sudden blackout and unnoticed fading both seem bizarre if the system\'s organization stays fixed.</p>',
+      },
+      {
+        type: 'quote',
+        label: 'Schneider\'s Core Question',
+        text: 'Would the processing of an AI feel a certain way, from the inside?',
+        source: '<em>The Problem of AI Consciousness</em> — Schneider frames the issue as whether AI processing would have any felt quality at all.',
+      },
+      {
+        type: 'bullets',
+        title: 'Why Techno-Optimism Is Still Premature',
+        items: [
+          'Even if an isomorph would be conscious, that shows only <strong>conceptual possibility</strong>, not that humans can actually build one.',
+          'Schneider distinguishes <strong>conceptual</strong>, <strong>nomological</strong> (law-of-nature), and <strong>technological</strong> possibility.',
+          'Consciousness might depend on quantum-level features we cannot duplicate or even fully measure.',
+          'Building a true isomorph may require a complete account of the brain plus enormous computational resources.',
+          'Many real and near-term AIs are not brain isomorphs anyway, so the thought experiment may miss the systems we actually need to evaluate.',
+        ],
+      },
+      {
+        type: 'check',
+        q: 'What is an isomorph in the Week 9 discussion?',
+        a: 'An <strong>isomorph</strong> is a system that matches a conscious system in its <strong>relevant functional organization</strong> — the same causal pattern among internal parts and between those parts and inputs/outputs — even if it is made of a different material such as silicon.',
+      },
+      {
+        type: 'check',
+        q: 'Why does Schneider think techno-optimists move too quickly from "an isomorph might be conscious" to optimism about AI consciousness in general?',
+        a: 'Because that inference jumps from a claim about <strong>special, carefully engineered brain isomorphs</strong> to a claim about the AIs we are actually likely to build. Schneider argues those are different questions. Even if an isomorph would be conscious, it may be <strong>too hard to build</strong>, may require unknown scientific advances, and tells us little about whether <strong>non-isomorphic</strong> AIs like near-term systems are conscious.',
+      },
+      {
+        type: 'summary',
+        title: 'Week 9 — Key Takeaways',
+        points: [
+          'Consciousness means there is something it is like to be a system from the inside; behavior alone does not settle that question.',
+          'The Week 9 debate turns on necessary and sufficient conditions for consciousness.',
+          'The Chinese Room, if sound, shows that human-like input-output behavior is not sufficient for consciousness.',
+          'A stronger pro-AI proposal says that the same functional organization as a conscious brain may be sufficient, yielding the idea of an isomorph.',
+          'Schneider argues that even if isomorph consciousness is conceptually possible, that does not show the AIs we actually build will be conscious.',
+        ],
+        cta: 'Week 9 prepares the move into simulation arguments by sharpening the difference between intelligence, behavior, consciousness, and what would count as evidence for each.',
+      },
+    ],
+  },
+  {
+    id: 'week12',
+    title: 'Week 12',
+    subtitle: 'Art, Definitions, and Levinson',
+    icon: '\uD83C\uDFA8',
+    slides: [
+      {
+        type: 'intro',
+        week: 'Week 12 — Art',
+        question: 'What makes something a work of art?',
+        body: 'This lesson connects definition logic with the philosophy of art. The central task is to find a necessary and sufficient condition for being art, then understand Levinson\'s historical definition of art.',
+      },
+      {
+        type: 'term',
+        label: 'Definition Logic',
+        term: 'Necessary and Sufficient Conditions',
+        def: '<strong>X is necessary and sufficient for Y</strong> means X is required for Y and X guarantees Y.<br><br>Equivalently: <strong>X if and only if Y</strong>. For art, a definition tries to identify an X such that all artworks have X and no non-artworks have X.',
+      },
+      {
+        type: 'concept',
+        title: 'Necessary and Sufficient Conditions for Art',
+        body: '<p>A definition of art is not just a list of examples. It aims to state what all artworks have in common and what separates artworks from non-artworks.</p><p>If <strong>X</strong> is the definition of art, then every artwork must have X, and anything with X must be art. That is why counterexamples matter: one artwork without X shows X is not necessary; one non-artwork with X shows X is not sufficient.</p>',
+      },
+      {
+        type: 'check',
+        q: 'If X is a necessary and sufficient condition for art, what must be true?',
+        a: '<strong>All artworks must have X, and all things with X must be artworks.</strong> In set terms, artworks and X line up exactly. If an artwork lacks X, X is not necessary. If a non-artwork has X, X is not sufficient.',
+      },
+      {
+        type: 'concept',
+        title: 'How "If and Only If" Changes Validity',
+        body: '<p>The lecture reviews argument forms because definitions usually have an <strong>if and only if</strong> structure. With a plain conditional, "If A, then B," affirming B or denying A is invalid. But with "A if and only if B," both directions are built in.</p><p>So from <strong>A iff B</strong>, you may validly infer B from A, A from B, not-B from not-A, and not-A from not-B.</p>',
+      },
+      {
+        type: 'concept',
+        title: 'Beauty Is Not the Definition of Art',
+        body: '<p>The lecture tests whether beauty could be the X that defines art. It fails both directions. Some artworks are not beautiful, so beauty is <strong>not necessary</strong> for art. And some beautiful things are not artworks, so beauty is <strong>not sufficient</strong> for art.</p><p>This is why examples such as <em>Fountain</em>, <em>The Comedian</em>, and <em>Artist\'s Shit</em> matter: they put pressure on purely exhibited or perceptible properties as definitions of art.</p>',
+      },
+      {
+        type: 'check',
+        q: 'Why is beauty not a successful definition of art?',
+        a: 'Because it is <strong>neither necessary nor sufficient</strong>. Some artworks are not beautiful, so beauty is not required for art. Some beautiful things are not artworks, so beauty does not guarantee art.',
+      },
+      {
+        type: 'term',
+        label: 'Levinson\'s Main Idea',
+        term: 'Historical Definition of Art',
+        def: 'Levinson argues that what makes something art is not an exhibited property we can simply perceive. What matters is a historical and intentional relation: the object is intended to be regarded in ways that earlier artworks have been correctly regarded.',
+      },
+      {
+        type: 'concept',
+        title: 'Levinson: A Historical Definition of Art',
+        body: '<p>Levinson\'s core claim is that an artwork is a thing <strong>intended for regard-as-a-work-of-art</strong>: regard in any way that prior artworks have been correctly or standardly regarded.</p><p>The definition is historical because later art depends on earlier art. Something counts as art at a time only if it is intentionally related to art that already existed before that time.</p>',
+      },
+      {
+        type: 'check',
+        q: 'According to Levinson, what makes something a work of art?',
+        a: 'It is not beauty or another directly perceptible feature. It is that someone with the appropriate authority <strong>non-passingly intends</strong> the object to be regarded in ways that prior artworks have been correctly regarded.',
+      },
+      {
+        type: 'bullets',
+        title: 'Proprietary Right and Non-Passing Intention',
+        items: [
+          '<strong>Appropriate proprietary right:</strong> roughly, you cannot simply "artify" what you do not own or control.',
+          '<strong>Creating the physical object is not enough:</strong> making something is neither necessary nor sufficient for having the relevant authority over it.',
+          '<strong>Non-passing intention:</strong> the art-making intention must be reasonably stable, not a momentary thought.',
+          '<strong>Correctly regarded:</strong> the definition uses correct or standard art-regards, not just any common use. Otherwise, if old portraits became commonly used as insulation, new insulation could wrongly count as art.',
+        ],
+      },
+      {
+        type: 'bullets',
+        title: 'The Three Kinds of Art-Making Intention',
+        items: [
+          '<strong>Specific art-conscious intention:</strong> intending the object to be regarded in the specific way some particular past artworks or art kinds were correctly regarded.',
+          '<strong>Non-specific art-conscious intention:</strong> intending it to be regarded in whatever ways past artworks have been correctly regarded, without a particular work in mind.',
+          '<strong>Art-unconscious intention:</strong> intending it to be regarded in a specific way that is in fact a correct way of regarding past art, even though the maker does not know that.',
+        ],
+      },
+      {
+        type: 'check',
+        q: 'Why does Levinson include art-unconscious intention?',
+        a: 'To allow possible artworks made by people who know nothing about art history or art institutions. The Amazon stones and the farmer\'s wife examples are meant to show that someone can create art by intending an object to be appreciated in a relevant way, even without knowing that this is a way prior art has been regarded.',
+      },
+      {
+        type: 'concept',
+        title: 'Art Can Change Status Over Time',
+        body: '<p>Levinson\'s definition is time-indexed: an object can be an artwork at one time and not another. An object may be physically created before it is art, then become art later when the right intention and historical relation are in place.</p><p>This is one reason the lecture stresses <strong>at t</strong>: whether something is art depends on the intentions and prior artworks available at that time.</p>',
+      },
+      {
+        type: 'concept',
+        title: 'Revolutionary Art',
+        body: '<p>A major objection says Levinson cannot explain revolutionary art, because revolutionary art seems intended to be treated in a completely new way.</p><p>Levinson\'s response is that revolutionary artists can have a <strong>double intention</strong>: they initially direct audiences to try regarding the object in prior art ways, while expecting that this will frustrate the audience and push them toward a new mode of regard.</p>',
+      },
+      {
+        type: 'check',
+        q: 'How does Levinson respond to the objection about revolutionary art?',
+        a: 'He says revolutionary art can involve a <strong>double intention</strong>. The artist may intend the object to be approached through past art-regards, but with the deeper aim that this approach will prove frustrating and lead viewers toward a new way of regarding it. The initial relation to past art is still needed to make it art.',
+      },
+      {
+        type: 'summary',
+        title: 'Week 12 — Key Takeaways',
+        points: [
+          'A definition of art aims at a necessary and sufficient condition: all artworks have X and no non-artworks have X.',
+          'Beauty fails as a definition because it is neither necessary nor sufficient for art.',
+          'Levinson defines art historically: art is intentionally related to earlier artworks and their correct modes of regard.',
+          'The relevant intention must come from someone with appropriate proprietary right and must be non-passing.',
+          'Levinson allows specific art-conscious, non-specific art-conscious, and art-unconscious intentions.',
+          'The definition handles some revolutionary art by appeal to double intention.',
+        ],
+        cta: 'Week 12 links logic and aesthetics: exam questions can ask both whether an argument form is valid and whether a proposed definition survives counterexamples.',
+      },
+    ],
+  },
+  {
+    id: 'week13',
+    title: 'Week 13',
+    subtitle: 'Death and Nagel\'s Deprivation Account',
+    icon: '\u23F3',
+    slides: [
+      {
+        type: 'intro',
+        week: 'Week 13 — Death',
+        question: 'Is death bad for the person who dies?',
+        body: 'This lesson covers Nagel\'s answer: death is bad for the person who dies because it deprives them of goods they would otherwise have had. The lecture focuses on three challenges to that view.',
+      },
+      {
+        type: 'term',
+        label: 'Topic Definition',
+        term: 'Death',
+        def: 'Nagel and the lecture use <strong>death</strong> to mean the unequivocal and permanent end of our existence, with no conscious survival. This is different from the <strong>process of dying</strong>, during which the person still exists and may experience pain, fear, or other states.',
+      },
+      {
+        type: 'concept',
+        title: 'Nagel: The Deprivation Account',
+        body: '<p>Nagel argues that death is bad for the person who dies because it <strong>deprives</strong> them of the goods they would otherwise have had. The badness is not a painful state of being dead. It is the loss of life and the loss of possible goods contained in continued life.</p><p>This also explains why mere organic survival is not the relevant good: an immediate coma followed by death twenty years later would not give you twenty extra years of valuable conscious life.</p>',
+      },
+      {
+        type: 'check',
+        q: 'On Nagel\'s view, why is death bad for the person who dies?',
+        a: 'Death is bad because it <strong>deprives</strong> that person of the goods they would otherwise have had in continued life. It is bad as a loss, not because being dead is itself an unpleasant experience.',
+      },
+      {
+        type: 'bullets',
+        title: 'Three Challenges Nagel Answers',
+        items: [
+          '<strong>First challenge:</strong> can something be bad for you if it is only a deprivation and you do not mind it?',
+          '<strong>Second challenge:</strong> who is the subject of the misfortune, and when is death bad for that subject?',
+          '<strong>Third challenge:</strong> why is posthumous nonexistence bad if prenatal nonexistence is not?',
+        ],
+      },
+      {
+        type: 'concept',
+        title: 'First Challenge: Can Deprivation Be Bad If You Do Not Mind It?',
+        body: '<p>The first challenge says badness usually seems to involve something bad being present, such as pain, and the person minding it. Death has neither: there is no painful state of being dead, and the dead person does not mind anything.</p><p>Nagel replies with cases like severe mental degeneration. If an intelligent adult is reduced to the mental condition of a contented infant, the person may not mind the condition, but we still judge it bad for that person because of the life and possibilities lost.</p>',
+      },
+      {
+        type: 'check',
+        q: 'What is the point of Nagel\'s intelligent adult reduced to a contented infant example?',
+        a: 'It shows that something can be bad for a person even if the person does not mind it and even if no painful state is present. The misfortune depends on the contrast between the person\'s actual condition and the possible adult life that was lost.',
+      },
+      {
+        type: 'concept',
+        title: 'Second Challenge: When Is Death Bad for You?',
+        body: '<p>The second challenge argues: death is bad for you only if there is some particular time when it is bad for you; there is no such time; therefore death is not bad for you.</p><p>Nagel rejects the first premise. Some goods and evils do not need to be located at a precise time in the person\'s experience. The person who suffers the loss has a clear location, even if the loss itself is not easily located.</p>',
+      },
+      {
+        type: 'check',
+        q: 'Which premise should Nagel reject in the argument that death is bad only if there is a particular time when it is bad?',
+        a: 'He should reject <strong>P1</strong>: the claim that death is bad for a person only if there is some particular time when it is bad for that person. Nagel thinks losses can be real misfortunes even when the misfortune itself is not temporally located in that simple way.',
+      },
+      {
+        type: 'concept',
+        title: 'The Subject of the Loss',
+        body: '<p>Nagel does not say that nonexistence is bad for someone who never existed. If there is a loss, there must be someone who suffers it. This is why Beethoven\'s never-existing children are not unfortunate.</p><p>Death is different: the person who dies did exist, had a life, and could have continued to live. The loss belongs to that person, even though the person is no longer around to experience being deprived.</p>',
+      },
+      {
+        type: 'concept',
+        title: 'Third Challenge: Prenatal and Posthumous Nonexistence',
+        body: '<p>Lucretius-style reasoning says: prenatal nonexistence is not bad for us; posthumous nonexistence is symmetrical with prenatal nonexistence; so death is not bad for us either.</p><p>Nagel rejects the symmetry. The time after death is time of which death deprives you, because you would have been alive then if you had not died. But the time before your birth is not usually time you could have lived: someone born substantially earlier would have been someone else.</p>',
+      },
+      {
+        type: 'check',
+        q: 'Why does Nagel reject Lucretius\'s symmetry between prenatal and posthumous nonexistence?',
+        a: 'Because posthumous nonexistence deprives an already-existing person of possible continued life. Prenatal nonexistence usually does not deprive that same person of earlier life, because someone born substantially earlier would have been a different person.',
+      },
+      {
+        type: 'concept',
+        title: 'Death at an Old Age',
+        body: '<p>Nagel acknowledges a harder question: is death bad even at 110, or only when it cuts life short unusually early? Keats dying at 24 seems more tragic than Tolstoy dying at 82, because Keats lost more possible years.</p><p>But Nagel suggests that from the inside, our future appears open-ended. If more valuable conscious life would still be good, then even normal or inevitable death may still be an abrupt cancellation of possible goods.</p>',
+      },
+      {
+        type: 'check',
+        q: 'Why might Nagel still think death is bad even when someone dies at an old age?',
+        a: 'Because normality does not by itself show that more life would not be good. From the person\'s own perspective, the future can appear open-ended; if continued life would contain further goods, death still deprives the person of those possible goods.',
+      },
+      {
+        type: 'summary',
+        title: 'Week 13 — Key Takeaways',
+        points: [
+          'Nagel treats death as permanent nonexistence without conscious survival, not as the process of dying.',
+          'Death is bad, if it is bad, because of deprivation: it removes the goods of continued life.',
+          'A deprivation can be bad for someone even if they do not mind it, as shown by the mental degeneration example.',
+          'Nagel denies that every misfortune must occur at a precise time in the person\'s experience.',
+          'The subject of death\'s loss is the person who lived and could have continued living, not a never-existing person.',
+          'Nagel rejects the symmetry between prenatal and posthumous nonexistence because only the latter deprives the person of possible continued life.',
+          'Even old-age death may be bad if more valuable conscious life would still have been good.',
+        ],
+        cta: 'Week 13 is especially exam-friendly because it combines Nagel\'s substantive view with valid argument forms and premise-targeting.',
       },
     ],
   },

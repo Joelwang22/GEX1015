@@ -25,12 +25,12 @@ const path = require('path');
 
 // ─── Configuration ────────────────────────────────────────────────────────────
 
-const CONTENT_DIR = path.join(__dirname, 'midterm prep');
 const SEED_FILE   = path.join(__dirname, 'src/seed/gex1015.ts');
 const OUTPUT_FILE = path.join(__dirname, 'generated-questions.ts');
 
 const TOPICS = {
   week1: {
+    dir: 'midterm prep',
     topicId: 'gex-intro',
     label: 'Week 1: Introduction to Philosophy',
     files: [
@@ -39,6 +39,7 @@ const TOPICS = {
     ],
   },
   week2: {
+    dir: 'midterm prep',
     topicId: 'gex-goodness',
     label: 'Week 2: Goodness (Hedonism, Desire Theory, Objective List)',
     files: [
@@ -47,6 +48,7 @@ const TOPICS = {
     ],
   },
   week3: {
+    dir: 'midterm prep',
     topicId: 'gex-right-wrong-1',
     label: 'Week 3: Right & Wrong I (Consequentialism, Utilitarianism, Singer)',
     files: [
@@ -56,6 +58,7 @@ const TOPICS = {
     ],
   },
   week4: {
+    dir: 'midterm prep',
     topicId: 'gex-right-wrong-2',
     label: 'Week 4: Right & Wrong II (Non-Consequentialism, Kant, Trolley, Thomson)',
     files: [
@@ -65,6 +68,7 @@ const TOPICS = {
     ],
   },
   week5: {
+    dir: 'midterm prep',
     topicId: 'gex-logic-relativism',
     label: 'Week 5: Logical Reasoning & Cultural Relativism',
     files: [
@@ -74,12 +78,48 @@ const TOPICS = {
     ],
   },
   week6: {
+    dir: 'midterm prep',
     topicId: 'gex-religion',
     label: 'Week 6: Religion & The Problem of Evil',
     files: [
       'LUE 2026 Week6 Religion student version.txt',
       'Week 6 Perry Dialogue on Good, Evil and the Existence of God.txt',
       'transcripts/Week6 transcript.txt',
+    ],
+  },
+  week8: {
+    dir: 'finals prep',
+    topicId: 'gex-free-will',
+    label: 'Week 8: Free Will and Moral Responsibility',
+    files: [
+      'LUE 2026 Week8 Free Will student version.txt',
+      'Week 8 Do We Possess Free Will.txt',
+    ],
+  },
+  week9: {
+    dir: 'finals prep',
+    topicId: 'gex-ai-consciousness',
+    label: 'Week 9: AI Consciousness, Chinese Room, and Isomorphs',
+    files: [
+      'LUE 2026 Week9 AI Consciousness student version.txt',
+      'Week 9 Schneider The Problem of AI Consciousness.txt',
+    ],
+  },
+  week12: {
+    dir: 'finals prep',
+    topicId: 'gex-art',
+    label: 'Week 12: Art, Definitions, and Levinson',
+    files: [
+      'LUE 2026 Week12 Art student version.txt',
+    ],
+  },
+  week13: {
+    dir: 'finals prep',
+    topicId: 'gex-death',
+    label: 'Week 13: Death and Nagel',
+    files: [
+      'LUE 2026 Week13 Death student version.txt',
+      'Week 13 Reading Nagel Death.txt',
     ],
   },
 };
@@ -96,9 +136,10 @@ function readFile(filePath) {
 
 /** Load all source content for a given week config. */
 function loadContent(weekConfig) {
+  const contentDir = path.join(__dirname, weekConfig.dir ?? 'midterm prep');
   const parts = [];
   for (const file of weekConfig.files) {
-    const full = path.join(CONTENT_DIR, file);
+    const full = path.join(contentDir, file);
     const text = readFile(full);
     if (text) {
       parts.push(`=== ${file} ===\n${text}`);
@@ -233,7 +274,7 @@ async function main() {
   const args = process.argv.slice(2);
   if (args.length === 0) {
     console.log('Usage: node generate-questions.cjs <week|all> [count]');
-    console.log('  week: week1 | week2 | week3 | week4 | week5 | week6 | all');
+    console.log('  week: week1 | week2 | week3 | week4 | week5 | week6 | week8 | week9 | week12 | week13 | all');
     console.log('  count: number of questions to generate (default: 5)');
     process.exit(1);
   }

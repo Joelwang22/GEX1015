@@ -1,0 +1,575 @@
+--- Page 1 ---
+1
+• The (entire) Levinson reading is now optional.
+• Final exam: Monday, 27 Apr, 5pm-7pm, MPSH-2A
+(Pre-assigned seating: your seat number will be available on EduRec. Bring your student ID.)
+• We’ll use Examplify, and the exam will be open book meaning you may bring one sheet of paper (handwritten or printed,
+A4 or smaller, double-sided). Rough/draft paper will be available from the invigilators as in the midterm exam. You should
+bring your own pen/pencil.
+• Fully charge your laptop before the exam, if possible.
+• The final exam questions will focus on Weeks 6-13 lectures and readings, but some questions will combine these
+materials with the Weeks 2- 5 materials (Don’t forget to study the Week 6 materials).
+• As before, some questions may require you to know something in a reading that is not covered in lectures (except for
+Schneider, “The Problem of AI Consciousness” and Levinson, “"Defining Art Historically" ).
+Announcements and reminders
+
+--- Page 2 ---
+What kinds of evidence would be relevant to which of the three possibilities is true?
+2
+Nick Bostrom
+(1973-)
+“If we are in a simulation, could [we] ever know for certain? If the simulators
+don’t want us to find out, we probably never will. But if they choose to reveal
+themselves, they could certainly do so. Another event that would let us
+conclude with a high degree of confidence that we are in a simulation is if we ever
+reach a point when we are about to switch on our own ancestor simulations. That would
+be very strong evidence against the first two propositions, leaving us only with
+the third.(p.9)
+
+--- Page 3 ---
+3
+Nick Bostrom
+(1973-)
+At least one of the following three possibilities is true:
+(a) “Almost all civilisations at our level of development become extinct before becoming
+technologically mature”
+(b) “The fraction of technologically mature civilisations that are interested in creating
+ancestor simulations is almost zero”
+(c) “You are almost certainly living in a computer simulation”
+“ if you think that possibilities one and two are both false, you should accept the third ” (p.9)
+“ In reality, we don’t have much specific information to tell us which of the three possibilities might be
+true. In this situation, it might be reasonable to distribute our credence roughly evenly between them ”
+(p.9)
+Bostrom might be wrong about this claim. But note that we should still assign a significant probability
+to (c), insofar as we think that there is a significant probability that both (a) and (b) are false.
+1/3
+1/3
+1/3
+
+--- Page 4 ---
+What is the definition of art?
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+≈ necessary and sufficient
+condition for art
+
+--- Page 5 ---
+5
+Necessary and Sufficient condition (we’ll talk more about this later)
+A is (a) necessary and sufficient (condition) for B
+= A is sufficient for B and A is necessary for B
+(and vice versa)
+= A if and only if B
+= B if and only if A
+E.g.) Being a plane figure with four equal straight sides and four right angles is a necessary and sufficient
+condition for being a square.
+A B
+Often shortened to “ iff ”
+
+--- Page 6 ---
+How “if and only if” is related to validity
+
+--- Page 7 ---
+(1) Always valid
+If A, then B ( ≈ All As are B).
+A.
+Therefore, B.
+7
+(4) Always invalid
+If A, then B (≈ All As are B).
+B.
+Therefore, A.
+(3) Always invalid
+If A, then B (≈ All As are B).
+Not A.
+Therefore, Not B.
+(2) Always valid
+If A, then B (≈ All As are B).
+Not B.
+Therefore, Not A.
+
+--- Page 8 ---
+(1) Always valid
+A, only if B ( ≈ All As are B).
+A.
+Therefore, B.
+8
+(4) Always invalid
+A, only if B (≈ All As are B).
+B.
+Therefore, A.
+(3) Always invalid
+A, only if B (≈ All As are B).
+Not A.
+Therefore, Not B.
+(2) Always valid
+A, only if B (≈ All As are B).
+Not B.
+Therefore, Not A.
+
+--- Page 9 ---
+(1) Always valid
+A, if and only if B ( ≈ All As are B).
+A.
+Therefore, B.
+9
+(4) Always valid
+A, if and only if B (≈ All As are B).
+B.
+Therefore, A.
+(3) Always valid
+A, if and only if B (≈ All As are B).
+Not A.
+Therefore, Not B.
+(2) Always valid
+A, if and only if B (≈ All As are B).
+Not B.
+Therefore, Not A.
+
+--- Page 10 ---
+P1. If A, then B (= B, if A)
+P2. Not A
+C. Not B
+10
+Always invalid argument form 1
+P1. If I have the cold, then I am sick.
+P2. I do not have the cold
+C. I am not sick.
+A (having the cold )
+B (being sick)
+P1. If Edward Cullen were a human, he would be mortal. (True)
+P2. Edward Cullen is not a human. (True)
+C. Edward Cullen is not mortal. (True)
+Valid or invalid?
+Invalid
+
+--- Page 11 ---
+P1. If A, then B (= B, if A)
+P2. Not A
+C. Not B
+11
+Always invalid argument form 1
+A (having the cold )
+B (being sick)
+P1. A if and only if B (= B if and only if A)
+P2. Not A
+C. Not B
+A B
+
+--- Page 12 ---
+P1. If A, then B (= B, if A)
+P2. B
+C. A
+12
+Always invalid argument form 2
+A (having the cold )
+B (being sick)
+P1. If I have the cold, then I am sick.
+P2. I am sick.
+C. I have the cold.
+P1. If Edward Cullen is a vampire, he is immortal.
+P2. Edward Cullen is immortal.
+C. Edward Cullen is a vampire.
+Valid or invalid?
+Invalid
+
+--- Page 13 ---
+P1. If A, then B (= B, if A)
+P2. B
+C. A
+13
+Always invalid argument form 2
+A (having the cold )
+B (being sick)
+P1. A if and only if B (= B if and only if A)
+P2. B
+C. A
+A B
+
+--- Page 14 ---
+Going back to the definition of art…
+
+--- Page 15 ---
+15
+The definition of art
+X is (a) necessary and sufficient (condition) for being art
+= all artworks have X, and no non-artworks have X.
+X Art
+Similar to ….
+Being a plane figure with four equal straight sides and four right angles is
+a necessary and sufficient condition for being a square.
+
+--- Page 16 ---
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+What could be X?
+
+--- Page 17 ---
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+What could be X?
+Beautiful?
+(not necessary)
+
+--- Page 18 ---
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+What could be X?
+Beautiful?
+(not necessary)
+So, beauty is not [necessary or sufficient?]
+
+--- Page 19 ---
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+What could be X?
+Beautiful?
+(not necessary)
+
+--- Page 20 ---
+20
+People with
+a driver’s license
+People above 18
+Necessary condition
+X is (a) necessary (condition) for Y
+= Y is a subset of X
+= In order for Y to be the case, X has to be the case.
+= It is not possible for something to be or do Y and not X.
+E.g.) Being in Asia is a necessary condition for being in Singapore.
+Being a rectangle is a necessary condition for being a square.
+Being above 18 is necessary for getting a driver’s license .
+How can you show that X is not necessary for Y?
+: find an example that is not X but Y
+e.g.,) A friend of mine got their driver’s license when they were 17
+
+--- Page 21 ---
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+What could be X?
+Beautiful?
+(not necessary)
+Is beauty sufficient?
+
+--- Page 22 ---
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+What could be X?
+Beautiful?
+(not necessary, not sufficient)
+
+--- Page 23 ---
+23
+Sufficient condition
+X is (a) sufficient (condition) for Y
+= X is a subset of Y
+= X 100% guarantees Y
+= If X is the case, Y is the case (always).
+= It is not possible for something to be or do X and not Y.
+E.g.) Being in Singapore is a sufficient condition for being in Asia.
+Being a square is a sufficient condition for being a rectangle.
+Graduating NUS with a 5.0 GPA is a sufficient condition for living a happy life (probably false)
+How to show that X is NOT sufficient for Y
+: find an example that is X but not Y
+e.g.,) Someone who graduated NUS with a 5.0 GPA but is not living a happy life
+People graduating
+NUS with
+a 5.0 GPA
+People living a
+happy life
+
+--- Page 24 ---
+Levinson, “Defining Art Historically” (1979) your hand if
+you’re not okay with the lecture being recorded.
+If you have any concerns, please feel free to let me know via
+email or
+the anonymous suggestion forum on
+What makes something a work of art is not any exhibited property (i.e., something
+you can perceive) but something you cannot perceive, more specifically,
+its being intended to be regarded in any of the ways works of art existing prior to it
+have been correctly regarded.
+
+--- Page 25 ---
+Maurizio Cattelan
+The Comedian (2019)
+Marcel Duchamp
+Fountain (1917)
+Vincent van Gogh
+The Starry Night (1889)
+Piero Manzoni
+Artist's Shit (1961)
+What could be X?
+Beautiful?
+
+--- Page 26 ---
+Levinson, “Defining Art Historically” (1979) your hand if
+you’re not okay with the lecture being recorded.
+If you have any concerns, please feel free to let me know via
+email or
+the anonymous suggestion forum on
+What makes something a work of art is not any exhibited property (i.e., something
+you can perceive) but something you cannot perceive, more specifically,
+its being intended to be regarded in certain ways — any of the ways works of art
+existing prior to it have been correctly regarded.
+
+--- Page 27 ---
+27
+• What is the main claim?
+“ a work of art is a thing intended for regard-as-a-work-of-art: regard in any of the ways works of art
+existing prior to it have been correctly regarded ” (p.234)
+Levinson’s definition of art
+The Starry Night (1889)
+I intend this to be
+treated in […] ways,
+Vincent van Gogh
+(from the movie
+At Eternity’s Gate )
+“ for something to be an art
+work at any time is for it to be
+intentionally related to art
+works that precede it ” (p.246)
+
+--- Page 28 ---
+28
+• What is the main claim?
+“ a work of art is a thing intended for regard-as-a-work-of-art: regard in any of the ways works of art
+existing prior to it have been correctly regarded ” (p.234)
+Levinson’s definition of art
+More precisely,
+“X is an artwork at t = df X is an object of which it is true at t that some
+person or persons having the appropriate proprietary right over X, non-
+passingly intends (or intended) X for regard-as-a-work-of-art, i.e. regard in
+any way (or ways) in which art works existing prior to t are or were correctly
+(or standardly) regarded.” (p.238)
+
+--- Page 29 ---
+Let’s unpack
+
+--- Page 30 ---
+30
+Levinson’s definition of art
+“X is an artwork at t = df X is an object of which it is true at t that some person or persons having the
+appropriate proprietary right over X, non-passingly intends (or intended) X for regard-as-a-work-of-
+art, i.e. regard in any way (or ways) in which art works existing prior to t are or were correctly (or
+standardly) regarded.” (p.238)
+• “ What this amounts to is basically ownership — you cannot 'artify' what you do not own.. All your intentions will not
+avail in such a case, because another person's intention, that of the owner, has priority over yours” (p.237).
+• Creating the physical object is neither necessary nor sufficient for ownership.
+• Many originally non-art objects of the past being exhibited at art museums might fail to satisfy this condition
+e.g.) A sacred ritual object from an ancient Mexican culture being exhibited at a (non-Mexican)
+art museum. Descendants of that culture demand the removal of the object from public
+view. → not art, according to Levinson
+
+--- Page 31 ---
+31
+Levinson’s definition of art
+“X is an artwork at t = df X is an object of which it is true at t that some person or persons having the
+appropriate proprietary right over X, non-passingly intends (or intended) X for regard-as-a-work-of-
+art, i.e. regard in any way (or ways) in which art works existing prior to t are or were correctly (or
+standardly) regarded.” (p.238)
+Any of the following three kinds of intention can satisfy this condition:
+1. Specific art-conscious intention : “intending for regard in the specific way or ways some particular past art works (or class of
+artworks) have been correctly regarded.”(p.237)
+e.g.) “intending for regard in the way wire sculptures are to be regarded” (p.237)
+
+--- Page 32 ---
+32
+Levinson’s definition of art
+“X is an artwork at t = df X is an object of which it is true at t that some person or persons having the
+appropriate proprietary right over X, non-passingly intends (or intended) X for regard-as-a-work-of-
+art, i.e. regard in any way (or ways) in which art works existing prior to t are or were correctly (or
+standardly) regarded.” (p.238)
+Any of the following three kinds of intention can satisfy this condition:
+1. Specific art-conscious intention : “intending for regard in the specific way or ways some particular past art works (or class of
+artworks) have been correctly regarded.”(p.237)
+e.g.) “intending for regard in the way wire sculptures are to be regarded” (p.237)
+2. Non-specific art-conscious intention : “intending for regard in whatever ways any past art works
+have been correctly regarded, having no particular ones in mind.” (p.237)
+3. Art-unconscious intention : “intending for regard in some specific way ϕ characterized in terms of intrinsic features, where ϕ is in
+fact a way in which some past art works have been correctly regarded, though this fact is not known to the intender.”(p.237)
+e.g.) “intending for listening to with attention to timbre”, aesthetic appreciation
+
+--- Page 33 ---
+Why include art-unconscious intention?
+
+--- Page 34 ---
+34
+“Consider a solitary Indian along the Amazon, who steals off from his non -artistic tribe to arrange coloured stones in a
+clearing, not outwardly investing them with special position in the world. Might not this also be art (and, note, before
+any future curator decides that it is)?” (p.233)
+I intend this to be appreciated
+with attention to its interesting
+shape and texture. .
+leave quietly or sneak away without being noticed
+“ my definition thus allows (via the art-unconscious intention) for an art-maker ignorant
+of all art works, all art activities, and all institutions of art .” (p.238)
+
+--- Page 35 ---
+35
+“Consider a solitary Indian along the Amazon, who steals off from his non -artistic tribe to arrange coloured stones in a
+clearing, not outwardly investing them with special position in the world. Might not this also be art (and, note, before
+any future curator decides that it is)?” (p.233)
+leave quietly or sneak away without being noticed
+“ my definition thus allows (via the art-unconscious intention) for an art-maker ignorant
+of all art works, all art activities, and all institutions of art .” (p.238)
+“Consider the farmer's wife at a country fair in Nebraska, who sets an assemblage of egg shells and white glue down
+on the corner of a table for folks to look at. Isn't it possible that she has created art? Yet she and the artworld exist in
+perfect mutual oblivion.” (p.233)
+
+--- Page 36 ---
+36
+Levinson’s definition of art
+“X is an artwork at t =df X is an object of which it is true at t that some person or persons having the
+appropriate proprietary right over X, non-passingly intends (or intended) X for regard-as-a-work-of-
+art, i.e. regard in any way (or ways) in which art works existing prior to t are or were correctly (or
+standardly) regarded.” (p.238)
+“ An object can be an artwork at one time and not another . ” (p.238)
+e.g.) an object physically created at one time becomes art later (e.g., Fountain )
+Marcel Duchamp
+Fountain (1917)
+
+--- Page 37 ---
+37
+Levinson’s definition of art
+“X is an artwork at t =df X is an object of which it is true at t that some person or persons having the
+appropriate proprietary right over X, non-passingly intends (or intended) X for regard-as-a-work-of-
+art, i.e. regard in any way (or ways) in which art works existing prior to t are or were correctly (or
+standardly) regarded.” (p.238)
+“ An object can be an artwork at one time and not another . ” (p.238)
+e.g.) an object physically created at one time becomes art later (e.g., Fountain )
+e.g.) someone intends an object for a certain regard at t1, which only later at t2 becomes regard-as-a-work-
+of- art: the object wasn’t art at t1. It becomes art at t2.
+I intend this to be
+regarded in X way.
+202 6 (X is not a regard - as - a - work - of - art) 212 6 (X is a regard - as - a - work - of - art)
+
+--- Page 38 ---
+38
+Levinson’s definition of art
+“X is an artwork at t = df X is an object of which it is true at t that some person or persons having the
+appropriate proprietary right over X, non-passingly intends (or intended) X for regard-as-a-work-of-
+art, i.e. regard in any way (or ways) in which art works existing prior to t are or were correctly (or
+standardly) regarded .” (p.238)
+What happens if the definition doesn’t include “correctly”:
+“ Italian Renaissance portraits are presumably art works. Suppose that they come to be regarded in a new and
+unprecedented way, viz. they begin to be used as thermal insulation, and are found to be quite suitable for this. And
+suppose, through an amazing decline in taste or an unparalleled need for insulation, this manner of regard becomes the
+rule. If we omit 'correctly' from our definition, or replace it by 'commonly' or 'rewardingly', then given the case as
+described, it follows from our definition that anything subsequently intended by its maker for use as insulation (e.g. a
+sheet of fibreglass) would be an art work …. Using Renaissance portraits as insulation is manifestly not a correct way
+of regarding them, no matter how widespread or satisfactory such a use might be.” (p.236)
+
+--- Page 39 ---
+39
+Levinson’s definition of art
+“X is an artwork at t = df X is an object of which it is true at t that some person or persons having the
+appropriate proprietary right over X, non-passingly intends (or intended) X for regard-as-a-work-of-
+art, i.e. regard in any way (or ways) in which art works existing prior to t are or were correctly (or
+standardly) regarded.” (p.238)
+“the intent must be fairly stable ('non -passing'), as opposed to merely transient. In other words, it is not enough to turn
+an object into art that one momentarily considers it for regard-as-a-work-of- art.” (p.236)
+
+--- Page 40 ---
+An objection to Levinson’s definition of art
+(more objections discussed in the reading)
+
+--- Page 41 ---
+41
+• Objection:
+According to Levinson’s definition, revolutionary art, “ intended for treatment in a manner
+completely distinct from what has gone before ” (p.241), can’t be art.
+• Levinson’s response
+He suggests two possible strategies
+1. Double intention: “'My object is for regarding in any way art works have been regarded in
+the past (but with the expectation that this will prove frustrating or unrewarding, thus
+prodding the spectator to adopt some other point of view — this being my real intention).'
+The secondary intention embodies the true aim of such art, but the primary intention must
+be present to make it art at all.” (p.241)
+Objection: What about revolutionary art?
+Marcel Duchamp
+Fountain (1917)
+
+--- Page 42 ---
+42
+• What is the main claim?
+“ a work of art is a thing intended for regard-as-a-work-of-art: regard in any of the ways works of art
+existing prior to it have been correctly regarded ” (p.234)
+Levinson’s definition of art
+More precisely,
+“X is an artwork at t = df X is an object of which it is true at t that some
+person or persons having the appropriate proprietary right over X, non-
+passingly intends (or intended) X for regard-as-a-work-of-art, i.e. regard in
+any way (or ways) in which art works existing prior to t are or were correctly
+(or standardly) regarded. ” (p.238)
+
+--- Page 43 ---
+43
+• Objection:
+According to Levinson’s definition, revolutionary art, “intended for treatment in a manner
+completely distinct from what has gone before” (p.241), can’t be art.
+• Levinson’s response
+He suggests two possible strategies
+1. Double intention: “'My object is for regarding in any way art works have been regarded in
+the past (but with the expectation that this will prove frustrating or unrewarding, thus
+prodding the spectator to adopt some other point of view — this being my real intention).'
+The secondary intention embodies the true aim of such art, but the primary intention must
+be present to make it art at all.” (p.241)
+Objection: What about revolutionary art?
+My definition can explain how revolutionary art is possible.
+“'although the consciously revolutionary artist desires that eventually his objects will be dealt
+with in unprecedented ways, to make them art he must initially direct his audience to take them
+(or try taking them) in some way that art has been taken …The art -making intention of the
+consciously revolutionary artist may thus have to be a covertly disingenuous one, somewhat
+along these lines: ‘ My object is for regarding in any way art works have been regarded in the
+past (but with the expectation that this will prove frustrating or unrewarding, thus prodding the
+spectator to adopt some other point of view —this being my real intention).’ The secondary
+intention embodies the true aim of such art, but the primary intention must be present to make it
+art at all.” (p.241)
+
+--- Page 44 ---
+44
+• Do the reading for next lecture
+: Nagel, “Death”
+What to do this week

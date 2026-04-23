@@ -1,0 +1,331 @@
+Announcements and reminders
+· [Reminder] Your exam results are posted on Canvas and on the Examsoft student portal. And the exam questions and answers/explanations are available in the "Files" section on Canvas.
+· [Reminder] your grade will be determined based on your relative ranking, not your absolute score.
+· Final exam: Monday, 27 Apr, 5pm-7pm, venue TBA  50% of your grade · The final will be similar to the midterm in terms of question style and difficulty (just more questions). · However, there will be differences in administrative matters because the final exam is more strictly regulated by the
+university. For example, there will be pre-assigned seating and ID checks. · The final may contain some questions that combine Weeks 1-5 materials with Weeks 6-13 materials. · Next week's reading, Schneider, "The Problem of AI Consciousness", is optional, meaning you only need to understand
+the Week 9 lecture, not the reading itself, for the purposes of the final exam.
+· [Reminder] There is an anonymous suggestion board: https://docs.google.com/document/d/1Nqjj_otw9ItOhYhMMUwpTu_tlscIEW8X_Uoc50sXRJA/edit?usp=sharing
+1
+
+Free Will
+To understand her argument better, let's forget about morality for now and think about other human traits that are possibly the results of evolution.
+2
+
+The reading begins with this case: 101-Year-Old Woman Gets Beaten While Mugged In NYC
+https://www.youtube.com/watch?v=Bk654sNEvq8
+3
+
+We think that the mugger is morally responsible for his act because he has free will. better, let's forget about morality for now and think about other human traits that are
+possibly the results of evolution. This is common sense. But is it true? Do we really have free will?
+To understand her argument better, let's forget about morality for now and t[hSiindke anobtoeu] tWoet'hllearshsuummeatnhatrtamitosrathl aretsaproenspiboislistyibalnydthfreeerewsilul latslwoafysevgoolutotgioenth.er (how they're related to each other is actually controversial)To understand
+her argument better, let's forget about morality for now and think about other human traits that are possibly the results of evolution.
+4
+
+Here's an argument that we don't have free will/moral responsibility
+5
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility. Valid or invalid?
+6
+
+An argument against free will
+
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility.
+
+Valid
+
+P1. A or B. P2. If A, then C. P3. If B, then C.
+C. Therefore, C.
+ Always valid
+
+7
+
+How can we respond to this argument (if we don't want to accept the conclusion)?
+8
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility.
+9
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility.
+If you don't want to accept the conclusion, it seems you should reject P2 and/or P3. (And if you want to defend the conclusion, you should focus on defending P2 and P3)
+10
+
+We're going to learns more about P2 and P3 soon. But let's first learn what determinism is.
+11
+
+Determinism
+Determinism: roughly, what will happen now is fixed by what happened in the past. Given the (same) past, only one possibility exists as to what will happen now.
+We'll focus on physical/causal determinism: "the state of the cosmos at any one time is determined by its state at any prior time, together with the laws of nature. On this view, the state of the universe at any point in the past--say, exactly 1 billion years ago--and the laws of nature together fix the state of the universe at every future time. If this view is correct, then given the past and the laws, absolutely everything that happens--every supernova, every mugging--is determined to occur just as it does." (p.598)
+Universe begins
+BIG BANG
+12
+
+Determinism
+Determinism: roughly, what will happen now is fixed by what happened in the past. Given the (same) past, only one possibility exists as to what will happen now.
+We'll focus on physical/causal determinism: "the state of the cosmos at any one time is determined by its state at any prior time, together with the laws of nature. On this view, the state of the universe at any point in the past--say, exactly 1 billion years ago--and the laws of nature together fix the state of the universe at every future time. If this view is correct, then given the past and the laws, absolutely everything that happens--every supernova, every mugging--is determined to occur just as it does." (p.598)
+Universe begins
+BIG BANG
+13
+
+Determinism
+Determinism: roughly, what will happen now is fixed by what happened in the past. Given the (same) past, only one possibility exists as to what will happen now.
+We'll focus on physical/causal determinism: "the state of the cosmos at any one time is determined by its state at any prior time, together with the laws of nature. On this view, the state of the universe at any point in the past--say, exactly 1 billion years ago--and the laws of nature together fix the state of the universe at every future time. If this view is correct, then given the past and the laws, absolutely everything that happens--every supernova, every mugging--is determined to occur just as it does." (p.598)
+
+Universe begins
+
+...
+
+BIG BANG
+14
+
+Determinism
+Determinism: roughly, what will happen now is fixed by what happened in the past. Given the (same) past, only one possibility exists as to what will happen now.
+We'll focus on physical/causal determinism: "the state of the cosmos at any one time is determined by its state at any prior time, together with the laws of nature. On this view, the state of the universe at any point in the past--say, exactly 1 billion years ago--and the laws of nature together fix the state of the universe at every future time. If this view is correct, then given the past and the laws, absolutely everything that happens--every supernova, every mugging--is determined to occur just as it does." (p.598)
+
+Universe begins
+
+...
+
+BIG If dBetAerNmGinism is true, the mugger could not have done otherwise. That is, there were no alternative possibilities.
+15
+
+Determinism
+Determinism: roughly, what will happen now is fixed by what happened in the past. Given the (same) past, only one possibility exists as to what will happen now.
+We'll focus on physical/causal determinism: "the state of the cosmos at any one time is determined by its state at any prior time, together with the laws of nature. On this view, the state of the universe at any point in the past--say, exactly 1 billion years ago--and the laws of nature together fix the state of the universe at every future time. If this view is correct, then given the past and the laws, absolutely everything that happens--every supernova, every mugging--is determined to occur just as it does." (p.598)
+<Be careful> Determinism does not mean that some external force makes us do something against our will. Determinism works via our will, desires, motives, choices, etc. (e.g., the mugger did what he wanted to do) It is just that we're determined to will, desire, choose, etc. the thing that we actually will, desire, choose.
+BIG BANG
+So, determinism is compatible with our experience of consciously making choices that feel free.
+16
+
+Determinism
+BIG BANG
+
+What should I major in?
+Philosophy Law Sociology
+17
+
+Determinism
+
+I find philosophy most interesting! I want to major in philosophy! So, I'm going to do that.
+
+Philosophy
+
+Universe begins
+
+...
+
+Law
+
+Sociology
+
+BItIGwas already determined that you'll find philosophy most interesting and want to major in it
+
+BA(BaNuntGdt,haisccdoercdisiniognly,pwroiclledsesccidaentsotidllofeseol)c. oYmouplceoteullyd
+
+not have done otherwise. free and not determined.
+
+18
+
+Now that we know what determinism is, let's go back to the argument against free will/moral responsibility.
+19
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility.
+What are the reasons to think that P2 and P3 are true?
+20
+
+Let's discuss P2 first.
+21
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility.
+Those who claim that P2 is true are called incompatibilists (because they think determinism and free wil/moral responsibility are incompatible) and those who think that P2 is false are called compatibilists (because they think determinism and free will/moral responsibility are compatible).
+Incompatibilists think P2 is true (that is, determinism is incompatible with free will/moral responsibility) because they think having alternative possibilities is necessary for free will/moral responsibility. (= We need alternative possibilities to have free will/moral responsibility = If we don't have alternative possibilities, we don't have free will/moral responsibility). This means that P2 is true because determinism being true  No alternative possibilities  No free will
+22
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility. Those who claim that P2 is true are called incompatibilists (because they think determinism and free wil/moral responsibility are incompatible) and those who think that P2 is false are called compatibilists (because they think determinism and free will/moral responsibility are compatible).
+Incompatibilists think P2 is true (that is, determinism is incompatible with free will/moral responsibility) because they think having alternative possibilities is necessary for free will/moral responsibility.
+(Most) Compatibilists, on the other hand, think that alternative possibilities are not necessary for free will/moral responsibility and, thus, even if determinism is true, we can still have free will/moral responsibility.
+23
+
+How can anyone think that alternative possibilities are not necessary for free will/moral responsibility ??
+24
+
+Compatibilists' attempts to show that alternative possibilities are not necessary for free will/moral responsibility In order to show that, they need to find an example where a person doesn't have alternative
+possibilities but still has free will/moral responsibility.
+25
+
+I promised to help my friend move, but I want to keep playing the game... What should I do?
+26
+
+I've decided not to help my friend!
+27
+
+John Locke (1632-1704)
+
+Moral responsibility (and free will) without alternative possibilities!
+
+I've decided not to help my friend!
+
+28
+
+Moral responsibility (and free will) without alternative possibilities!
+
+John Locke (1632-1704)
+I've decided not to help my friend!
+
+Deciding to not help Vs.
+Not helping
+
+29
+
+Harry Frankfurt (1929-2023)
+
+Let me try. Here's a case of moral responsibility without alternative possibilities!
+
+30
+
+I'll leave it up to think about whether Frankfurt has successfully shown that alternative possibilities are not necessary for free will/moral responsibility.
+31
+
+Let's turn to P3.
+32
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility.
+Why would anyone think that P3 is true? Isn't it a good thing for free will/moral responsibility if determinism is false (=indeterminism is true)?
+33
+
+If determinism is true...
+
+What should I do?
+
+I'll not help my friend.
+
+...
+Now
+Given the characteristics you have (desires, values, beliefs, etc.) now, you're determined to not help your friend.
+
+BIG BANG
+34
+
+If determinism is false (=indeterminism is true)...
+What should I do?
+
+I'll help my friend.
+
+...
+Now
+
+I'll not help my friend.
+
+What happened in the past does not fix what will happen now (at least not everything). Even with the (same) past, multiple possibilities exist as to what will happen now.
+So, you could have done otherwise, and you have alternative possibilities, despite the characteristics (desires, values, beliefs) you have now.
+ThisBlIeGads to the following problem.... BANG
+
+35
+
+If determinism is false (=indeterminism is true)...
+What should I do?
+
+I'll help my friend.
+
+...
+Now
+
+I'll not help my friend.
+
+It seems what explains why you make one decision rather than another is not something about you but just random chance. It is unclear how the decision to choose one option over another is under your control.
+"Why did he make that decision? If the process is genuinely indeterministic, this question may have no answer. When the choice was made, it was as if a coin were flipped in the mugger's head. His decision was a chance occurrence, a random fluctuation. ...it is hard to see how he can be responsible for a choice that simply happens in him as a result of
+randBoImGchance." (p.599) BANG
+
+36
+
+If determinism is false (=indeterminism is true)...
+
+BIG BANG
+
+What should I major in?
+
+Philosophy
+
+Law Sociology
+
+Given your interests, what kind of life you want to live, your deliberation process, etc.
+
+You can still make any of these choices.
+
+Then what determines your choice?
+
+37
+
+<Challenges posed by Determinism vs. Indeterminism>
+· Determinism threatens free will and moral responsibility because there are no alternative possibilities (you could not have done otherwise). But, if determinism is true, there is still a sense in which you're what determines your choice because factors in the past determine your choice only via your desires, values, etc. (although you couldn't have had different desires, values, etc.)
+· On the other hand, if determinism is false, there are alternative possibilities (you could have done otherwise). The problem, though, is that it seems you're not what determines your choice. The choice seems random and arbitrary and not within your control.
+38
+
+An argument against free will
+P1. Either determinism is true, or determinism is false. P2. If determinism is true, we don't have free will/moral responsibility. P3. If determinism is false, we don't have free will/moral responsibility.
+C. We don't have free will/moral responsibility.
+So, there is in fact reason to think that P3 is true. Some philosophers (such as libertarians) deny P3, however. They think we can have free will/moral responsibility even if determinism is false. It is under debate how P3 could be false, that is, how we can have free will/moral responsibility if determinism is false  I'll leave it up to you to think about how libertarians can meet this challenge.
+39
+
+Compatibilists
+
+Incompatibilists
+
+Libertarians
+Incompatibilists who think that we have free will/moral responsibility (and determinism is false)
+40
+
+Possible answer 3. Evil in our world is a necessary consequence of humans having free will
+
+Do we really have free will, though this is the topic for next lecture?
+
+This theist response requires incompatibilism
+
+Why doesn't an all-perfect god at least intervene sometimes, to prevent the most horrendous outcomes of free will (e.g., by ending World War 2 a bit early)?
+
+Does the importance of free will really outweigh the evils in the world?
+
+Is our having free will compatible with the existence of an omniscient god?
+
+God (and angels) presumably have free will and never commit any wrongdoing. Why, then, couldn't God make humans like that too?
+
+Also, what about natural evils, which are not consequences of human free will (e.g., earthquakes, floods, tsunamis, volcanoes, cancer, etc.)?
+
+41
+
+An argument against the existence of god from evil ­ second attempt
+
+P1. If an all-perfect god exists, there are no unjustified evils.
+
+P2. There are unjustified evils.
+
+Evils that an all-perfect god has no good reason to allow
+
+C. An all-perfect god does not exist.
+Now, let's evaluate this argument. First, is this argument valid?
+
+Allowing the evil in question is necessary for achieving a more important moral goal (e.g., generating a good that outweighs the evil, preventing a more serious evil) ("necessary" here means that even an all-perfect god cannot achieve that goal without allowing the evil).
+
+Second, are the premises all true? If yes, then theists should accept the conclusion!
+
+42
+
+What to do this week
+· Do the reading for next lecture : [Optional] Schneider, "The Problem of AI Consciousness" (All readings are posted in the "Files" section on Canvas)
+44
+
+
